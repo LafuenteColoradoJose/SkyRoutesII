@@ -1,0 +1,34 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "autoprefixer": "^10.4.16",
+    "daisyui": "^3.9.2",
+    "nuxt": "^3.7.4",
+    "nuxt3-leaflet": "^1.0.12",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@mapbox/polyline": "^1.2.1",
+    "@planetscale/database": "^1.11.0",
+    "dotenv": "^16.3.1",
+    "leaflet": "^1.9.4",
+    "moment": "^2.29.4",
+    "mysql2": "^3.6.2",
+    "pg": "^8.11.3",
+    "vue2-leaflet-locatecontrol": "^1.0.2"
+  }
+}

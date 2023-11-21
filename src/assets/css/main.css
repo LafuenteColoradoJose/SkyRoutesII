@@ -1,0 +1,50 @@
+/* :root {
+  
+  @media screen and (min-width: 850px) {
+    main {
+        height: 100vh;
+    }
+    
+  }
+
+} */
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+
+
+
+/* 
+AZUL: rgba(52, 92, 168, 1) #345ca8
+PATRONES:
+- Triada: #a8a634 , #a8343a
+- Complementarios: #a83434, #a86d4a, #a87f5f, #a57474, #a48a91 rgba(138, 145, 164, 1)
+- Monocromáticos: #345ca8, #4a6da7, #5f7fa6, #7480a5, #8a91a4
+
+  https://www.sessions.edu/color-calculator/
+
+*/
+
+#principal {
+  color: #345ca8; 
+}
+
+#monocromaticos {
+    color:#4a6da7, #5f7fa6, #7480a5, #8a91a4
+}
+
+#complementarios {
+    color: #a83434, #a86d4a, #a87f5f, #a57474, #a48a91
+}
+
+#triada {
+    color: #a8a634 , #a8343a
+}
