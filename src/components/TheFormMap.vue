@@ -612,16 +612,21 @@ const dibujarPolyline = () => {
 
 let localizacion = ref([])
 onMounted(() => {
+    getLocation();
+    setInterval(getLocation, 120000);
+});
+
+const getLocation = () => {
     if (typeof window !== 'undefined' && 'geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(function (position) {
             // console.log("La latitud es :", position.coords.latitude);
             // console.log("La longitud es :", position.coords.longitude);
             // console.log("La precisión es :", position.coords.accuracy);
             localizacion.value = [position.coords.latitude, position.coords.longitude];
-            // console.log(localizacion.value);
+            console.log(localizacion.value);
         });
     }
-});
+}
 
 // ⁡⁢⁢⁣𝗥𝗨𝗠𝗕𝗢⁡
 
