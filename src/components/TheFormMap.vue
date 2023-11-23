@@ -638,6 +638,7 @@ let lat2 = ref(0)
 let lon2 = ref(0)
 let currentIndex = 0
 
+
 const calculateBearingAndCheckDestination = async () => {
     lat1.value = localizacion.value[0]
     lon1.value = localizacion.value[1]
@@ -664,12 +665,11 @@ const calculateBearingAndCheckDestination = async () => {
     bearing.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat2.value, lon2.value))
     console.log("RUMBO", bearing.value)
 
-    distanceBearing.value = Math.round(distance) + ' Nm'
+    distanceBearing.value = parseFloat(distance.toFixed(2)) + ' Nm'
     console.log("DISTANCIA", distanceBearing.value)
 }
 
-
-setInterval(calculateBearingAndCheckDestination, 60000)
+setInterval(calculateBearingAndCheckDestination, 30000)
 
 </script>
 
@@ -815,7 +815,14 @@ setInterval(calculateBearingAndCheckDestination, 60000)
     }
 }
 
+.alert {
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    color: #fff;
+    background-color: rgba(52, 92, 168, 1);
 
+}
 
 
 
