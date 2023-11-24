@@ -15,7 +15,7 @@
             </p>
 
 
-            <p class="container">
+            <p class="container mt-6">
                 ¿Qué nos hace diferentes?
             </p>
             <p class="container">
@@ -30,7 +30,7 @@
                 explorando nuevos horizontes, SkyRoutes te ofrece las herramientas y recursos para que tus sueños
                 despeguen con confianza y precisión.
             </p>
-            <p class="container">
+            <p class="container mt-6">
                 Únete a nuestra comunidad de apasionados de la aviación y comienza a crear planes de vuelo memorables
                 hoy mismo.
             </p>
@@ -57,4 +57,25 @@
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙄𝙊𝙎 𝙋𝙀𝙌𝙐𝙀Ñ𝙊𝙎⁡ */
+@media (max-width: 767px) {
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+}
+
+/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙈𝙀𝘿𝙄𝘼𝙉𝙊𝙎⁡ */
+@media (min-width: 768px) and (max-width: 1023px) {
+   
+    h1 {
+        font-size: 4rem;
+    }
+
+}
+
+
+</style>

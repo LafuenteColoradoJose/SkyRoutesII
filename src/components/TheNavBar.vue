@@ -1,13 +1,24 @@
 <template>
-    <div id="navBar" class="bg-[#5f7fa6] p-2 flex flex-row justify-between">
+    <nav id="navBar" class=" p-2 flex flex-wrap justify-between">
+
         <div>
+            <img src="/SkyRoutes_Logo_White.svg" alt="SkyRoutes Logo" class="w-20 pt-4">
+        </div>
+        <div id="menu" class="flex flex-row justify-between items-center gap-2">
+            <div class="hidden md:flex md:flex-row md:gap-2"></div>
             <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">Inicio</NuxtLink>
             <NuxtLink to="/contact" class="btn btn-ghost normal-case text-xl">Contacta</NuxtLink>
             <NuxtLink to="/about" class="btn btn-ghost normal-case text-xl">Nosotros</NuxtLink>
         </div>
-
         <div>
+            <NuxtLink to="/flightplans" class="btn btn-ghost normal-case text-xl">Planes de vuelo</NuxtLink>
+        </div>
+        <div>
+            <NuxtLink to="/profile" class="btn btn-ghost normal-case text-xl">Profile</NuxtLink>
+        </div>
+        
 
+        <div id="icono">
             <label class="swap swap-rotate">
 
                 <!-- this hidden checkbox controls the state -->
@@ -30,48 +41,24 @@
             </label>
         </div>
 
-    </div>
+    </nav>
 </template>
 
 <script setup>
 // console.log(toogle-theme)
-
-// const theme = ref('sun');
-
-// const handleThemeChange = (newTheme) => {
-//     theme.value = newTheme;
-//     const navBar = document.getElementById('navBar');
-//     if (theme.value === 'sun') {
-//         navBar.style.color= '#ffffff';
-//     }
-//     console.log('cambio', theme.value);
-// };
-
-
-
-
-
 
 // bg-[#5f7fa6]
 </script>
 
 
 <style scope>
-.navbar {
-    display: flex;
-    align-items: center;
-    padding: var(--navbar-padding, 0.5rem
-            /* 8px */
-        );
-    min-height: 4rem
-        /* 64px */
-    ;
-    width: 100%;
-    
-}
+    #navBar {
+        background-color: #5f7fa6;
+        background-image: url('/imgs/World Map.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size:auto;
+    }
 
-:where(.navbar > *) {
-    display: inline-flex;
-    align-items: center;
-}
+
 </style>

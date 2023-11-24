@@ -135,15 +135,29 @@
 
                     <div class="text-center">
                         <article>METAR</article>
-                        <span class="flex justify-center align-baseline"> {{ fpMetar }}
-                            <a v-if="fpMetar.length > 0" href="#" @click.prevent="showMetar"><svg
+                        <span class="flex justify-center align-baseline mr-4"> {{ fpMetar }}
+                            <div v-if="fpMetar.length > 0" href="#" @click="showTAF">
+                                <!-- <svg
                                     class="fill-cyan-500 hover:fill-cyan-700 w-4 m-1" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24" id="plus">
                                     <path
                                         d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z">
                                     </path>
-                                </svg>
-                            </a>
+                                </svg> -->
+                                <button class="btn btn-info" onclick="my_modal_1.showModal()">TAF</button>
+                                <dialog id="my_modal_1" class="modal">
+                                    <div class="modal-box">
+                                        <h3 class="font-bold text-lg">Hello!</h3>
+                                        <p class="py-4"> {{ modalContent }} </p>
+                                        <div class="modal-action">
+                                            <form method="dialog">
+                                                <!-- if there is a button in form, it will close the modal -->
+                                                <button class="btn">Close</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </dialog>
+                            </div>
                         </span>
                     </div>
 
@@ -182,7 +196,8 @@
             <LMap ref="map" :zoom="zoom" :center="[40.416729, -3.703790]">
 
                 <div id="rumbo">
-                    <img id="rumboIcono" src="/icons/maps-arrow.svg" :style="{ transform: `rotate(${bearing}deg)` }" />
+                    <img id="rumboIcono" src="/icons/maps-arrow.svg" v-if="decodedPolyline.length > 1" :style="{ transform: `rotate(${bearing}deg)`, borderColor: bearing === bearingCorrect ? 'green' : 'red' }" />
+                    <img id="rumboIcono" src="/icons/maps-arrow.svg" v-else />
                     <div id="texto">
                         <span id="rumboTexto">{{ bearing }} º</span>
                         <span id="distanciaTexto">{{ distanceBearing }} </span>
@@ -502,13 +517,17 @@ const getMetar = async () => {
     console.log(fpMetar.value)
 }
 
-// Mostrar ALERT METAR
-const showMetar = async () => {
+// ⁡⁢⁢⁣Mostrar ALERT METAR⁡
+
+const modalContent = ref('')    // Contenido del modal
+
+const showTAF = async () => {
     if (fpMetar !== '') {
         await getMetar();
-        alert(fpTAF.value);
+        modalContent.value = fpTAF.value;
     }
 };
+
 
 
 // ⁡⁢⁢⁡⁢⁢⁣FUNCIÓN GENERAL PARA MANEJAR EL SUBMIT⁡⁡⁡
@@ -637,6 +656,9 @@ let lon1 = ref(0)
 let lat2 = ref(0)
 let lon2 = ref(0)
 let currentIndex = 0
+let lat3 = ref(0)
+let lon3 = ref(0)
+let bearingCorrect = ref(0)
 
 
 const calculateBearingAndCheckDestination = async () => {
@@ -667,6 +689,18 @@ const calculateBearingAndCheckDestination = async () => {
 
     distanceBearing.value = parseFloat(distance.toFixed(2)) + ' Nm'
     console.log("DISTANCIA", distanceBearing.value)
+
+    // RUMBO CORRECTO
+    
+        lat3.value = destinationBearing[2]
+        lon3.value = destinationBearing[3]
+
+        // Empiezo a comparar los rumbos cuando llego al punto de salida
+        if (currentIndex > 0) {
+            bearingCorrect.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat3.value, lon3.value))
+            // console.log("RUMBO CORRECTO", bearingCorrect.value)
+        }
+    
 }
 
 setInterval(calculateBearingAndCheckDestination, 30000)
@@ -716,6 +750,7 @@ setInterval(calculateBearingAndCheckDestination, 30000)
 #rumboIcono {
     width: 100%;
     height: auto;
+    border: solid 2px transparent;
 }
 
 #texto {
@@ -832,4 +867,5 @@ setInterval(calculateBearingAndCheckDestination, 30000)
 
 .border-green-800 {
     border: 2px solid green;
-}</style>
+}
+</style>
