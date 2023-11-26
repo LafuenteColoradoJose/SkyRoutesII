@@ -1,5 +1,5 @@
 <template>
-            <main class="grid grid-cols-1 content-between items-stretch" :data-theme="theme">
+            <main class="flex flex-col place-content-between" :data-theme="theme">
                 <TheNavBar @toggle-theme="toggleTheme"/>
                 <slot />
                 <TheFooter />

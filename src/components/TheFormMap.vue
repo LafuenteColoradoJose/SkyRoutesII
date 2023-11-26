@@ -130,35 +130,27 @@
 
                 <!-- ⁡⁢⁢⁣𝗠𝗘𝗧𝗔𝗥⁡⁡⁡ -->
 
-                <section id="metar" class="border border-gray-800 rounded">
+                <section id="metar" class="border border-gray-800 rounded text-center">
 
 
-                    <div class="text-center">
-                        <article>METAR</article>
-                        <span class="flex justify-center align-baseline mr-4"> {{ fpMetar }}
-                            <div v-if="fpMetar.length > 0" href="#" @click="showTAF">
-                                <!-- <svg
-                                    class="fill-cyan-500 hover:fill-cyan-700 w-4 m-1" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24" id="plus">
-                                    <path
-                                        d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z">
-                                    </path>
-                                </svg> -->
-                                <button class="btn btn-info" onclick="my_modal_1.showModal()">TAF</button>
-                                <dialog id="my_modal_1" class="modal">
-                                    <div class="modal-box">
-                                        <h3 class="font-bold text-lg">Hello!</h3>
-                                        <p class="py-4"> {{ modalContent }} </p>
-                                        <div class="modal-action">
-                                            <form method="dialog">
-                                                <!-- if there is a button in form, it will close the modal -->
-                                                <button class="btn">Close</button>
-                                            </form>
-                                        </div>
+                    <article>METAR</article>
+                    <div class="flex justify-center align-baseline items-center text-center pb-3">
+                        <span class="text-center mr-4"> {{ fpMetar }}</span>
+                        <div v-if="fpMetar.length > 0" href="#" @click="showTAF">
+                            <button class="btn btn-info" onclick="my_modal_1.showModal()">TAF</button>
+                            <dialog id="my_modal_1" class="modal text-start w-screen">
+                                <div class="modal-box">
+                                    <h3 class="font-bold text-lg">Hello!</h3>
+                                    <p class="py-4"> {{ modalContent }} </p>
+                                    <div class="modal-action">
+                                        <form method="dialog">
+                                            <!-- if there is a button in form, it will close the modal -->
+                                            <button class="btn">Close</button>
+                                        </form>
                                     </div>
-                                </dialog>
-                            </div>
-                        </span>
+                                </div>
+                            </dialog>
+                        </div>
                     </div>
 
 
@@ -179,10 +171,10 @@
                         <button type="submit" @click="resetForm">Cancelar Plan Vuelo</button>
                     </article>
 
-                    <!-- <article class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2">
+                    <article class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2">
                         <label for=""></label>
-                        <button type="submit">Guardar plan de vuelo</button>
-                    </article> -->
+                        <button type="submit" @click="saveFP">Guardar plan de vuelo</button>
+                    </article>
 
                 </section>
 
@@ -196,7 +188,8 @@
             <LMap ref="map" :zoom="zoom" :center="[40.416729, -3.703790]">
 
                 <div id="rumbo">
-                    <img id="rumboIcono" src="/icons/maps-arrow.svg" v-if="decodedPolyline.length > 1" :style="{ transform: `rotate(${bearing}deg)`, borderColor: bearing === bearingCorrect ? 'green' : 'red' }" />
+                    <img id="rumboIcono" src="/icons/maps-arrow.svg" v-if="decodedPolyline.length > 1"
+                        :style="{ transform: `rotate(${bearing}deg)`, borderColor: bearing === bearingCorrect ? 'green' : 'red' }" />
                     <img id="rumboIcono" src="/icons/maps-arrow.svg" v-else />
                     <div id="texto">
                         <span id="rumboTexto">{{ bearing }} º</span>
@@ -305,6 +298,7 @@ aircrafts = await responseAircrafts.db.map(aircraft => {
 
 // ⁡⁢⁢⁣cambiar datos aeronaves⁡
 const selectedAircraft = ref(null)
+let idAircraft = ref('')
 
 const selectAircraft = async () => {
     // console.log(selectedAircraft.value)
@@ -317,6 +311,7 @@ const selectAircraft = async () => {
             aircraftSpeed = aircrafts[aircraft].velocidad
             aircraftSpeedCalc.value = aircrafts[aircraft].velocidad
             aircraftImage = aircrafts[aircraft].img
+            idAircraft = aircrafts[aircraft].id
             // console.log(aircraftRegistration)
             // console.log(aircraftTurbulence)
             // console.log(aircraftFuel)
@@ -509,12 +504,12 @@ const getMetar = async () => {
 
     // ⁡⁢⁣⁡⁣⁣⁢⁢PRUEBAS CON METAR POR EXECSO DE PLANES DE VUELO DIARIOS A LA API⁡⁡
     // const { data: metar } = await useLazyFetch(`https://api.met.no/weatherapi/tafmetar/1.0/metar?extended=false&icao=LEBA`) // PRUEBAS CON METAR a Noruega
-    console.log(dataMetar)
-    console.log(typeof (dataMetar))
+    // console.log(dataMetar)
+    // console.log(typeof (dataMetar))
     fpTAF.value = dataMetar.response.TAF
-    console.log(fpTAF.value)
+    // console.log(fpTAF.value)
     fpMetar.value = dataMetar.response.METAR
-    console.log(fpMetar.value)
+    // console.log(fpMetar.value)
 }
 
 // ⁡⁢⁢⁣Mostrar ALERT METAR⁡
@@ -587,6 +582,40 @@ const resetForm = () => {
 
 
 };
+
+// ⁡⁢⁢⁣𝗚𝗨𝗔𝗥𝗗𝗔𝗥 𝗣𝗟𝗔𝗡 𝗗𝗘 𝗩𝗨𝗘𝗟𝗢⁡
+import swal from 'sweetalert'
+
+let userID = ref('')
+
+const saveFP = async () => {
+    // console.log('Guardar Plan de Vuelo')
+
+    const data = await $fetch("/fp/fp", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            fpOrigin: fpOrigin,
+            fpDestination: fpDestination,
+            fpDistance: fpDistance ,
+            fpAltitude: fpAltitude,
+            fpWaypoints: fpWaypoints,
+            idAircraft: idAircraft,
+            departureTime: departureTime,
+            userID: userID // Hay que sacar el userID del usuario logueado
+
+        }),
+    });
+
+    console.log('DATA desde guardarFP:   ', data)
+    if (data.res.rowsAffected > 0) {
+        swal('Plan de vuelo guardado correctamente')
+    } else {
+        swal('Error al guardar el plan de vuelo')
+    }
+}
 
 
 // ​‌‌‌⁡⁢⁢⁣𝗟Ó𝗚𝗜𝗖𝗔 𝗠𝗔𝗣𝗔​ ⁡
@@ -691,16 +720,16 @@ const calculateBearingAndCheckDestination = async () => {
     console.log("DISTANCIA", distanceBearing.value)
 
     // RUMBO CORRECTO
-    
-        lat3.value = destinationBearing[2]
-        lon3.value = destinationBearing[3]
 
-        // Empiezo a comparar los rumbos cuando llego al punto de salida
-        if (currentIndex > 0) {
-            bearingCorrect.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat3.value, lon3.value))
-            // console.log("RUMBO CORRECTO", bearingCorrect.value)
-        }
-    
+    lat3.value = destinationBearing[2]
+    lon3.value = destinationBearing[3]
+
+    // Empiezo a comparar los rumbos cuando llego al punto de salida
+    if (currentIndex > 0) {
+        bearingCorrect.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat3.value, lon3.value))
+        // console.log("RUMBO CORRECTO", bearingCorrect.value)
+    }
+
 }
 
 setInterval(calculateBearingAndCheckDestination, 30000)

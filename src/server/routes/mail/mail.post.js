@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
 
     const {
         nombre,
+        apellidos,
         email,
         bio,
     } = body;
@@ -26,7 +27,7 @@ export default defineEventHandler(async (event) => {
         from: email,
         to: 'skyroutes.info@gmail.com',
         subject: 'Datos del formulario',
-        text: `Nombre: ${nombre}\nEmail: ${email}\nBio: ${bio}`,
+        text: `Nombre: ${nombre}\nApellidos: ${apellidos}\nEmail: ${email}\nBio: ${bio}`,
     };
 
     // Enviar el correo
