@@ -162,21 +162,18 @@
 
 
                 ⁡⁣⁢⁣<!-- 𝗕𝗨𝗧𝗧𝗢𝗡S -->⁡
-                <section id="buttons" class="mb-1">
+                <section id="buttons" class="mb-1 flex justify-around">
 
-                    <article class="btn">
-                        <label for=""></label>
-                        <button type="submit">Solicitar Plan de vuelo</button>
+                    <article class="m-2">
+                        <button class="btn" type="submit">Solicitar</button>
                     </article>
 
-                    <article id="cancelFP" class="btn m-2">
-                        <label for=""></label>
-                        <button type="submit" @click="resetForm">Cancelar Plan Vuelo</button>
+                    <article id="cancelFP" class=" m-2">
+                        <button class="btn" type="submit" @click="resetForm">Cancelar</button>
                     </article>
 
-                    <article class="btn m-2" v-if="fpWaypoints > 0">
-                        <label for=""></label>
-                        <button type="submit" @click="saveFP">Guardar plan de vuelo</button>
+                    <article class="m-2" v-if="fpWaypoints > 0">
+                        <button class="btn" type="submit" @click="saveFP">Guardar</button>
                     </article>
 
                 </section>
