@@ -1,55 +1,124 @@
 <template>
-    <nav id="navBar" class=" flex flex-col justify-between">
+    <nav id="navBar" class=" flex flex-col justify-between z-10">
 
-        <div id="subNavBar1" class="flex flex-row justify-between items-center mx-4">
-            <div>
-                <img src="/SkyRoutes_Logo_White.svg" alt="SkyRoutes Logo" class="w-12 pt-2">
+
+        <div class="navbar">
+            <div class="navbar-start">
+                <div class="dropdown">
+                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </div>
+                    <ul class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li>
+                            <NuxtLink to="/">Inicio</NuxtLink>
+                        </li>
+                        <li>
+                            <NuxtLink to="/contact">Contacta</NuxtLink>
+                        </li>
+                        <li>
+                            <NuxtLink to="/about">Nosotros</NuxtLink>
+                        </li>
+                        <li>
+                            <a>Planes de vuelo</a>
+                            <ul class="p-2">
+                                <li>
+                                    <NuxtLink to="/user">Solicitar</NuxtLink>
+                                </li>
+                                <li>
+                                    <NuxtLink to="/flightplans">Histórico</NuxtLink>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>Usuario</a>
+                            <ul class="p-2">
+                                <li>
+                                    <NuxtLink to="/profile">Perfil</NuxtLink>
+                                </li>
+                                <li>
+                                    <NuxtLink to="/" class="btn-sm">Logout</NuxtLink>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <article>
+                    <img src="/SkyRoutes_Logo_White.svg" alt="SkyRoutes Logo" class="w-12 pt-2">
+                </article>
             </div>
-            <div id="icono" class="pt-2">
-                <label class="swap swap-rotate">
 
-                    <!-- this hidden checkbox controls the state -->
-                    <input type="checkbox" @change="$emit('toggle-theme')" />
+            <!-- 𝗡𝗔𝗩𝗕𝗔𝗥 𝗗𝗜𝗦𝗣𝗢𝗦𝗜𝗧𝗜𝗩𝗢𝗦 𝗚𝗥𝗔𝗡𝗗𝗘𝗦 -->
 
-                    <!-- sun icon -->
-                    <svg class="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                        @click="handleThemeChange('moon')">
-                        <path
-                            d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
-                    </svg>
-
-                    <!-- moon icon -->
-                    <svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        @click="handleThemeChange('sun')">
-                        <path
-                            d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-                    </svg>
-
-                </label>
+            <div class="navbar-center hidden lg:flex">
+                <ul class="menu menu-horizontal px-1">
+                    <li class="text-xl font-semibold">
+                        <NuxtLink to="/">Inicio</NuxtLink>
+                    </li>
+                    <li class="text-xl font-semibold">
+                        <NuxtLink to="/contact">Contacta</NuxtLink>
+                    </li>
+                    <li class="text-xl font-semibold">
+                        <NuxtLink to="/about">Nosotros</NuxtLink>
+                    </li>
+                    <li>
+                        <details>
+                            <summary class="text-xl font-semibold">Planes de vuelo</summary>
+                            <ul class="p-2">
+                                <li class="text-xl font-semibold">
+                                    <NuxtLink to="/user">Solicitar</NuxtLink>
+                                </li>
+                                <li class="text-xl font-semibold">
+                                    <NuxtLink to="/flightplans">Histórico</NuxtLink>
+                                </li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li>
+                        <details>
+                            <summary class="text-xl font-semibold">Usuario</summary>
+                            <ul class="p-2">
+                                <li class="text-xl font-semibold">
+                                    <NuxtLink to="/profile">Perfil</NuxtLink>
+                                </li>
+                                <li class="text-xl font-semibold">
+                                    <NuxtLink to="/" class="btn-sm text-xl font-semibold">Logout</NuxtLink>
+                                </li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
             </div>
+            <div class="navbar-end">
 
-        </div>
-        <div id="subNavBar2" class="flex flex-wrap justify-between items-center">
+                <!-- THEME -->
+                <div id="icono" class="">
+                    <label class="swap swap-rotate">
 
-            <div id="menu" class="flex flex-wrap justify-between items-center gap-2">
-                <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">Inicio</NuxtLink>
-                <NuxtLink to="/contact" class="btn btn-ghost normal-case text-xl">Contacta</NuxtLink>
-                <NuxtLink to="/about" class="btn btn-ghost normal-case text-xl">Nosotros</NuxtLink>
+                        <!-- this hidden checkbox controls the state -->
+                        <input type="checkbox" @change="$emit('toggle-theme')" />
+
+                        <!-- sun icon -->
+                        <svg class="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            @click="handleThemeChange('moon')">
+                            <path
+                                d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                        </svg>
+
+                        <!-- moon icon -->
+                        <svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            @click="handleThemeChange('sun')">
+                            <path
+                                d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                        </svg>
+
+                    </label>
+                </div>
             </div>
-            <div>
-                <NuxtLink to="/user" class="btn btn-ghost normal-case text-xl">Plan de vuelo</NuxtLink>
-                <NuxtLink to="/flightplans" class="btn btn-ghost normal-case text-xl">Listado de planes</NuxtLink>
-            </div>
-            <!-- <div>
-                <NuxtLink to="/profile" class="btn btn-ghost normal-case text-xl">Profile</NuxtLink>
-            </div> -->
-
-            <div>
-                <NuxtLink to="/profile" class="btn btn-ghost normal-case text-xl">Perfil</NuxtLink>
-                <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">Logout</NuxtLink>
-            </div>
-           
-
         </div>
 
     </nav>
@@ -62,12 +131,11 @@
 </script>
 
 
-<style scope>
-#navBar {
+<style scope>#navBar {
     background-color: #5f7fa6;
     background-image: url('/imgs/World Map.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: auto;
-}
-</style>
+
+}</style>

@@ -1,16 +1,19 @@
 <template>
-    <div id="TheFormMap" class="flex flex-col justify-between items-center gap-2">
+    <div id="TheFormMap" class="flex flex-col lg:flex-row lg:mx-6 lg:justify-between lg:gap-4 items-center gap-2">
 
-        <section class="flex h-full">
+
+         <!-- ​‌‌‌⁡⁣⁢⁣‍𝗙𝗢𝗥𝗠𝗨𝗟𝗔𝗥𝗜𝗢⁡​​⁡ -->
+
+        <section id="formulario" class="flex h-full">
             <form class=" flex-col text-center space-y-2 h-full" @submit.prevent="solicitarDatos">
-                <div v-if="localizacion[0] === undefined" role="alert" class="alert">
+                <!-- <div v-if="localizacion[0] === undefined" role="alert" class="alert">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         class="stroke-current shrink-0 w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <span>Para utilizar el GPS deberá permitir la geolocalización en su navegador.</span>
-                </div>
+                </div> -->
 
                 <h2 class="text-3xl">Planes de vuelo</h2>
 
@@ -85,7 +88,7 @@
                         </select>
 
                         <!-- 𝗙𝗘𝗖𝗛𝗔 -->
-                        <div id="date" class="my-3">
+                        <div id="date" class="my-2">
                             <input type="datetime-local" name="date" id="date" v-model="departureTime" :min="minDateTime"
                                 v-show="!isSubmitted">
                         </div>
@@ -93,8 +96,8 @@
                     </div>
 
                     <!-- 𝗗𝗔𝗧𝗢𝗦 -->
-                    <div id="dateFP" class="flex flex-col m-2">
-                        <table class="border-separate border-spacing-2 border border-slate-400 rounded">
+                    <div id="dateFP" class="flex flex-col mx-1">
+                        <table class="border-separate border-spacing-1 border border-slate-400 rounded">
                             <tr>
                                 <td>Origen</td>
                                 <td>{{ fpOrigin }}</td>
@@ -134,7 +137,7 @@
 
 
                     <article>METAR</article>
-                    <div class="flex justify-center align-baseline items-center text-center pb-2">
+                    <div class="flex justify-center align-baseline items-center text-center pb-1">
                         <span class="text-center mr-4"> {{ fpMetar }}</span>
                         <div v-if="fpMetar.length > 0" href="#" @click="showTAF">
                             <button class="btn btn-info" onclick="my_modal_1.showModal()">TAF</button>
@@ -159,19 +162,19 @@
 
 
                 ⁡⁣⁢⁣<!-- 𝗕𝗨𝗧𝗧𝗢𝗡S -->⁡
-                <section id="buttons" class="mb-5">
+                <section id="buttons" class="mb-1">
 
-                    <article class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2">
+                    <article class="btn">
                         <label for=""></label>
                         <button type="submit">Solicitar Plan de vuelo</button>
                     </article>
 
-                    <article id="cancelFP" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2">
+                    <article id="cancelFP" class="btn m-2">
                         <label for=""></label>
                         <button type="submit" @click="resetForm">Cancelar Plan Vuelo</button>
                     </article>
 
-                    <article class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2" v-if="fpWaypoints > 0">
+                    <article class="btn m-2" v-if="fpWaypoints > 0">
                         <label for=""></label>
                         <button type="submit" @click="saveFP">Guardar plan de vuelo</button>
                     </article>
@@ -181,10 +184,12 @@
             </form>
         </section>
 
-        <!-- ⁡⁣⁢⁣​‌‌‍𝗠𝗔𝗣𝗔​⁡ -->
 
 
-        <section id="contenedorMapa" class="container flex justify-center content-center">
+        <!-- ​‌‌‌⁡⁣⁢⁣‍𝗠𝗔𝗣𝗔​​⁡ -->
+
+
+        <section id="contenedorMapa" class="flex justify-center content-center z-0">
             <LMap ref="map" :zoom="zoom" :center="[40.416729, -3.703790]">
 
                 <div id="rumbo">
@@ -410,7 +415,7 @@ const flightplandatabase = async () => {
     // console.log('datosResponse: ', datosResponse)
 
     datos = datosResponse
-    console.log('DATOS: ', datos)
+    // console.log('DATOS: ', datos)
 
 
     fpOrigin.value = datos.fromICAO
@@ -628,7 +633,7 @@ const saveFP = async () => {
 
     
 
-    console.log('DATA desde guardarFP:   ', data)
+    // console.log('DATA desde guardarFP:   ', data)
     if (data.res.rowsAffected > 0) {
         swal('Plan de vuelo guardado correctamente')
     } else {
@@ -690,10 +695,17 @@ const getLocation = () => {
             // console.log("La longitud es :", position.coords.longitude);
             // console.log("La precisión es :", position.coords.accuracy);
             localizacion.value = [position.coords.latitude, position.coords.longitude];
-            console.log(localizacion.value);
+            // console.log(localizacion.value);
         });
     }
 }
+
+
+onMounted(() => {
+    if (localizacion.value.length <= 0) {
+        swal('Para utilizar el GPS deberá permitir la geolocalización en su navegador.')
+    }
+});
 
 // ⁡⁢⁢⁣𝗥𝗨𝗠𝗕𝗢⁡
 
@@ -730,7 +742,7 @@ const calculateBearingAndCheckDestination = async () => {
     if (distance < 0.1) {
         currentIndex++
         bearing.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat2.value, lon2.value))
-        console.log("RUMBO", bearing.value)
+        // console.log("RUMBO", bearing.value)
     }
 
     bearing.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat2.value, lon2.value))
@@ -738,7 +750,7 @@ const calculateBearingAndCheckDestination = async () => {
     // console.log("RUMBO TIPO", typeof bearing.value)
 
     distanceBearing.value = parseFloat(distance.toFixed(2)) + ' Nm'
-    console.log("DISTANCIA", distanceBearing.value)
+    // console.log("DISTANCIA", distanceBearing.value)
 
     // RUMBO CORRECTO
 
@@ -789,7 +801,7 @@ setInterval(calculateBearingAndCheckDestination, 30000)
     flex-direction: col;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 999;
     /* gap: 1rem; */
 
     /* From https://css.glass */
