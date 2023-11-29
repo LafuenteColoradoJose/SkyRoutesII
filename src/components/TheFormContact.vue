@@ -1,5 +1,5 @@
 <template>
-    <form class="flex flex-col text-center p-5 m-5 gap-4" @submit.prevent="enviarDatos">
+    <form class="flex flex-col text-center p-5 m-5 gap-3" @submit.prevent="enviarDatos">
         <h2>Contacta con nosotros</h2>
 
         <label for="nombre"></label>

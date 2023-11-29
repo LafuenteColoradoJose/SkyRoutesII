@@ -1,5 +1,5 @@
 <template>
-    <div id="TheFormMap" class="flex flex-col justify-between items-center gap-4">
+    <div id="TheFormMap" class="flex flex-col justify-between items-center gap-2">
 
         <section class="flex h-full">
             <form class=" flex-col text-center space-y-2 h-full" @submit.prevent="solicitarDatos">
@@ -14,7 +14,7 @@
 
                 <h2 class="text-3xl">Planes de vuelo</h2>
 
-                <article id="formPilotLisence" class="mb-2 ">
+                <article id="formPilotLisence" class="mb-1">
                     <label for="Nº"></label>
                     <input type="text" v-model.trim="flightLicense" @input="validarCampo"
                         :class="{ 'border-red-800': !isValidLicense, 'border-green-500': isValidLicense, 'rounded-lg': true }"
@@ -55,7 +55,7 @@
                                     <td class="border border-slate-600 h-7 w-7">{{ aircraftSpeed }}</td>
                                     <td class="border border-slate-600 h-7 w-7">
                                         <img v-bind:src="aircraftImage" alt="img" id="imgAircraftSelected"
-                                            class="w-full h-full object-cover">
+                                            class="w-full h-auto  object-cover">
                                     </td>
                                 </tr>
 
@@ -93,7 +93,7 @@
                     </div>
 
                     <!-- 𝗗𝗔𝗧𝗢𝗦 -->
-                    <div id="dateFP" class="flex flex-col m-3">
+                    <div id="dateFP" class="flex flex-col m-2">
                         <table class="border-separate border-spacing-2 border border-slate-400 rounded">
                             <tr>
                                 <td>Origen</td>
@@ -134,7 +134,7 @@
 
 
                     <article>METAR</article>
-                    <div class="flex justify-center align-baseline items-center text-center pb-3">
+                    <div class="flex justify-center align-baseline items-center text-center pb-2">
                         <span class="text-center mr-4"> {{ fpMetar }}</span>
                         <div v-if="fpMetar.length > 0" href="#" @click="showTAF">
                             <button class="btn btn-info" onclick="my_modal_1.showModal()">TAF</button>
@@ -171,7 +171,7 @@
                         <button type="submit" @click="resetForm">Cancelar Plan Vuelo</button>
                     </article>
 
-                    <article class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2">
+                    <article class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2" v-if="fpWaypoints > 0">
                         <label for=""></label>
                         <button type="submit" @click="saveFP">Guardar plan de vuelo</button>
                     </article>
@@ -188,10 +188,22 @@
             <LMap ref="map" :zoom="zoom" :center="[40.416729, -3.703790]">
 
                 <div id="rumbo">
-                    <img id="rumboIcono" src="/icons/maps-arrow.svg" v-if="decodedPolyline.length > 1"
+
+
+                    <svg id="rumboIcono" width="48px" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" class=" mr-5 md:w-20 xl:w-22"
+                        :class="{ 'stroke-green-700': bearingCorrect, 'stroke-red-700': !bearingCorrect }"
+                        :style="{ transform: `rotate(${bearing}deg)` }" color="#345ca8">
+                        <path
+                            d="M3.68478 18.7826L11.5642 4.77473C11.7554 4.43491 12.2446 4.43491 12.4358 4.77473L20.3152 18.7826C20.5454 19.1918 20.1357 19.6639 19.6982 19.4937L12.1812 16.5705C12.0647 16.5251 11.9353 16.5251 11.8188 16.5705L4.30179 19.4937C3.86426 19.6639 3.45463 19.1918 3.68478 18.7826Z"
+                            stroke="#345ca8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+
+
+                    <!-- <img id="rumboIcono" src="/icons/maps-arrow.svg" v-if="decodedPolyline.length > 1"
                         :style="{ transform: `rotate(${bearing}deg)`, borderColor: bearing === bearingCorrect ? 'green' : 'red' }" />
-                    <img id="rumboIcono" src="/icons/maps-arrow.svg" v-else />
-                    <div id="texto">
+                    <img id="rumboIcono" src="/icons/maps-arrow.svg" v-else /> -->
+                    <div id="texto" class="flex flex-col text-[#345ca8] font-bold text-2xl">
                         <span id="rumboTexto">{{ bearing }} º</span>
                         <span id="distanciaTexto">{{ distanceBearing }} </span>
                     </div>
@@ -296,6 +308,7 @@ aircrafts = await responseAircrafts.db.map(aircraft => {
 // console.log(typeof(aircrafts))
 // console.log(aircrafts)
 
+
 // ⁡⁢⁢⁣cambiar datos aeronaves⁡
 const selectedAircraft = ref(null)
 let idAircraft = ref('')
@@ -307,7 +320,8 @@ const selectAircraft = async () => {
         if (aircrafts[aircraft].id === selectedAircraft.value) {
             aircraftRegistration = aircrafts[aircraft].matricula
             aircraftTurbulence = aircrafts[aircraft].turbulence
-            aircraftFuel = aircrafts[aircraft].combustible
+            // aircraftFuel = aircrafts[aircraft].combustible
+            aircraftFuel = String(aircrafts[aircraft].combustible).padStart(5, '0');
             aircraftSpeed = aircrafts[aircraft].velocidad
             aircraftSpeedCalc.value = aircrafts[aircraft].velocidad
             aircraftImage = aircrafts[aircraft].img
@@ -315,7 +329,9 @@ const selectAircraft = async () => {
             // console.log(aircraftRegistration)
             // console.log(aircraftTurbulence)
             // console.log(aircraftFuel)
+            // console.log(typeof (aircraftFuel))
             // console.log(aircraftSpeed)
+            // console.log(typeof (aircraftSpeed))
             // console.log(aircraftImage)
         }
     }
@@ -394,7 +410,7 @@ const flightplandatabase = async () => {
     // console.log('datosResponse: ', datosResponse)
 
     datos = datosResponse
-    console.log('datos: ', datos)
+    console.log('DATOS: ', datos)
 
 
     fpOrigin.value = datos.fromICAO
@@ -599,15 +615,18 @@ const saveFP = async () => {
         body: JSON.stringify({
             fpOrigin: fpOrigin,
             fpDestination: fpDestination,
-            fpDistance: fpDistance ,
+            fpDistance: fpDistance,
             fpAltitude: fpAltitude,
             fpWaypoints: fpWaypoints,
             idAircraft: idAircraft,
             departureTime: departureTime,
-            userID: userID // Hay que sacar el userID del usuario logueado
+            userID: userID, // Hay que sacar el userID del usuario logueado
+            license: flightLicense
 
         }),
     });
+
+    
 
     console.log('DATA desde guardarFP:   ', data)
     if (data.res.rowsAffected > 0) {
@@ -687,7 +706,8 @@ let lon2 = ref(0)
 let currentIndex = 0
 let lat3 = ref(0)
 let lon3 = ref(0)
-let bearingCorrect = ref(0)
+let bearingNext = ref(0)
+let bearingCorrect = ref(undefined)
 
 
 const calculateBearingAndCheckDestination = async () => {
@@ -715,6 +735,7 @@ const calculateBearingAndCheckDestination = async () => {
 
     bearing.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat2.value, lon2.value))
     console.log("RUMBO", bearing.value)
+    // console.log("RUMBO TIPO", typeof bearing.value)
 
     distanceBearing.value = parseFloat(distance.toFixed(2)) + ' Nm'
     console.log("DISTANCIA", distanceBearing.value)
@@ -726,7 +747,12 @@ const calculateBearingAndCheckDestination = async () => {
 
     // Empiezo a comparar los rumbos cuando llego al punto de salida
     if (currentIndex > 0) {
-        bearingCorrect.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat3.value, lon3.value))
+        bearingNext.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat3.value, lon3.value))
+        if (bearing.value === bearingNext.value) {
+            bearingCorrect.value = true
+        } else {
+            bearingCorrect.value = false
+        }
         // console.log("RUMBO CORRECTO", bearingCorrect.value)
     }
 
@@ -751,20 +777,20 @@ setInterval(calculateBearingAndCheckDestination, 30000)
 
 #rumbo {
     margin: auto;
-    margin-top: 5vh;
-    padding: 30px;
-    width: 60vw;
-    height: 5vh;
+    margin-top: 2vh;
+    padding: 10px;
+    width: fit-content;
+    height: auto;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: col;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    gap: 1rem;
+    /* gap: 1rem; */
 
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0);
@@ -776,13 +802,13 @@ setInterval(calculateBearingAndCheckDestination, 30000)
 
 }
 
-#rumboIcono {
+/* #rumboIcono {
     width: 100%;
     height: auto;
     border: solid 2px transparent;
-}
+} */
 
-#texto {
+/* #texto {
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -791,9 +817,9 @@ setInterval(calculateBearingAndCheckDestination, 30000)
     width: auto;
 
 
-}
+} */
 
-#rumboTexto,
+/* #rumboTexto,
 #distanciaTexto {
 
     font-size: 1.5rem;
@@ -802,10 +828,10 @@ setInterval(calculateBearingAndCheckDestination, 30000)
     color: rgba(52, 92, 168, 1);
 
 
-}
+} */
 
 
-/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙄𝙊𝙎 𝙋𝙀𝙌𝙐𝙀Ñ𝙊𝙎⁡ */
+/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙋𝙀𝙌𝙐𝙀Ñ𝙊𝙎⁡ */
 @media (max-width: 767px) {
 
     #formAircraft,
@@ -819,10 +845,10 @@ setInterval(calculateBearingAndCheckDestination, 30000)
         width: 90vw;
     }
 
-    #rumboIcono {
+    /* #rumboIcono {
         width: max-content;
         height: auto;
-    }
+    } */
 
 
 }
@@ -840,15 +866,15 @@ setInterval(calculateBearingAndCheckDestination, 30000)
         width: 90vw;
     }
 
-    #rumbo {
+    /* #rumbo {
         width: 30vw;
         margin-top: 2vh;
-    }
+    } */
 
-    #rumboIcono {
+    /* #rumboIcono {
         width: 10vw;
         height: auto;
-    }
+    } */
 
 
 }
@@ -867,16 +893,16 @@ setInterval(calculateBearingAndCheckDestination, 30000)
         width: 60vw;
     }
 
-    #rumbo {
+    /* #rumbo {
         width: 20vw;
         margin-top: 5vh;
-    }
+    } */
 
-    #rumboIcono {
+    /* #rumboIcono {
         width: 4vw;
         height: auto;
 
-    }
+    } */
 }
 
 .alert {
@@ -889,6 +915,7 @@ setInterval(calculateBearingAndCheckDestination, 30000)
 }
 
 
+/* para validar la licencia */
 
 .border-red-800 {
     border: 2px solid red;

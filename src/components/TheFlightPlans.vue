@@ -28,6 +28,7 @@
                 <th class="hidden sm:table-cell">Waypoints</th>
                 <th class="hidden sm:table-cell">Aircraft</th>
                 <th>Fecha</th>
+                <th>Licencia</th>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +41,7 @@
                 <td class="hidden sm:table-cell">{{ fp.waypoints }}</td>
                 <td class="hidden sm:table-cell">{{ fp.idAircraft }}</td>
                 <td>{{ formatDate(fp.date) }}</td>
+                <td>{{ fp.license }}</td>
             </tr>
         </tbody>
     </table>

@@ -1,66 +1,53 @@
 <template>
-    <section class="flex flex-col">
+    <section id="publicity" class="flex flex-col mx-3 justify-stretch items-center gap-7 xl:mx-40">
 
-
-        <h2 class="h2">SkyRoutes, Encuentra tu ruta</h2>
-        <h3>¡Sincronizado con OpenStreetMaps!</h3>
-
-        <p>¡Descubre SkyRoutes: Tu aliado para planes de vuelo perfectos! </p>
-
-
-        <p>
-            ¿Eres un piloto que busca optimizar sus planes de vuelo? ¡No busques
-            más! SkyRoutes es la aplicación que revolucionará tu experiencia en la
-            aviación.
-        </p>
-
-        <strong>
-            Con SkyRoutes, generar planes de vuelo precisos y eficientes nunca ha
-            sido tan fácil. Nuestra aplicación inteligente utiliza tecnología de
-            vanguardia para ofrecerte una herramienta completa y confiable.
-        </strong>
-
-        <div className={styles.razones}>
-
-            <p>Aquí tienes algunas razones para elegir SkyRoutes:</p>
-
-            <ol>
-                <li>
-                    Eficiencia maximizada: Ahorra tiempo y combustible al generar rutas
-                    de vuelo optimizadas, teniendo en cuenta factores como el clima, las
-                    restricciones del espacio aéreo y las preferencias del piloto. Con
-                    SkyRoutes, alcanza tu destino de la manera más eficiente posible.
-                </li>
-
-                <li>
-                    Eficiencia maximizada: Ahorra tiempo y combustible al generar rutas
-                    de vuelo optimizadas, teniendo en cuenta factores como el clima, las
-                    restricciones del espacio aéreo y las preferencias del piloto. Con
-                    SkyRoutes, alcanza tu destino de la manera más eficiente posible
-                </li>
-
-                <li>
-                    Navegación precisa: Con nuestra interfaz intuitiva y fácil de usar,
-                    obtén acceso rápido a información vital, incluyendo mapas
-                    detallados, altitudes recomendadas y notificaciones en tiempo real.
-                    Nunca te perderás ni te quedarás sin información esencial.
-                </li>
-
-                <li>
-                    Colaboración sin esfuerzo: SkyRoutes te permite compartir tus planes
-                    de vuelo con colegas y controladores de tráfico aéreo, facilitando
-                    la comunicación y asegurando una mayor coordinación entre todos los
-                    involucrados. ¡Trabaja en equipo para lograr un vuelo impecable!
-                </li>
-
-                <li>
-                    ¡No te pierdas la oportunidad de elevar tus vuelos al siguiente
-                    nivel con SkyRoutes! Descarga la aplicación hoy mismo desde nuestra
-                    página web y disfruta de una experiencia de planificación de vuelo
-                    sin igual.
-                </li>
-            </ol>
+        <div id="titulo" class="text-center">
+            <h2 class="xl:text-3xl text-2xl">SkyRoutes, Encuentra tu ruta</h2>
+            <h3>¡Totalmente gratuita!</h3>
         </div>
+
+
+        <article class="flex flex-col items-center gap-2 xl:flex-row justify-stretch">
+            <div>
+                <p class="mb-2">Con SkyRoutes, generar planes de vuelo precisos y eficientes nunca ha
+                    sido tan fácil. Nuestra aplicación inteligente utiliza tecnología de
+                    vanguardia para ofrecerte una herramienta completa y confiable.</p>
+    
+                <p>SkyRoutes es completamente gratuito, lo que te permite disfrutar de todas sus ventajas sin ningún costo, por
+                    lo que te permite maximizar tus recursos mientras disfrutas de un servicio de alta calidad.</p>
+    
+            </div>
+
+            <div id="img" class="w-fit">
+                <img id="imagen" src="/imgs/fmc.webp" alt="Flight Plan Cart" class="">
+            </div>
+    
+
+        </article>
+
+        <article id="parrafo2">
+            <p>
+                ¡No te pierdas la oportunidad de elevar tus vuelos al siguiente nivel con SkyRoutes!
+            </p>
+        </article>
 
     </section>
 </template>
+
+<style scoped>
+/* ⁡⁢⁣⁢⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙋𝙀𝙌𝙐𝙀Ñ𝙊𝙎⁡⁡ */
+
+@media (max-width: 767px) {}
+
+/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙈𝙀𝘿𝙄𝘼𝙉𝙊𝙎⁡⁡ */
+@media (min-width: 768px) and (max-width: 1023px) {}
+
+/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙂𝙍𝘼𝙉𝘿𝙀𝙎⁡ */
+@media (min-width: 1024px) {
+
+
+
+ 
+
+}
+</style>

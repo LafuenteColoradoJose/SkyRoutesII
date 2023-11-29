@@ -28,6 +28,10 @@ export default defineEventHandler(async event => {
 
 // await conn.execute('ALTER TABLE `flightplans` CHANGE `distance` `distance` varchar(255) NOT NULL, CHANGE `maxAltitude` `maxAltitude` varchar(255) NOT NULL;');
 
+// await conn.execute('ALTER TABLE `flightplans` ADD `license` VARCHAR(255);');
+
+// const res = await conn.execute('UPDATE aircrafts SET combustible = 38 WHERE id=1;');
+
 return {
     db: res.rows,
 }

@@ -1,5 +1,5 @@
 <template>
-    <section id="contenedor" class="flex flex-row p-2 m-2">
+    <section id="contenedor" class="flex flex-row mx-4">
       <article id="form">
         <TheFormMap />
       </article>

@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-col gap-12 justify-center">
-        <h1 class="text-7xl text-center">Bienvenido a SkyRoutes</h1>
+    <div class="flex flex-col gap-3 justify-center">
+        <h1 class="text-5xl text-center">Bienvenido a SkyRoutes</h1>
 
         <section class=" mx-10 flex flex-col gap-2 items-center">
 
@@ -15,7 +15,7 @@
             </p>
 
 
-            <p class="container mt-6">
+            <p class="container mt-3">
                 ¿Qué nos hace diferentes?
             </p>
             <p class="container">
@@ -30,12 +30,12 @@
                 explorando nuevos horizontes, SkyRoutes te ofrece las herramientas y recursos para que tus sueños
                 despeguen con confianza y precisión.
             </p>
-            <p class="container mt-6">
+            <p class="container mt-3">
                 Únete a nuestra comunidad de apasionados de la aviación y comienza a crear planes de vuelo memorables
                 hoy mismo.
             </p>
 
-            <article class="flex flex-wrap gap-2 justify-around mt-10">
+            <article class="flex flex-wrap gap-2 justify-around mt-4">
                 <img class="rounded border w-32 h-auto flex justify-center items-center transform transition-transform duration-500 hover:scale-150 hover:z-10"
                     src="/imgs/Ai1.jpg" alt="aircraft">
                 <img class="rounded border w-32 h-auto flex justify-center items-center transform transition-transform duration-500 hover:scale-150 hover:z-10"
@@ -50,7 +50,7 @@
                     src="/imgs/fmc.png" alt="aircraft">
             </article>
 
-            <strong class="container flex flex-col justify-center items-center m-8 text-3xl">
+            <strong class="container flex flex-col justify-center items-center m-4 text-3xl">
                 ¡Despliega tus alas y alcanza nuevos horizontes con SkyRoutes!
             </strong>
         </section>

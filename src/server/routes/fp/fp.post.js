@@ -12,17 +12,19 @@ export default defineEventHandler(async (event) => {
     const waypoints = body.fpWaypoints._value;
     const idAircraft = body.idAircraft;
     const date = body.departureTime._value;
+    const license = body.license._value;
     // // const userID = body.userID._value;
     const userID = 1;
 
-    console.log("fpOrigin: ", fpOrigin);
-    console.log("fpDestination: ", fpDestination);
-    console.log("distance: ", distance);
-    console.log("maxAltitude: ", maxAltitude);
-    console.log("waypoints: ", waypoints);
-    console.log("idAircraft: ", idAircraft);
-    console.log("date: ", date);
-    console.log("userID: ", userID);
+    // console.log("fpOrigin: ", fpOrigin);
+    // console.log("fpDestination: ", fpDestination);
+    // console.log("distance: ", distance);
+    // console.log("maxAltitude: ", maxAltitude);
+    // console.log("waypoints: ", waypoints);
+    // console.log("idAircraft: ", idAircraft);
+    // console.log("date: ", date);
+    // console.log("userID: ", userID);
+    // console.log("license: ", license);
 
     console.log('DESDE SERVIDOR')
 
@@ -36,8 +38,8 @@ export default defineEventHandler(async (event) => {
     const conn = connect(config)
 
     const res = await conn.execute(
-        `INSERT INTO flightplans (fpOrigin, fpDestination, distance, maxAltitude, waypoints, idAircraft, date, userID) 
-         VALUES ('${fpOrigin}', '${fpDestination}', '${distance}', '${maxAltitude}', '${waypoints}', '${idAircraft}', '${date}', '${userID}');`, {
+        `INSERT INTO flightplans (fpOrigin, fpDestination, distance, maxAltitude, waypoints, idAircraft, date, userID, license) 
+         VALUES ('${fpOrigin}', '${fpDestination}', '${distance}', '${maxAltitude}', '${waypoints}', '${idAircraft}', '${date}', '${userID}', '${license}');`, {
         method: "POST"
     }
     );
