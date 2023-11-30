@@ -138,7 +138,7 @@ async function validarFormulario() {
       // window.location.href = 'TheFormLogin.html';
 
       // Prueba
-      await navigateTo('http://localhost:3000/', {
+      await navigateTo('/', {
         open: {
           target: '_self',
           windowFeatures: {

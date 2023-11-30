@@ -36,6 +36,7 @@ let password = ref("");
 let emailError = ref("");
 let passwordError = ref("");
 let emailOrPasswordError = ref("");
+let userId = ref("");
 
 function validarEmail() {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -79,9 +80,10 @@ async function validarFormulario() {
       //Email y Contraseña correcta --> Redirigir al usuario a 
       console.log("Email y Contraseña correcta");
       emailOrPasswordError.value = '';
+      userId.value = data.id;
 
       // Prueba
-      await navigateTo('http://localhost:3000/user', {
+      await navigateTo('/user', {
         open: {
           target: '_self',
           windowFeatures: {
