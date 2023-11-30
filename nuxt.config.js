@@ -40,18 +40,17 @@ export default defineNuxtConfig({
       MYSQL_PASS: process.env.MYSQL_PASS,
       MYSQL_DATABASE: process.env.MYSQL_DATABASE,
 
-      PRUEBA_ENV: process.env.NUXT_PRUEBAENV,
 
       PLANETSCALE_URL: process.env.PLANETSCALE_URL,
 
-      // DATABASE: process.env.DATABASE,
-      // USERNAME: process.env.USERNAME,
-      // HOST: process.env.HOSTPLANET,
-      // PASSWORD: process.env.PASSWORD,
 
       DATABASE_HOST: process.env.DATABASE_HOST,
       DATABASE_USERNAME: process.env.DATABASE_USERNAME,
       DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
+
+      ACCOUNT_GMAIL: process.env.ACCOUNT_GMAIL,
+      USER_GMAIL: process.env.USER_GMAIL,
+      PASS_GMAIL: process.env.PASS_GMAIL,
     },
 
     devtools: {

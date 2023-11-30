@@ -1,0 +1,35 @@
+[
+{"type":"header","version":"5.2.0","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"skyroutes"},
+{"type":"table","name":"aircrafts","database":"skyroutes","data":
+[
+{"id":"1","modelo":"Cessna 172SP","matricula":"EC-NAQ","velocidad":"90","turbulence":"L","combustible":"38","img":"\/aircrafts\/Cessna172.svg"},
+{"id":"3","modelo":"Beechcraft Baron 58","matricula":"EC-CFZ","velocidad":"200","turbulence":"M","combustible":"190","img":"\/aircrafts\/baron58.svg"},
+{"id":"6","modelo":"Cessna Citation X","matricula":"EC-WZZ","velocidad":"473","turbulence":"H","combustible":"13000","img":"\/aircrafts\/citationX.svg"}
+]
+}
+,{"type":"table","name":"airports","database":"skyroutes","data":
+[
+{"id":"1","ICAO":"LEBA","name":"CORDOBA","LAT":"37.8419440","LON":"-4.8488890"},
+{"id":"4","ICAO":"LEBB","name":"BILBAO","LAT":"43.3011110","LON":"-2.9105560"},
+{"id":"6","ICAO":"LECO","name":"A CORUÑA","LAT":"43.3019440","LON":"-8.3772220"},
+{"id":"8","ICAO":"LEMD","name":"MADRID","LAT":"40.4722220","LON":"-3.5608330"},
+{"id":"10","ICAO":"LEMG","name":"MALAGA","LAT":"36.6750000","LON":"-4.4991670"},
+{"id":"12","ICAO":"LEPA","name":"PALMA","LAT":"39.5516670","LON":"2.7388890"},
+{"id":"14","ICAO":"LEVC","name":"VALENCIA","LAT":"39.4894440","LON":"-0.4816670"},
+{"id":"16","ICAO":"LEZL","name":"SEVILLA","LAT":"37.4180560","LON":"-5.8988890"},
+{"id":"18","ICAO":"LEBL","name":"BARCELONA","LAT":"41.2969440","LON":"2.0783330"}
+]
+}
+,{"type":"table","name":"flightplans","database":"skyroutes","data":
+[
+
+]
+}
+,{"type":"table","name":"users","database":"skyroutes","data":
+[
+{"id":"40","name":"pepe","user":"pepote","email":"pp@pp.com","password":"1234","license":"no tengo","admin":"0"},
+{"id":"56","name":"JuanAntonio","user":"juanito","email":"juan@juan.com","password":"1234","license":"prueba1234","admin":"1"}
+]
+}
+]

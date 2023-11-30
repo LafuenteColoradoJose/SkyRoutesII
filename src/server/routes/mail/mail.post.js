@@ -17,15 +17,15 @@ export default defineEventHandler(async (event) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'skyroutes.info@gmail.com',
-            pass: 'vzdn aytu oouk hijq',
+            user: useRuntimeConfig().public.USER_GMAIL,
+            pass: useRuntimeConfig().public.PASS_GMAIL,
         },
     });
 
     // Configurar el contenido del correo
     const mailOptions = {
         from: email,
-        to: 'skyroutes.info@gmail.com',
+        to: useRuntimeConfig().public.ACCOUNT_GMAIL,
         subject: 'Datos del formulario',
         text: `Nombre: ${nombre}\nApellidos: ${apellidos}\nEmail: ${email}\nBio: ${bio}`,
     };
