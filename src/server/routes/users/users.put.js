@@ -19,6 +19,7 @@ export default defineEventHandler(async (event) => {
         // En el caso de que el correo este ocupado --> devuelvo un mensaje de correo ocupado
         return {
             api: 1,
+            id: existingUser.rows[0].id,
             // db: res,
 
         };

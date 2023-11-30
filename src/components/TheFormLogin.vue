@@ -1,6 +1,6 @@
 <template>
   <div id="contenedorFormularioLogin">
-    <h1>Introduce los datos</h1>
+    <h1 class="text-xl font-bold">Introduce los datos</h1>
     <form @submit.prevent="validarFormulario">
       <label for="email">Email:</label>
       <input v-model.trim="email" type="email" id="email" name="email" class="input input-bordered w-full max-w-xs"
@@ -21,12 +21,13 @@
       <div id="emailOrPasswordError" class="error">{{ emailOrPasswordError }}</div>
 
       <button type="submit" id="login">Login</button>
+      
+      <article class="mt-3">
+        <button><router-link to="/register">Register</router-link></button>
+        <p class=""><strong>Para acceder a la aplicación, debes estar registrado.</strong></p>
+      </article>
     </form>
 
-    <article>
-      <p class=""><strong>Para acceder a la aplicación, debes estar registrado. Si no lo estás, puedes hacerlo
-          <router-link to="/register">aquí</router-link></strong></p>
-    </article>
   </div>
 </template>
 
@@ -36,7 +37,6 @@ let password = ref("");
 let emailError = ref("");
 let passwordError = ref("");
 let emailOrPasswordError = ref("");
-let userId = ref("");
 
 function validarEmail() {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -60,6 +60,10 @@ function formularioValido() {
   return !emailError.value && !passwordError.value;
 };
 
+// EXPORTAR EL ID DEL USUARIO
+
+const userId = ref(useCookie('userId'))
+
 async function validarFormulario() {
   if (formularioValido()) {
     console.log('Formulario válido. Envía los datos.');
@@ -80,7 +84,8 @@ async function validarFormulario() {
       //Email y Contraseña correcta --> Redirigir al usuario a 
       console.log("Email y Contraseña correcta");
       emailOrPasswordError.value = '';
-      userId.value = data.id;
+      // Cuando recibes el id del usuario, establece el valor de userId
+      userId.value = data.id
 
       // Prueba
       await navigateTo('/user', {
@@ -164,4 +169,5 @@ button:hover {
 .error-container {
   height: 25px;
   /* Ajusta la altura del contenedor de error */
-}</style>
+}
+</style>

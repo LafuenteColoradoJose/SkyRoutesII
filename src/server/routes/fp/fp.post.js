@@ -13,8 +13,7 @@ export default defineEventHandler(async (event) => {
     const idAircraft = body.idAircraft;
     const date = body.departureTime._value;
     const license = body.license._value;
-    // // const userID = body.userID._value;
-    const userID = 1;
+    const userID = body.userID._value;
 
     // console.log("fpOrigin: ", fpOrigin);
     // console.log("fpDestination: ", fpDestination);

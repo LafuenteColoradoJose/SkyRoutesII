@@ -1,6 +1,13 @@
 import { connect } from '@planetscale/database'
+import { parse } from 'dotenv'
 
 export default defineEventHandler(async event => {
+
+    // console.log(event)
+    const userID = getQuery(event, 'userId')
+
+    // const userID = 92
+
     const config = {
         host: useRuntimeConfig().public.DATABASE_HOST,
         username: useRuntimeConfig().public.DATABASE_USERNAME,
@@ -9,7 +16,8 @@ export default defineEventHandler(async event => {
 
     const conn = connect(config)
 
-    const res = await conn.execute('SELECT * FROM flightplans')
+    // const res = await conn.execute('SELECT * FROM flightplans')
+    const res = await conn.execute('SELECT * FROM flightplans WHERE userID = ?', [userID.userId])
     // const res = await conn.execute('DESC flightplans')
     // const res = await conn.execute('SHOW COLUMNS FROM flightplans;')
     // const res = await conn.execute('SHOW INDEX FROM flightplans;')
@@ -34,6 +42,7 @@ export default defineEventHandler(async event => {
 
 return {
     db: res.rows,
+    // userID
 }
 
 

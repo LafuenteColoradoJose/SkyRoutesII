@@ -604,7 +604,6 @@ const resetForm = () => {
 // ⁡⁢⁢⁣𝗚𝗨𝗔𝗥𝗗𝗔𝗥 𝗣𝗟𝗔𝗡 𝗗𝗘 𝗩𝗨𝗘𝗟𝗢⁡
 import swal from 'sweetalert'
 
-let userID = ref('')
 
 const saveFP = async () => {
     // console.log('Guardar Plan de Vuelo')
@@ -622,7 +621,7 @@ const saveFP = async () => {
             fpWaypoints: fpWaypoints,
             idAircraft: idAircraft,
             departureTime: departureTime,
-            userID: userID, // Hay que sacar el userID del usuario logueado
+            userID: useCookie('userId'), // Hay que sacar el userID del usuario logueado
             license: flightLicense
 
         }),

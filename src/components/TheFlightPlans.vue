@@ -56,10 +56,11 @@
 <script setup>
 
 let dataFP = ref([])
-
+const userId = ref(useCookie('userId'))
+// console.log('userid es: ', userId.value)
 const enviarDatos = async () => {
 
-    const response = await $fetch('/fp/fp', {
+    const response = await $fetch(`/fp/fp?userId=${userId.value}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

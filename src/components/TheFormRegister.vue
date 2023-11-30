@@ -1,6 +1,6 @@
 <template>
   <div id="contenedorFormularioRegistro">
-    <h1>Introduce los datos</h1>
+    <h1 class="text-xl font-bold">Introduce los datos</h1>
     <form @submit.prevent="validarFormulario">
       <label for="nombre">Nombre:</label>
       <input v-model.trim="name" type="text" id="nombre" name="name" class="input input-bordered w-full max-w-xs" required

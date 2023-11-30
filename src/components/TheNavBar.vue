@@ -22,7 +22,7 @@
                         <li>
                             <NuxtLink to="/about">Nosotros</NuxtLink>
                         </li>
-                        <li>
+                        <li v-if="userId">
                             <a>Planes de vuelo</a>
                             <ul class="p-2">
                                 <li>
@@ -33,14 +33,14 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <li v-if="userId">
                             <a>Usuario</a>
                             <ul class="p-2">
                                 <li>
                                     <NuxtLink to="/profile">Perfil</NuxtLink>
                                 </li>
                                 <li>
-                                    <NuxtLink to="/" class="btn-sm">Logout</NuxtLink>
+                                    <NuxtLink to="/" class="btn-sm" @click="logout">Logout</NuxtLink>
                                 </li>
                             </ul>
                         </li>
@@ -65,7 +65,7 @@
                     <li class="text-xl font-semibold">
                         <NuxtLink to="/about">Nosotros</NuxtLink>
                     </li>
-                    <li>
+                    <li v-if="userId">
                         <details>
                             <summary class="text-xl font-semibold">Planes de vuelo</summary>
                             <ul class="p-2">
@@ -78,7 +78,7 @@
                             </ul>
                         </details>
                     </li>
-                    <li>
+                    <li v-if="userId">
                         <details>
                             <summary class="text-xl font-semibold">Usuario</summary>
                             <ul class="p-2">
@@ -128,6 +128,23 @@
 // console.log(toogle-theme)
 
 // bg-[#5f7fa6]
+
+// acceder al Id del usuario desde el composable
+const userId = ref(useCookie('userId'))
+// console.log('ID de usuario: ', userId)
+
+
+/**
+ *  TODO Borrar cookies al hacer logout
+ * 
+ *  */
+
+
+const logout = () => {
+res.clearCookie('userId')
+
+}
+
 </script>
 
 
