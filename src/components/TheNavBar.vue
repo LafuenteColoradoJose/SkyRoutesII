@@ -1,5 +1,5 @@
 <template>
-    <nav id="navBar" class=" flex flex-col justify-between z-10">
+    <nav id="navBar" class=" flex flex-col justify-between z-10 sm:mt-1">
 
 
         <div class="navbar">
@@ -39,8 +39,8 @@
                                 <li>
                                     <NuxtLink to="/profile">Perfil</NuxtLink>
                                 </li>
-                                <li>
-                                    <NuxtLink to="/" class="btn-sm" @click="logout">Logout</NuxtLink>
+                                <li @click="logout">
+                                    <NuxtLink to="/" class="btn-sm">Logout</NuxtLink>
                                 </li>
                             </ul>
                         </li>
@@ -66,7 +66,7 @@
                         <NuxtLink to="/about">Nosotros</NuxtLink>
                     </li>
                     <li v-if="userId">
-                        <details>
+                        <details class="">
                             <summary class="text-xl font-semibold">Planes de vuelo</summary>
                             <ul class="p-2">
                                 <li class="text-xl font-semibold">
@@ -85,7 +85,7 @@
                                 <li class="text-xl font-semibold">
                                     <NuxtLink to="/profile">Perfil</NuxtLink>
                                 </li>
-                                <li class="text-xl font-semibold">
+                                <li class="text-xl font-semibold" @click="logout">
                                     <NuxtLink to="/" class="btn-sm text-xl font-semibold">Logout</NuxtLink>
                                 </li>
                             </ul>
@@ -140,19 +140,54 @@ const userId = ref(useCookie('userId'))
  *  */
 
 
-const logout = () => {
-res.clearCookie('userId')
+const logout = async () => {
+    navigateTo('/')
+    document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+
+    if (typeof window !== 'undefined') {
+       setInterval(() => {
+        window.location.reload()
+       }, 100);
+}
 
 }
 
 </script>
 
 
-<style scope>#navBar {
+<style scope>
+#navBar {
     background-color: #5f7fa6;
     background-image: url('/imgs/World Map.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: auto;
 
-}</style>
+}
+
+.menu-horizontal {
+    display: inline-flex;
+    flex-direction: row;
+}
+.menu-horizontal > li:not(.menu-title) > details > ul {
+    position: absolute;
+}
+.menu-horizontal > li:not(.menu-title) > details > ul {
+    margin-left: 0px;
+    margin-top: 1rem/* 16px */;
+    padding-top: 0.5rem/* 8px */;
+    padding-bottom: 0.5rem/* 8px */;
+    padding-right: 0.5rem/* 8px */;
+}
+.menu-horizontal > li > details > ul:before {
+    content: none;
+}
+:where(.menu-horizontal > li:not(.menu-title) > details > ul) {
+    --tw-bg-opacity: 1;
+    background-color: hsl(var(--b1) / var(--tw-bg-opacity));
+    --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    border-radius: var(--rounded-box, 1rem/* 16px */);
+}
+</style>

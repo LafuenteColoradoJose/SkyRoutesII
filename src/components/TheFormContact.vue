@@ -1,19 +1,29 @@
 <template>
-    <form class="flex flex-col text-center p-5 m-5 gap-3" @submit.prevent="enviarDatos">
+    <form class="flex flex-col text-center p-2 m-2 gap-3" @submit.prevent="enviarDatos">
+
         <h2 class="text-xl font-bold">Contacta con nosotros</h2>
 
-        <label for="nombre">Nombre</label>
-        <input type="text" v-model.trim="nombre" class="input input-bordered w-full max-w-xs" required />
+        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:justify-start lg:w-full">
+            <label class="mb-1" for="nombre">Nombre</label>
+            <input type="text" v-model.trim="nombre" class="input input-bordered w-full max-w-xs" required />
+        </article>
 
-        <label for="nombre">Apellidos</label>
-        <input type="text" v-model.trim="apellidos" class="input input-bordered w-full max-w-xs" required />
+        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:justify-start lg:w-full">
+            <label class="mb-1" for="nombre">Apellidos</label>
+            <input type="text" v-model.trim="apellidos" class="input input-bordered w-full max-w-xs" required />
+        </article>
 
-        <label for="email">Email</label>
-        <input type="email" v-model.trim="email" class="input input-bordered w-full max-w-xs" required />
+        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:justify-start lg:w-full">
+            <label class="mb-1" for="email">Email</label>
+            <input type="email" v-model.trim="email" class="input input-bordered w-full max-w-xs" required />
+        </article>
 
-        <label for="asunto">Asunto</label>
-        <textarea v-model.trim="bio" class="textarea textarea-bordered" placeholder="Max 250 palabras" required
-            maxlength="250"></textarea>
+        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:justify-start lg:w-full">
+            <label class="mb-1" for="asunto">Asunto</label>
+            <textarea v-model.trim="bio" class="textarea textarea-bordered w-full" placeholder="Max 250 palabras" required
+                maxlength="250">
+            </textarea>
+        </article>
 
 
         <article class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2">

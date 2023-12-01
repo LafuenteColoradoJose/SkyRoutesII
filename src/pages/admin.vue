@@ -4,6 +4,17 @@
     </div>
 </template>
 
+
+<script setup>
+definePageMeta({
+    title: 'Admin',
+    description: 'Admin page',
+    middleware: 'auth'
+})
+
+
+</script>
+
 <style scoped>
 
   #contenedor {

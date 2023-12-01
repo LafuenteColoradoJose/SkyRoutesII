@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt3-leaflet',
+    // 'cookie-universal-nuxt',
 
   ],
   css: ['@/assets/css/main.css'],
@@ -62,6 +63,7 @@ export default defineNuxtConfig({
     },
   },
 
+  // middleware: 'auth',
 
   // para hacer debugging
   sourcemap: {

@@ -9,7 +9,7 @@
   <nav class="grid-flow-col gap-8 md:place-self-center md:justify-self-end mr-5">
     
     <div class="flex flex-row gap-2">
-      <span class="text-xs"> José Antonio Rivera</span>
+      <span class="text-xs"> José A. Rivera</span>
       <a href="https://github.com/JoseAntonioRiveraVargas">
         <img src="../public/icons/github.svg" alt="Logotipo SkyRoutes" class="w-5">
     </a>

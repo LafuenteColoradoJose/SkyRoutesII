@@ -1,20 +1,21 @@
 <template>
   <div id="contenedorFormularioLogin">
-    <h1 class="text-xl font-bold">Introduce los datos</h1>
+    <h1 class="text-xl font-bold mb-2">Introduce los datos</h1>
     <form @submit.prevent="validarFormulario">
+
       <label for="email">Email:</label>
       <input v-model.trim="email" type="email" id="email" name="email" class="input input-bordered w-full max-w-xs"
         required @input="validarEmail">
-      <div class="error-container">
 
+      <div class="error-container">
         <div id="emailError" class="error">{{ emailError }}</div>
       </div>
 
       <label for="password">Contraseña:</label>
       <input v-model.trim="password" type="password" id="password" name="password"
         class="input input-bordered w-full max-w-xs" required @input="validarPassword">
-      <div class="error-container">
 
+      <div class="error-container">
         <div id="passwordError" class="error">{{ passwordError }}</div>
       </div>
 
@@ -119,17 +120,18 @@ async function validarFormulario() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  /* justify-content:flex-start; */
   margin: auto;
   margin-top: 1vh;
   /* margen superior */
   height: 70vh;
   width: 60vw;
+  /* background-color: brown; */
 }
 
-form {
+/* form {
   width: 100%;
-}
+} */
 
 label,
 input,
@@ -167,7 +169,8 @@ button:hover {
 }
 
 .error-container {
-  height: 25px;
+  height: 45px;
   /* Ajusta la altura del contenedor de error */
+
 }
 </style>
