@@ -64,6 +64,7 @@ function formularioValido() {
 // EXPORTAR EL ID DEL USUARIO
 
 const userId = ref(useCookie('userId'))
+const isAdmin = ref(false);
 
 async function validarFormulario() {
   if (formularioValido()) {
@@ -81,13 +82,14 @@ async function validarFormulario() {
     }
     );
 
-    if (data.api === 1) {
+    if (data.api === 1 && data.isAdmin === 0) {
       //Email y Contraseña correcta --> Redirigir al usuario a 
       console.log("Email y Contraseña correcta");
       emailOrPasswordError.value = '';
       // Cuando recibes el id del usuario, establece el valor de userId
       userId.value = data.id
-
+      
+      
       // Prueba
       await navigateTo('/user', {
         open: {
@@ -98,15 +100,24 @@ async function validarFormulario() {
           }
         }
       })
+      
+    } else if (data.api === 1 && data.isAdmin === 1) {
+      userId.value = data.id
+      await navigateTo('/admin', {
+        open: {
+          target: '_self',
+          windowFeatures: {
+            width: 500,
+            height: 500
+          }
+        }
+      })
+    }
 
     } else if (data.api === 0) {
       // Email o Contraseña INCORRECTO
       console.log("Email o Contraseña INCORRECTO");
       emailOrPasswordError.value = 'Email o Contraseña INCORRECTO';
-
-    }
-
-
 
   } else {
     console.log('Formulario inválido. Por favor, corrige los errores.');

@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
         return {
             api: 1,
             id: existingUser.rows[0].id,
+            isAdmin: existingUser.rows[0].admin,
             // db: res,
 
         };

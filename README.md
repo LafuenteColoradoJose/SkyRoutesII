@@ -20,7 +20,10 @@
    4. Nuxt3:
       * npm install
       * Development Server: Start the development server on `http://localhost:3000`
-      * npm run dev (https://nuxt.com/docs/getting-started/deployment)
+      * npm run dev (https://nuxt.com/docs/getting-started/deployment).
+  5. Administrador:
+     1. email: admin@admin.com
+     2. pass: Admin12345
    
 ## Información sobre despliegue
    1. Requisitos:

@@ -165,29 +165,4 @@ const logout = async () => {
 
 }
 
-.menu-horizontal {
-    display: inline-flex;
-    flex-direction: row;
-}
-.menu-horizontal > li:not(.menu-title) > details > ul {
-    position: absolute;
-}
-.menu-horizontal > li:not(.menu-title) > details > ul {
-    margin-left: 0px;
-    margin-top: 1rem/* 16px */;
-    padding-top: 0.5rem/* 8px */;
-    padding-bottom: 0.5rem/* 8px */;
-    padding-right: 0.5rem/* 8px */;
-}
-.menu-horizontal > li > details > ul:before {
-    content: none;
-}
-:where(.menu-horizontal > li:not(.menu-title) > details > ul) {
-    --tw-bg-opacity: 1;
-    background-color: hsl(var(--b1) / var(--tw-bg-opacity));
-    --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    border-radius: var(--rounded-box, 1rem/* 16px */);
-}
 </style>

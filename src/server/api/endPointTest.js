@@ -29,7 +29,21 @@ export default defineEventHandler(async event => {
 
       const conn = connect(config)
     //   const res = await conn.execute('SHOW TABLES')
-    const res = await conn.execute('SELECT * FROM airports')
+
+
+    // const res = await conn.execute('SELECT * FROM airports')
+
+    // const res = await conn.execute(
+    //     `INSERT INTO users (name, user, email, password, license, admin) 
+    //      VALUES ('admin', 'admin', 'admin@admin.com', 'admin1234', 'ESP.FCL.1234567', 1)`, {
+    //     method: "POST"
+    // }
+    // );
+
+    const res = await conn.execute(
+        `UPDATE users SET password = 'Admin12345' WHERE user = 'admin'`, {
+        method: "POST"
+    });
 
     return {
         api: "works in endPointTest",
