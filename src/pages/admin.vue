@@ -1,11 +1,11 @@
 <template>
-    <div id="contenedor" class="flex flex-row p-2 m-2">
-        <h2 class="text-3xl">CRUD del Admin</h2>
-    </div>
+    <TheFormAdmin />
 </template>
 
 
 <script setup>
+import TheFormAdmin from '~/components/TheFormAdmin.vue';
+
 definePageMeta({
     title: 'Admin',
     description: 'Admin page',
