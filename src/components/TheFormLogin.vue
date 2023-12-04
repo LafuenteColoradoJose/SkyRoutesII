@@ -21,12 +21,14 @@
 
       <div id="emailOrPasswordError" class="error">{{ emailOrPasswordError }}</div>
 
-      <button type="submit" id="login">Login</button>
-      
-      <article class="mt-3">
+      <div class="flex flex-row justify-center items-center gap-1">
+        <button type="submit" id="login">Login</button>
         <button><router-link to="/register">Register</router-link></button>
-        <p class=""><strong>Para acceder a la aplicación, debes estar registrado.</strong></p>
-      </article>
+
+      </div>
+      <p class=""><strong>Para acceder a la aplicación, debes estar registrado.</strong></p>
+
+
     </form>
 
   </div>
@@ -88,8 +90,8 @@ async function validarFormulario() {
       emailOrPasswordError.value = '';
       // Cuando recibes el id del usuario, establece el valor de userId
       userId.value = data.id
-      
-      
+
+
       // Prueba
       await navigateTo('/user', {
         open: {
@@ -100,7 +102,7 @@ async function validarFormulario() {
           }
         }
       })
-      
+
     } else if (data.api === 1 && data.isAdmin === 1) {
       userId.value = data.id
       await navigateTo('/admin', {
@@ -114,10 +116,10 @@ async function validarFormulario() {
       })
     }
 
-    } else if (data.api === 0) {
-      // Email o Contraseña INCORRECTO
-      console.log("Email o Contraseña INCORRECTO");
-      emailOrPasswordError.value = 'Email o Contraseña INCORRECTO';
+  } else if (data.api === 0) {
+    // Email o Contraseña INCORRECTO
+    console.log("Email o Contraseña INCORRECTO");
+    emailOrPasswordError.value = 'Email o Contraseña INCORRECTO';
 
   } else {
     console.log('Formulario inválido. Por favor, corrige los errores.');

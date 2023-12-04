@@ -44,6 +44,9 @@
                                 </li>
                             </ul>
                         </li>
+                        <li v-if="isAdmin" class="text-xl font-semibold">
+                            <NuxtLink to="/admin">Dashboard</NuxtLink>
+                        </li>
                     </ul>
                 </div>
 
@@ -91,6 +94,9 @@
                             </ul>
                         </details>
                     </li>
+                    <li v-if="isAdmin" class="text-xl font-semibold">
+                        <NuxtLink to="/admin">Dashboard</NuxtLink>
+                    </li>
                 </ul>
             </div>
             <div class="navbar-end">
@@ -133,11 +139,11 @@
 const userId = ref(useCookie('userId'))
 // console.log('ID de usuario: ', userId)
 
-
-/**
- *  TODO Borrar cookies al hacer logout
- * 
- *  */
+const isAdmin = ref(false)
+if (userId.value == '93') {
+    // console.log('es admin', isAdmin)
+    isAdmin.value = true
+}
 
 
 const logout = async () => {
@@ -145,12 +151,12 @@ const logout = async () => {
     document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 
     if (typeof window !== 'undefined') {
-       setInterval(() => {
-        window.location.reload()
-       }, 100);
+        setInterval(() => {
+            window.location.reload()
+        }, 100);
+    }
 }
 
-}
 
 </script>
 
@@ -164,5 +170,4 @@ const logout = async () => {
     background-size: auto;
 
 }
-
 </style>

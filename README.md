@@ -31,7 +31,7 @@
       2. Base de datos MySql en un servidor.
       3. Cuenta de correo de gmail en activo.
       4. Nuxt 3:
-         1. Comando: 'nuxi bulid' (https://nuxt.com/docs/api/commands/build) 
+         1. Comando: 'nuxi build' (https://nuxt.com/docs/api/commands/build) 
 
    2. MySql: Configure las variables de entorno del archivo .env
    3. Cuenta de correo: Configure las variables de entorno del archivo .env
