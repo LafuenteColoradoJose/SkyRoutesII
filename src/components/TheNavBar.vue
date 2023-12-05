@@ -146,15 +146,15 @@ if (userId.value == '93') {
 }
 
 
-const logout = async () => {
-    navigateTo('/')
+const logout = () => {
+    // navigateTo('/')
     document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    reloadNuxtApp('/')
 
-    if (typeof window !== 'undefined') {
-        setInterval(() => {
-            window.location.reload()
-        }, 100);
-    }
+    // if (typeof window !== 'undefined') {
+    //     setInterval(() => {
+    //     }, 100);
+    // }
 }
 
 
