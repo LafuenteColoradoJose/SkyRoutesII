@@ -1,45 +1,82 @@
 <template>
   <div id="contenedorFormularioRegistro">
-    <h1 class="text-xl font-bold">Introduce los datos</h1>
-    <form @submit.prevent="validarFormulario">
-      <label for="nombre">Nombre:</label>
-      <input v-model.trim="name" type="text" id="nombre" name="name" class="input input-bordered w-full max-w-xs" required
-        @input="validarNombre">
-      <div class="error-container">
-        <div id="nombreError" class="error">{{ nombreError }}</div>
+    <h1 class="text-xl font-bold text-center">Introduce los datos</h1>
+    <form @submit.prevent="validarFormulario" id="formulario">
+
+      <div id="botonFuera">
+
+        <div class="form-group">
+
+          <div class="">
+            <label for="nombre">Nombre:</label>
+            <input v-model.trim="name" type="text" id="nombre" name="name" class="input input-bordered"
+              required @input="validarNombre">
+          </div>
+          <div class="error-container">
+            <div id="nombreError" class="error">{{ nombreError }}</div>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <div>
+            <label for="usuario">Usuario:</label>
+            <input v-model.trim="user" type="text" id="usuario" name="user" class="input input-bordered"
+              required @input="validarUsuario">
+          </div>
+          <div class="error-container">
+            <div id="usuarioError" class="error">{{ usuarioError }}</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div>
+            <div>
+              <label for="email" class="">Email:</label>
+              <input v-model.trim="email" type="email" id="email" name="email" class="input input-bordered"
+                required @input="validarEmail">
+            </div>
+
+            <div class="error-container">
+              <div id="emailError" class="error">{{ emailError }}</div>
+              <div id="emailOcupado" class="error">{{ emailOcupado }}</div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+          <div>
+            <label for="password">Contraseña:</label>
+            <input v-model.trim="password" type="password" id="password" name="password"
+              class="input input-bordered" required @input="validarPassword">
+          </div>
+          <div class="error-container">
+            <div id="passwordError" class="error">{{ passwordError }}</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div>
+            <label for="confirmPassword">Confirmar Contraseña:</label>
+            <input v-model.trim="confirmPassword" type="password" id="confirmPassword" name="confirmPassword"
+              class="input input-bordered" required @input="validarConfirmPassword">
+          </div>
+          <div class="error-container">
+            <div id="confirmPasswordError" class="error">{{ confirmPasswordError }}</div>
+          </div>
+        </div>
+
+
       </div>
 
-      <label for="usuario">Usuario:</label>
-      <input v-model.trim="user" type="text" id="usuario" name="user" class="input input-bordered w-full max-w-xs"
-        required @input="validarUsuario">
-      <div class="error-container">
-        <div id="usuarioError" class="error">{{ usuarioError }}</div>
+      <div class="text-center m-12">
+        <button type="submit" id="registrarBtn">Registrar</button>
       </div>
 
-      <label for="email">Email:</label>
-      <input v-model.trim="email" type="email" id="email" name="email" class="input input-bordered w-full max-w-xs"
-        required @input="validarEmail">
-      <div class="error-container">
-        <div id="emailError" class="error">{{ emailError }}</div>
-        <div id="emailOcupado" class="error">{{ emailOcupado }}</div>
-      </div>
-
-      <label for="password">Contraseña:</label>
-      <input v-model.trim="password" type="password" id="password" name="password"
-        class="input input-bordered w-full max-w-xs" required @input="validarPassword">
-      <div class="error-container">
-        <div id="passwordError" class="error">{{ passwordError }}</div>
-      </div>
-
-
-      <label for="confirmPassword">Confirmar Contraseña:</label>
-      <input v-model.trim="confirmPassword" type="password" id="confirmPassword" name="confirmPassword"
-        class="input input-bordered w-full max-w-xs" required @input="validarConfirmPassword">
-      <div class="error-container">
-        <div id="confirmPasswordError" class="error">{{ confirmPasswordError }}</div>
-      </div>
-
-      <button type="submit" id="registrarBtn">Registrar</button>
     </form>
   </div>
 </template>
@@ -61,7 +98,7 @@ let confirmPasswordError = ref("");
 function validarNombre() {
   const nombrePattern = /^[a-zA-ZÀ-ÿ\s']{2,}\s[a-zA-ZÀ-ÿ\s']{2,}$/u;
   if (!nombrePattern.test(name.value)) {
-    nombreError.value = 'El nombre y apellido deben tener al menos 2 caracteres de longitud.';
+    nombreError.value = 'El nombre debe tener al menos 2 caracteres de longitud.';
   } else {
     nombreError.value = ''
   }
@@ -165,28 +202,27 @@ async function validarFormulario() {
 #contenedorFormularioRegistro {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  /* height: 70vh; */
+  /* background-color: brown; */
+
+  /* height: auto; */
   /* Bloqueo */
-  width: 60vw;
-  margin: auto;
+  width: 100%;
+  /* margin: auto; */
   margin-top: 1vh;
   /* margen superior */
 }
 
-form {
-  width: 100%;
-}
 
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
 input {
   display: block;
-  margin-bottom: 10px;
+  /* margin-bottom: 5px; */
 }
 
 .error-container {
@@ -216,5 +252,79 @@ button {
 button:hover {
   background-color: #4a6280;
   /* Cambio de color al pasar el ratón */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  @media (min-width: 1024px) {
+
+    #contenedorFormularioRegistro {
+      display: flex;
+      flex-direction: column;
+      /* background-color: aqua; */
+
+    }
+
+    #formulario {
+      width:100%;
+      display: flex;
+      flex-direction: column;
+      /* justify-content: center; */
+      align-items: center;
+      /* padding: 40px; */
+    }
+
+    #botonFuera {
+      margin-top: 1rem;
+      width: 90%;
+      /* justify-content: space-around; */
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+
+    .form-group:nth-child(1),
+    .form-group:nth-child(2) {
+      grid-row: 1;
+    }
+
+    .form-group:nth-child(3) {
+      grid-row: 2;
+    }
+
+    .form-group:nth-child(4),
+    .form-group:nth-child(5) {
+      grid-row: 3;
+    }
+
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .error-container {
+     width: max-content;
+    }
+
+    .error {
+      width: 400px;
+    }
+
+    input {
+      width: 400px;
+    }
+
+
+
+
+  }
+
 }
 </style>

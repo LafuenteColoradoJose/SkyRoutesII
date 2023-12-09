@@ -105,7 +105,7 @@ async function validarFormulario() {
 
     } else if (data.api === 1 && data.isAdmin === 1) {
       userId.value = data.id
-      await navigateTo('/admin', {
+      await navigateTo('/', {
         open: {
           target: '_self',
           windowFeatures: {
@@ -133,18 +133,23 @@ async function validarFormulario() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content:flex-start; */
+  justify-content:center;
   margin: auto;
   margin-top: 1vh;
+  width: 100%;
   /* margen superior */
-  height: 70vh;
-  width: 60vw;
+  /* height: 70vh; */
+  /* width: 60vw; */
   /* background-color: brown; */
 }
 
-/* form {
+form {
   width: 100%;
-} */
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+}
 
 label,
 input,

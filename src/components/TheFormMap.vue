@@ -136,14 +136,14 @@
                 <section id="metar" class="border border-gray-800 rounded text-center">
 
 
-                    <article>METAR</article>
+                    <article v-if="fpMetar.length === 0">METAR</article>
                     <div class="flex justify-center align-baseline items-center text-center pb-1">
                         <span class="text-center mr-4"> {{ fpMetar }}</span>
                         <div v-if="fpMetar.length > 0" href="#" @click="showTAF">
                             <button class="btn btn-info" onclick="my_modal_1.showModal()">TAF</button>
                             <dialog id="my_modal_1" class="modal text-start w-screen">
                                 <div class="modal-box">
-                                    <h3 class="font-bold text-lg">Hello!</h3>
+                                    <h3 class="font-bold text-lg">Buen viaje!</h3>
                                     <p class="py-4"> {{ modalContent }} </p>
                                     <div class="modal-action">
                                         <form method="dialog">
@@ -162,7 +162,7 @@
 
 
                 ⁡⁣⁢⁣<!-- 𝗕𝗨𝗧𝗧𝗢𝗡S -->⁡
-                <section id="buttons" class="mb-1 flex justify-around">
+                <section id="buttons" class="mb-1 flex justify-around lg:mt-o">
 
                     <article class="m-2">
                         <button class="btn" type="submit">Solicitar</button>
@@ -172,8 +172,8 @@
                         <button class="btn" type="submit" @click="resetForm">Cancelar</button>
                     </article>
 
-                    <article class="m-2" v-if="fpWaypoints > 0">
-                        <button class="btn" type="submit" @click="saveFP">Guardar</button>
+                    <article class="m-2">
+                        <button  v-if="fpWaypoints > 0" class="btn" type="submit" @click="saveFP">Guardar</button>
                     </article>
 
                 </section>

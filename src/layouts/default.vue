@@ -2,7 +2,6 @@
             <main class="flex flex-col place-content-between" :data-theme="theme">
               <ClientOnly >
                 <TheNavBar @toggle-theme="toggleTheme"/>
-                
               </ClientOnly>
                 <slot />
                 <TheFooter />
@@ -32,6 +31,7 @@ onMounted(() => {
 
     main {
         min-height: 100vh;
+        height: 100%;
         background-image: var(--background-image);
         background-repeat: no-repeat;
         background-position: center;

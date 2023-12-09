@@ -3,31 +3,33 @@
 
         <h2 class="text-xl font-bold">Contacta con nosotros</h2>
 
-        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:justify-start lg:w-full">
-            <label class="mb-1" for="nombre">Nombre</label>
+        <article
+            class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:w-full">
+            <label class="mb-1 lg:w-48 lg:text-start" for="nombre">Nombre</label>
             <input type="text" v-model.trim="nombre" class="input input-bordered w-full max-w-xs" required />
         </article>
 
-        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:justify-start lg:w-full">
-            <label class="mb-1" for="nombre">Apellidos</label>
+        <article
+            class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:w-full">
+            <label class="mb-1 lg:w-48 lg:text-start" for="nombre">Apellidos</label>
             <input type="text" v-model.trim="apellidos" class="input input-bordered w-full max-w-xs" required />
         </article>
 
-        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:justify-start lg:w-full">
-            <label class="mb-1" for="email">Email</label>
+        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:w-full">
+            <label class="mb-1 lg:w-48 lg:text-start" for="email">Email</label>
             <input type="email" v-model.trim="email" class="input input-bordered w-full max-w-xs" required />
         </article>
 
-        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:justify-start lg:w-full">
-            <label class="mb-1" for="asunto">Asunto</label>
-            <textarea v-model.trim="bio" class="textarea textarea-bordered w-full" placeholder="Max 250 palabras" required
+        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:w-full">
+            <label class="mb-1 lg:w-48 lg:text-start" for="asunto">Asunto</label>
+            <textarea v-model.trim="bio" class="textarea textarea-bordered w-full resize-none" placeholder="Max 250 palabras" required
                 maxlength="250">
             </textarea>
         </article>
 
 
-        <article class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg m-2">
-            <label for=""></label>
+        <article class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg lg:mx-28">
+            <label class="" for=""></label>
             <button type="submit">Enviar</button>
         </article>
     </form>

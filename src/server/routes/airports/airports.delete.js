@@ -3,7 +3,7 @@ import { connect } from "@planetscale/database"
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
 
-    let selectedRows = body.selectedRows;
+    const id = body.id;
 
     const config = {
         host: useRuntimeConfig().public.DATABASE_HOST,
@@ -13,15 +13,12 @@ export default defineEventHandler(async (event) => {
     
     const conn = connect(config)
 
-    const promises = selectedRows.map(row => conn.execute(
-        `DELETE FROM airports WHERE id = ${row};`
-    ));
-
-    const res = await Promise.all(promises);
+    const res = await conn.execute(
+        `DELETE FROM airports WHERE id = ${id};`
+    );
 
     return {
         res,
-        // body
     };
 });
 

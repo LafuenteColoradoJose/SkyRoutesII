@@ -1,5 +1,5 @@
 <template>
-    <section id="publicity" class="flex flex-col mx-3 justify-stretch items-center gap-7 xl:mx-40">
+    <section id="publicity" class="flex flex-col mx-3 justify-stretch items-center gap-7 mt-3">
 
         <div id="titulo" class="text-center">
             <h2 class="xl:text-3xl text-2xl">SkyRoutes, Encuentra tu ruta</h2>
@@ -13,8 +13,8 @@
                     sido tan fácil. Nuestra aplicación inteligente utiliza tecnología de
                     vanguardia para ofrecerte una herramienta completa y confiable.</p>
     
-                <p>SkyRoutes es completamente gratuito, lo que te permite disfrutar de todas sus ventajas sin ningún costo, por
-                    lo que te permite maximizar tus recursos mientras disfrutas de un servicio de alta calidad.</p>
+                <!-- <p>SkyRoutes es completamente gratuito, lo que te permite disfrutar de todas sus ventajas sin ningún costo, por
+                    lo que te permite maximizar tus recursos mientras disfrutas de un servicio de alta calidad.</p> -->
     
             </div>
 
@@ -45,7 +45,9 @@
 /* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙂𝙍𝘼𝙉𝘿𝙀𝙎⁡ */
 @media (min-width: 1024px) {
 
-
+#publicity {
+    width: 400px;
+}
 
  
 

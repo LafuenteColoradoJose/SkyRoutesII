@@ -40,12 +40,23 @@
                                     <NuxtLink to="/profile">Perfil</NuxtLink>
                                 </li>
                                 <li @click="logout">
-                                    <NuxtLink to="/" class="btn-sm">Logout</NuxtLink>
+                                    <NuxtLink to="/">Logout</NuxtLink>
                                 </li>
                             </ul>
                         </li>
                         <li v-if="isAdmin" class="text-xl font-semibold">
-                            <NuxtLink to="/admin">Dashboard</NuxtLink>
+                            <a>Dashboard</a>
+                            <ul class="p-2">
+                                <li>
+                                    <NuxtLink to="/admin/aircrafts">Aircrafts</NuxtLink>
+                                </li>
+                                <li>
+                                    <NuxtLink to="/admin/airports">Airports</NuxtLink>
+                                </li>
+                                <li>
+                                    <NuxtLink to="/admin/users">Users</NuxtLink>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -89,13 +100,26 @@
                                     <NuxtLink to="/profile">Perfil</NuxtLink>
                                 </li>
                                 <li class="text-xl font-semibold" @click="logout">
-                                    <NuxtLink to="/" class="btn-sm text-xl font-semibold">Logout</NuxtLink>
+                                    <NuxtLink to="/">Logout</NuxtLink>
                                 </li>
                             </ul>
                         </details>
                     </li>
                     <li v-if="isAdmin" class="text-xl font-semibold">
-                        <NuxtLink to="/admin">Dashboard</NuxtLink>
+                        <details>
+                            <summary class="text-xl font-semibold">Dashboard</summary>
+                            <ul class="p-2">
+                                <li class="text-xl font-semibold">
+                                    <NuxtLink to="/admin/aircrafts">Aircrafts</NuxtLink>
+                                </li>
+                                <li class="text-xl font-semibold">
+                                    <NuxtLink to="/admin/airports">Airports</NuxtLink>
+                                </li>
+                                <li class="text-xl font-semibold">
+                                    <NuxtLink to="/admin/users">Users</NuxtLink>
+                                </li>
+                            </ul>
+                        </details>
                     </li>
                 </ul>
             </div>
@@ -169,5 +193,9 @@ const logout = () => {
     background-position: center;
     background-size: auto;
 
+}
+
+summary ul li{
+    background-color: aqua;
 }
 </style>
