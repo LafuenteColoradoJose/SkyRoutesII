@@ -13,13 +13,13 @@
                         </svg>
                     </div>
                     <ul class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li>
+                        <li v-show="!isAdmin && !userId">
                             <NuxtLink to="/">Inicio</NuxtLink>
                         </li>
-                        <li>
+                        <li v-show="!isAdmin && !userId">
                             <NuxtLink to="/contact">Contacta</NuxtLink>
                         </li>
-                        <li>
+                        <li v-show="!isAdmin && !userId">
                             <NuxtLink to="/about">Nosotros</NuxtLink>
                         </li>
                         <li v-if="userId">
@@ -33,17 +33,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li v-if="userId">
-                            <a>Usuario</a>
-                            <ul class="p-2">
-                                <li>
-                                    <NuxtLink to="/profile">Perfil</NuxtLink>
-                                </li>
-                                <li @click="logout">
-                                    <NuxtLink to="/">Logout</NuxtLink>
-                                </li>
-                            </ul>
-                        </li>
+
                         <li v-if="isAdmin" class="text-xl font-semibold">
                             <a>Dashboard</a>
                             <ul class="p-2">
@@ -70,13 +60,13 @@
 
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal px-1">
-                    <li class="text-xl font-semibold">
+                    <li v-show="!isAdmin && !userId" class="text-xl font-semibold">
                         <NuxtLink to="/">Inicio</NuxtLink>
                     </li>
-                    <li class="text-xl font-semibold">
+                    <li v-show="!isAdmin && !userId" class="text-xl font-semibold">
                         <NuxtLink to="/contact">Contacta</NuxtLink>
                     </li>
-                    <li class="text-xl font-semibold">
+                    <li v-show="!isAdmin && !userId" class="text-xl font-semibold">
                         <NuxtLink to="/about">Nosotros</NuxtLink>
                     </li>
                     <li v-if="userId">
@@ -92,19 +82,7 @@
                             </ul>
                         </details>
                     </li>
-                    <li v-if="userId">
-                        <details>
-                            <summary class="text-xl font-semibold">Usuario</summary>
-                            <ul class="p-2">
-                                <li class="text-xl font-semibold">
-                                    <NuxtLink to="/profile">Perfil</NuxtLink>
-                                </li>
-                                <li class="text-xl font-semibold" @click="logout">
-                                    <NuxtLink to="/">Logout</NuxtLink>
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
+
                     <li v-if="isAdmin" class="text-xl font-semibold">
                         <details>
                             <summary class="text-xl font-semibold">Dashboard</summary>
@@ -124,6 +102,47 @@
                 </ul>
             </div>
             <div class="navbar-end">
+
+                <!-- 𝗡𝗔𝗩𝗕𝗔𝗥 𝗥𝗜𝗚𝗛𝗧 𝗦𝗜𝗗𝗘 𝗠𝗘𝗡𝗨 -->
+                <div v-show="userId" class="navbar ml-16 md:ml-44 lg:ml-96">
+                    <!-- <div class="flex-1">
+                        <a class="btn btn-ghost text-xl">daisyUI</a>
+                    </div> -->
+                    <div class="flex-none gap-2">
+                        <!-- <div class="form-control">
+                            <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+                        </div> -->
+                        <div class="dropdown dropdown-end">
+                            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                                <div class="w-10 rounded-full shadow-xl border-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="w-full h-full">
+                                        <path fill-rule="evenodd"
+                                            d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+
+                                </div>
+                            </div>
+                            <ul tabindex="0"
+                                class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                <!-- <li>
+                                    <a class="justify-between">
+                                        Profile
+                                        <span class="badge">New</span>
+                                    </a>
+                                </li> -->
+                                <li class="text-xl font-semibold">
+                                    <NuxtLink to="/profile" class="text-xl">Perfil</NuxtLink>
+                                </li>
+                                <li class="text-xl font-semibold" @click="logout">
+                                    <NuxtLink to="/" class="text-xl">Logout</NuxtLink>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- THEME -->
                 <div id="icono" class="">
@@ -195,7 +214,6 @@ const logout = () => {
 
 }
 
-summary ul li{
+summary ul li {
     background-color: aqua;
-}
-</style>
+}</style>

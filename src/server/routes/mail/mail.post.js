@@ -25,10 +25,10 @@ export default defineEventHandler(async (event) => {
 
     const transporter = nodemailer.createTransport({
         port: 465,
-        host: "smtp.gmail.com",
+        host: "smtp.mailgun.org",
         auth: {
-            user: useRuntimeConfig().public.USER_GMAIL,
-            pass: useRuntimeConfig().public.PASS_GMAIL,
+            user:  "brad@sandboxadfe43ae354b4c598a4f1053b9c7d259.mailgun.org",
+            // pass: useRuntimeConfig().public.PASS_GMAIL,
         },
         secure: true,
     });

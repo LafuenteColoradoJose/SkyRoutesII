@@ -3,14 +3,12 @@
 
         <h2 class="text-xl font-bold">Contacta con nosotros</h2>
 
-        <article
-            class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:w-full">
+        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:w-full">
             <label class="mb-1 lg:w-48 lg:text-start" for="nombre">Nombre</label>
             <input type="text" v-model.trim="nombre" class="input input-bordered w-full max-w-xs" required />
         </article>
 
-        <article
-            class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:w-full">
+        <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:w-full">
             <label class="mb-1 lg:w-48 lg:text-start" for="nombre">Apellidos</label>
             <input type="text" v-model.trim="apellidos" class="input input-bordered w-full max-w-xs" required />
         </article>
@@ -22,8 +20,8 @@
 
         <article class="flex flex-col justify-center items-center lg:flex-row lg:gap-2 lg:w-full">
             <label class="mb-1 lg:w-48 lg:text-start" for="asunto">Asunto</label>
-            <textarea v-model.trim="bio" class="textarea textarea-bordered w-full resize-none" placeholder="Max 250 palabras" required
-                maxlength="250">
+            <textarea v-model.trim="bio" class="textarea textarea-bordered w-full resize-none"
+                placeholder="Max 250 palabras" required maxlength="250">
             </textarea>
         </article>
 
@@ -83,6 +81,7 @@ const enviarDatos = async () => {
         swal('Error al enviar el mensaje')
     }
 }
+
 
 
 

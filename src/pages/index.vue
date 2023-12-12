@@ -7,6 +7,12 @@
 
 <script setup>
 
+definePageMeta({
+    title: 'index',
+    description: 'index page',
+    middleware: 'registered-user'
+})
+
 </script>
 
 <style scoped>

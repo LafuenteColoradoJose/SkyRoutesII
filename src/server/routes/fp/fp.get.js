@@ -1,5 +1,4 @@
 import { connect } from '@planetscale/database'
-import { parse } from 'dotenv'
 
 export default defineEventHandler(async event => {
 

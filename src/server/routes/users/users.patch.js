@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     const name = body.name;
     const user = body.user;
     const email = body.email;
-    const password = body.password;
+    // const password = body.password;
     
 
     const config = {
@@ -31,9 +31,9 @@ export default defineEventHandler(async (event) => {
     if (email) {
         updateQuery += ` email = '${email}',`;
     }
-    if (password) {
-        updateQuery += ` password = '${password}',`;
-    }
+    // if (password) {
+    //     updateQuery += ` password = '${password}',`;
+    // }
     
 
     updateQuery = updateQuery.slice(0, -1); // Remove the last comma

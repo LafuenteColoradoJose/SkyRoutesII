@@ -37,9 +37,9 @@
 
         <!-- PAGINACIÓN -->
         <div class="flex justify-center mt-4 mb-4 gap-4">
-            <button @click="prevPage" :disabled="currentPage === 1">Anterior</button>
-            <div>Página {{ currentPage }} de {{ totalPages }}</div>
-            <button @click="nextPage" :disabled="currentPage === totalPages">Siguiente</button>
+            <button @click="prevPage" :disabled="currentPage === 1" class="btn">Anterior</button>
+            <div class="font-extrabold">Página {{ currentPage }} de {{ totalPages }}</div>
+            <button @click="nextPage" :disabled="currentPage === totalPages" class="btn">Siguiente</button>
         </div>
 
         <!-- Mostrar aeronaves -->

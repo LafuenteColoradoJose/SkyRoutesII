@@ -52,6 +52,9 @@ export default defineNuxtConfig({
       ACCOUNT_GMAIL: process.env.ACCOUNT_GMAIL,
       USER_GMAIL: process.env.USER_GMAIL,
       PASS_GMAIL: process.env.PASS_GMAIL,
+
+      APIKEY_RESEND: process.env.APIKEY_RESEND,
+      PASS_SMTPMAILER: process.env.PASS_SMTPMAILER,
     },
 
     devtools: {

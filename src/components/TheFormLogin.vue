@@ -105,7 +105,7 @@ async function validarFormulario() {
 
     } else if (data.api === 1 && data.isAdmin === 1) {
       userId.value = data.id
-      await navigateTo('/', {
+      await navigateTo('/user', {
         open: {
           target: '_self',
           windowFeatures: {

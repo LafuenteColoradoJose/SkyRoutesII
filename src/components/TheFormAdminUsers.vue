@@ -37,9 +37,9 @@
 
         <!-- PAGINACIÓN -->
         <div class="flex justify-center mt-4 mb-4 gap-4">
-            <button @click="prevPage" :disabled="currentPage === 1">Anterior</button>
+            <button @click="prevPage" :disabled="currentPage === 1" class="btn">Anterior</button>
             <div>Página {{ currentPage }} de {{ totalPages }}</div>
-            <button @click="nextPage" :disabled="currentPage === totalPages">Siguiente</button>
+            <button @click="nextPage" :disabled="currentPage === totalPages" class="btn">Siguiente</button>
         </div>
 
         <!-- Mostrar Usuarios-->
@@ -50,7 +50,7 @@
                     <th>Nombre</th>
                     <th>Usuario</th>
                     <th class="hidden lg:table-cell">Email</th>
-                    <th class="hidden lg:table-cell">Password</th>
+                    <!-- <th class="hidden lg:table-cell">Password</th> -->
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -60,7 +60,7 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.user }}</td>
                     <td class="hidden lg:table-cell">{{ user.email }}</td>
-                    <td class="hidden lg:table-cell">{{ user.password }}</td>
+                    <!-- <td class="hidden lg:table-cell">{{ user.password }}</td> -->
                     <td class="flex flex-col gap-1 lg:flex-row  lg:gap-2">
                         <button @click="showDetails(user)" class="btn-xs border rounded-md lg:hidden">Mostrar</button>
                         <button @click="editUser(user)" class="btn-xs border rounded-md">Editar</button>
@@ -91,10 +91,10 @@
                             <th>Email</th>
                             <td>{{ userDetails.email }}</td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <th>Password</th>
                             <td>{{ userDetails.password }}</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
                 <div class="modal-action">
@@ -131,12 +131,12 @@
                             <input v-model.trim="emailModificar" type="text" name="" id=""
                                 class="input input-bordered w-full max-w-xs">
                         </article>
-                        <article class="flex flex-col justify-center items-center mb-6">
+                        <!-- <article class="flex flex-col justify-center items-center mb-6">
                             <span class="font-mono italic"> {{ password }}</span>
                             <label for="">Nuevo Password</label>
                             <input v-model.trim="passwordModificar" type="text" name="" id=""
                                 class="input input-bordered w-full max-w-xs">
-                        </article>
+                        </article> -->
                     </div>
 
                     <button class="btn btn-ghost border border-gray-700 my-2 w-fit" @click="updateUser">Modificar
