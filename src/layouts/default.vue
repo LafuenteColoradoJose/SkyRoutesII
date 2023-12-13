@@ -1,8 +1,6 @@
 <template>
             <main class="flex flex-col place-content-between" :data-theme="theme">
-              <ClientOnly >
                 <TheNavBar @toggle-theme="toggleTheme"/>
-              </ClientOnly>
                 <slot />
                 <TheFooter />
             </main>
