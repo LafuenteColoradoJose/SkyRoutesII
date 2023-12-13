@@ -16,6 +16,9 @@ export default defineEventHandler(async (event) => {
     // Configurar el transporte de correo
     const transporter = nodemailer.createTransport({
         service: 'gmail',
+        host: "smtp.gmail.com",
+        port:587,
+        secure: false,
         auth: {
             user: useRuntimeConfig().public.USER_GMAIL,
             pass: useRuntimeConfig().public.PASS_GMAIL,
