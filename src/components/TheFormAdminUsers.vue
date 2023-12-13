@@ -1,5 +1,5 @@
 <template>
-    <section class="flex flex-col h-full ">
+    <section class="flex flex-col">
         <h2 class="text-2xl font-semibold m-auto mb-6">Users</h2>
 
         <div class="m-auto">
@@ -61,10 +61,17 @@
                     <td>{{ user.user }}</td>
                     <td class="hidden lg:table-cell">{{ user.email }}</td>
                     <!-- <td class="hidden lg:table-cell">{{ user.password }}</td> -->
-                    <td class="flex flex-col gap-1 lg:flex-row  lg:gap-2">
-                        <button @click="showDetails(user)" class="btn-xs border rounded-md lg:hidden">Mostrar</button>
-                        <button @click="editUser(user)" class="btn-xs border rounded-md">Editar</button>
-                        <button @click="deleteUser(user)" class="btn-xs border rounded-md">Eliminar</button>
+                    <td>
+                        <div v-if=user.id class="flex flex-col gap-1 lg:flex-row  lg:gap-2 justify-center">
+                            <button @click="showDetails(user)" class="btn-xs border rounded-md lg:hidden">Mostrar</button>
+                            <button @click="editUser(user)" class="btn-xs border rounded-md">Editar</button>
+                            <button @click="deleteUser(user)" class="btn-xs border rounded-md">Eliminar</button>
+                        </div>
+                        <div v-else class="opacity-[0.01] flex flex-col gap-1 lg:flex-row  lg:gap-2 justify-center">
+                            <span class="border rounded-md lg:hidden">Mostrar</span>
+                            <span class="border rounded-md">Editar</span>
+                            <span class="border rounded-md">Eliminar</span>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -201,7 +208,15 @@ const showAllUsers = async () => {
 
 let paginatedUsers = computed(() => {
     let start = (currentPage.value - 1) * perPage;
-    return users.value.slice(start, start + perPage);
+    let end = start + perPage;
+    let slice = users.value.slice(start, end);
+
+    // Si la página no está llena, llenarla con aeropuertos vacíos
+    while (slice.length < perPage) {
+        slice.push({});
+    }
+
+    return slice;
 });
 
 let totalPages = computed(() => Math.ceil(users.value.length / perPage));

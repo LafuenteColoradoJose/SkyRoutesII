@@ -47,18 +47,18 @@ const enviarDatos = async () => {
         headers: {
             'Content-Type': 'application/json'
         },
-        // body: JSON.stringify({
-        //     nombre: nombre.value,
-        //     email: email.value,
-        //     bio: bio.value
-        // })
-        body:
-        {
+        body: JSON.stringify({
             nombre: nombre.value,
-            apellidos: apellidos.value,
             email: email.value,
             bio: bio.value
-        }
+        })
+        // body:
+        // {
+        //     nombre: nombre.value,
+        //     apellidos: apellidos.value,
+        //     email: email.value,
+        //     bio: bio.value
+        // }
 
     });
 

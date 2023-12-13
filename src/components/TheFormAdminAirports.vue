@@ -1,6 +1,6 @@
 <template>
-    <section class="flex flex-col align-top">
-        <h2 class="text-2xl font-semibold m-auto mb-6">Airport</h2>
+    <section class="flex flex-col">
+        <h2 class="text-2xl font-semibold m-auto mb-6">Airports</h2>
 
         <div class="m-auto">
             <button @click="OpenModalCreate" class="btn-xs border rounded-md">Crear Aeropuerto</button>
@@ -9,7 +9,7 @@
         <dialog id="modalCreate" class="modal">
             <div class="modal-box">
                 <span class="text-center font-bold"> {{ textResponse }}</span>
-                <!-- TABLA AIRCRAFTS CREAR -->
+                <!-- TABLA AIRPORTS CREAR -->
                 <form class="flex flex-col justify-center items-center" v-on:submit.prevent="">
                     <label for="">ICAO</label>
                     <input v-model.trim="ICAO" type="text" name="" id="" class="input input-bordered w-full max-w-xs"
@@ -42,8 +42,8 @@
             <button @click="nextPage" :disabled="currentPage === totalPages" class="btn">Siguiente</button>
         </div>
 
-        <!-- Mostrar aeronaves -->
-        <table id="tableAirports" class="table">
+        <!-- Mostrar aeropuertos -->
+        <table id="tableAirports" class="table  text-center">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -56,15 +56,22 @@
             </thead>
             <tbody>
                 <tr v-for="airport in paginatedAirports" :key="airport.id">
-                    <td>{{ airport.id }}</td>
-                    <td>{{ airport.ICAO }}</td>
-                    <td>{{ airport.name }}</td>
-                    <td class="hidden lg:table-cell">{{ airport.LAT }}</td>
-                    <td class="hidden lg:table-cell">{{ airport.LON }}</td>
-                    <td class="flex flex-col gap-1 lg:flex-row  lg:gap-2">
-                        <button @click="showDetails(airport)" class="btn-xs border rounded-md lg:hidden">Mostrar</button>
-                        <button @click="editAirport(airport)" class="btn-xs border rounded-md">Editar</button>
-                        <button @click="deleteAirport(airport)" class="btn-xs border rounded-md">Eliminar</button>
+                    <td>{{ airport.id || '' }}</td>
+                    <td>{{ airport.ICAO || '' }}</td>
+                    <td>{{ airport.name || ''}}</td>
+                    <td class="hidden lg:table-cell">{{ airport.LAT || '' }}</td>
+                    <td class="hidden lg:table-cell">{{ airport.LON || ''}}</td>
+                    <td class="">
+                        <div v-if=airport.id class="flex flex-col gap-1 lg:flex-row  lg:gap-2 justify-center">
+                            <button @click="showDetails(airport)" class="btn-xs border rounded-md lg:hidden">Mostrar</button>
+                            <button @click="editAirport(airport)" class="btn-xs border rounded-md">Editar</button>
+                            <button @click="deleteAirport(airport)" class="btn-xs border rounded-md">Eliminar</button>
+                        </div>
+                        <div v-else class="opacity-[0.01] flex flex-col gap-1 lg:flex-row  lg:gap-2 justify-center">
+                            <span class="border rounded-md lg:hidden">Mostrar</span>
+                            <span class="border rounded-md">Editar</span>
+                            <span class="border rounded-md">Eliminar</span>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -201,7 +208,15 @@ const showAllAirports = async () => {
 
 let paginatedAirports = computed(() => {
     let start = (currentPage.value - 1) * perPage;
-    return airports.value.slice(start, start + perPage);
+    let end = start + perPage;
+    let slice = airports.value.slice(start, end);
+
+    // Si la página no está llena, llenarla con aeropuertos vacíos
+    while (slice.length < perPage) {
+        slice.push({});
+    }
+
+    return slice;
 });
 
 let totalPages = computed(() => Math.ceil(airports.value.length / perPage));
@@ -242,7 +257,7 @@ const createAirport = async () => {
                 name: name.value,
                 LAT: LAT.value,
                 LON: LON.value,
-                
+
             }),
         });
 
@@ -251,7 +266,7 @@ const createAirport = async () => {
         name.value = '';
         LAT.value = '';
         LON.value = '';
-        
+
         await showAllAirports();
     } catch (error) {
         console.log(error);
@@ -308,7 +323,7 @@ const updateAirport = async () => {
                 name: nameModificar.value,
                 LAT: LATModificar.value,
                 LON: LONModificar.value,
-                
+
             }),
         });
 

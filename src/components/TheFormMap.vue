@@ -288,7 +288,7 @@ let aircraftRegistration = ref('Matrícula')
 let aircraftTurbulence = ref('Turbulence')
 let aircraftFuel = ref('Fuel')
 let aircraftSpeed = ref('Speed')
-let aircraftImage = ref('/airplane-front-view-silhouette-3.svg')
+let aircraftImage = ref('/airplaneFormulario.svg')
 
 
 responseAircrafts = await $fetch('/aircrafts/aircrafts')

@@ -10,7 +10,7 @@
 definePageMeta({
     title: 'index',
     description: 'index page',
-    middleware: 'registered-user' 
+    middleware: 'registered-user',
 })
 
 </script>

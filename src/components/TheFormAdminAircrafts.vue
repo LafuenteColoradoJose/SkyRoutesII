@@ -1,5 +1,5 @@
 <template>
-    <section class="flex flex-col h-full ">
+    <section class="flex flex-col">
         <h2 class="text-2xl font-semibold m-auto mb-6">Aircrafts</h2>
 
         <div class="m-auto">
@@ -48,7 +48,7 @@
         </div>
 
         <!-- Mostrar aeronaves -->
-        <table id="tableAircrafts" class="table w-full">
+        <table id="tableAircrafts" class="table text-center">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -70,10 +70,18 @@
                     <td class="hidden lg:table-cell">{{ aircraft.turbulence }}</td>
                     <td class="hidden lg:table-cell">{{ aircraft.combustible }}</td>
                     <td class="hidden lg:table-cell">{{ aircraft.img }}</td>
-                    <td class="flex flex-col gap-1 lg:flex-row  lg:gap-2">
-                        <button @click="showDetails(aircraft)" class="btn-xs border rounded-md lg:hidden">Mostrar</button>
-                        <button @click="editAircraft(aircraft)" class="btn-xs border rounded-md">Editar</button>
-                        <button @click="deleteAircraft(aircraft)" class="btn-xs border rounded-md">Eliminar</button>
+                    <td class="">
+                        <div v-if="aircraft.id" class="flex flex-col gap-1 lg:flex-row  lg:gap-2 justify-center">
+                            <button @click="showDetails(aircraft)" class="btn-xs border rounded-md lg:hidden">Mostrar</button>
+                            <button @click="editAircraft(aircraft)" class="btn-xs border rounded-md">Editar</button>
+                            <button @click="deleteAircraft(aircraft)" class="btn-xs border rounded-md">Eliminar</button>
+                        </div>
+                        <div v-else class="opacity-[0.01] flex flex-col gap-1 lg:flex-row  lg:gap-2 justify-center">
+                            <span class="btn-xs border rounded-md lg:hidden">Mostrar</span>
+                            <span class="btn-xs border rounded-md">Editar</span>
+                            <span class="btn-xs border rounded-md">Eliminar</span>
+                        </div>
+                        
                     </td>
                 </tr>
             </tbody>
@@ -230,7 +238,15 @@ const showAllAircrafts = async () => {
 
 let paginatedAircrafts = computed(() => {
     let start = (currentPage.value - 1) * perPage;
-    return aircrafts.value.slice(start, start + perPage);
+    let end = start + perPage;
+    let slice = aircrafts.value.slice(start, end);
+
+    // Si la página no está llena, llenarla con aeropuertos vacíos
+    while (slice.length < perPage) {
+        slice.push({});
+    }
+
+    return slice;
 });
 
 let totalPages = computed(() => Math.ceil(aircrafts.value.length / perPage));
