@@ -1,5 +1,5 @@
 <template>
-    <nav id="navBar" class=" flex flex-col justify-between z-10 sm:mt-1">
+    <nav id="navBar" class=" flex flex-col justify-between z-10">
 
 
         <div class="navbar">

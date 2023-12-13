@@ -1,5 +1,5 @@
 <template>
-    <section class="flex flex-col h-full ">
+    <section class="flex flex-col align-top">
         <h2 class="text-2xl font-semibold m-auto mb-6">Airport</h2>
 
         <div class="m-auto">
@@ -43,7 +43,7 @@
         </div>
 
         <!-- Mostrar aeronaves -->
-        <table id="tableAirports" class="table w-full">
+        <table id="tableAirports" class="table">
             <thead>
                 <tr>
                     <th>Id</th>

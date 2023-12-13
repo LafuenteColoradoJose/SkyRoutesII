@@ -8,8 +8,8 @@
 <script setup>
 
 definePageMeta({
-    title: 'index',
-    description: 'index page',
+    title: 'register',
+    description: 'register page',
     middleware: 'registered-user'
 })
 </script>

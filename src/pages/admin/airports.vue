@@ -1,7 +1,8 @@
 <template>
-    <div>
-        <TheFormAdminAirports />
-    </div>
+        <div class="flex flex-col" >
+            <TheFormAdminAirports />
+        </div>
+    
 
 </template>
 
@@ -24,6 +25,6 @@ div {
     background-size: cover;
     background-position: center;
     width: 100vw;
-    height: 100%;
+    /* height: 100vh; */
 }
 </style>
