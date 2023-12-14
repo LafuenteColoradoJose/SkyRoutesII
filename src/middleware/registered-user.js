@@ -6,9 +6,10 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
     if(userId.value) {
         console.log('SALIENDO')
-        if (process.client) {
+        if (typeof window !== 'undefined') {
             // Reemplaza la última entrada en el historial del navegador con la página 'about'
             window.location.reload()
+            console.log('recargando')
         }
        return navigateTo('/about')
     //    return reloadNuxtApp('/about')
