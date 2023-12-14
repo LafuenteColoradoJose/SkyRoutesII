@@ -5,10 +5,9 @@
             <div id="botonFuera">
 
                 <div class="form-group">
-
                     <div class="">
 
-                        <label for="nombre">Nombre:</label>
+                        <label for="nombre">Nombre y Apellido:</label>
                         <input v-model.trim="nombre" type="text" id="nombre" name="nombre" class="input input-bordered"
                             @input="validarNombre" required>
                     </div>
@@ -32,8 +31,8 @@
                 <div class="form-group">
                     <div>
                         <label for="usuario">Usuario:</label>
-                        <input v-model.trim="usuario" type="text" id="usuario" name="usuario" class="input input-bordered" required
-                            @input="validarUsuario">
+                        <input v-model.trim="usuario" type="text" id="usuario" name="usuario" class="input input-bordered"
+                            required @input="validarUsuario">
                     </div>
 
                     <div class="error-container">
@@ -45,8 +44,8 @@
                     <div>
                         <div>
                             <label for="email">Email:</label>
-                            <input v-model.trim="email" type="email" id="email" name="email" class="input input-bordered" required
-                                @input="validarEmail">
+                            <input v-model.trim="email" type="email" id="email" name="email" class="input input-bordered"
+                                required @input="validarEmail">
                         </div>
 
                         <div class="error-container">
@@ -93,6 +92,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
+// Variables para el manejo del estado del formulario y del usuario
 const userId = ref(useCookie('userId')).value;
 let nombre = ref("");
 let usuario = ref("");
@@ -102,6 +102,7 @@ let nuevaContrasena = ref("");
 let repetirContrasena = ref("");
 let contrasenaBase = ref("");
 
+// Variables de errores para cada campo del formulario
 let nombreError = ref("");
 let usuarioError = ref("");
 let emailError = ref("");
@@ -110,6 +111,7 @@ let actualPasswordError = ref("");
 let passwordError = ref("");
 let confirmPasswordError = ref("");
 
+// Hook para cargar los datos del perfil al montar el componente
 onMounted(async () => {
     try {
         const response = await $fetch("profiles/profiles", {
@@ -134,6 +136,7 @@ onMounted(async () => {
     }
 });
 
+// Función para actualizar el perfil del usuario
 async function actualizarPerfil() {
     // Verifica si la contrasenaActual coincide con la contrasenaBase
     if (contrasenaActual.value !== contrasenaBase.value) {
@@ -157,8 +160,6 @@ async function actualizarPerfil() {
         }),
     });
 
-    console.log(data);
-
     await navigateTo('/user', {
         open: {
             target: '_self',
@@ -170,8 +171,9 @@ async function actualizarPerfil() {
     })
 };
 
-// Resto de funciones
+// Resto de funciones para validar campos del formulario
 
+// Función para validar el formato del nombre
 function validarNombre() {
     const nombrePattern = /^[a-zA-ZÀ-ÿ\s']{2,}\s[a-zA-ZÀ-ÿ\s']{2,}$/u;
     if (!nombrePattern.test(nombre.value)) {
@@ -181,6 +183,7 @@ function validarNombre() {
     }
 };
 
+// Función para validar la longitud del usuario
 function validarUsuario() {
     if (usuario.value.length < 2) {
         usuarioError.value = 'El usuario debe tener al menos 2 caracteres de longitud.';
@@ -189,6 +192,7 @@ function validarUsuario() {
     }
 };
 
+// Función para validar el formato del correo electrónico
 function validarEmail() {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(email.value)) {
@@ -198,6 +202,7 @@ function validarEmail() {
     }
 };
 
+// Función para validar la fortaleza de la contraseña
 function validarPassword() {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/;
     if (!passwordPattern.test(nuevaContrasena.value)) {
@@ -207,6 +212,7 @@ function validarPassword() {
     }
 };
 
+// Función para validar que las contraseñas coincidan
 function validarConfirmPassword() {
     if (repetirContrasena.value !== nuevaContrasena.value) {
         confirmPasswordError.value = 'Las contraseñas no coinciden.';
@@ -219,139 +225,132 @@ function validarConfirmPassword() {
 
 <style scoped>
 #contenedorFormularioRegistro {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* background-color: brown; */
-
-  /* height: auto; */
-  /* Bloqueo */
-  width: 100%;
-  /* margin: auto; */
-  margin-top: 1vh;
-  /* margen superior */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Bloqueo */
+    width: 100%;
+    /* margin: auto; */
+    margin-top: 1vh;
+    /* margen superior */
 }
 
 
 label {
-  display: block;
-  margin-bottom: 2px;
+    display: block;
+    margin-bottom: 2px;
 }
 
 input {
-  display: block;
-  /* margin-bottom: 5px; */
+    display: block;
+    /* margin-bottom: 5px; */
 }
 
 .error-container {
-  height: 25px;
-  /* Ajusta la altura del contenedor de error */
+    height: 25px;
+    /* Ajusta la altura del contenedor de error */
 }
 
 .error {
-  color: red;
+    color: red;
 }
 
 button {
-  background-color: #5f7fa6;
-  /* Nuevo color de fondo */
-  color: white;
-  /* Color del texto blanco */
-  border: none;
-  /* Sin borde */
-  border-radius: 4px;
-  /* Esquinas redondeadas */
-  cursor: pointer;
+    background-color: #2b4d8c;
+    /* Nuevo color de fondo */
+    color: white;
+    /* Color del texto blanco */
+    border: none;
+    /* Sin borde */
+    border-radius: 4px;
+    /* Esquinas redondeadas */
+    cursor: pointer;
 
-  padding: 6px 12px;
-  /* Espaciado interno */
+    padding: 6px 12px;
+    /* Espaciado interno */
 }
 
 button:hover {
-  background-color: #4a6280;
-  /* Cambio de color al pasar el ratón */
+    background-color: #233e71;
+    /* Cambio de color al pasar el ratón */
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 @media (min-width: 768px) {
-  .form-columns {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
+    .form-columns {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
 
-  .form-group {
-    width: 48%; /* Ancho para tener dos columnas con margen entre ellas */
-  }
+    .form-group {
+        width: 48%;
+        /* Ancho para tener dos columnas con margen entre ellas */
+    }
 }
 
 @media (min-width: 1024px) {
-  @media (min-width: 1024px) {
+    @media (min-width: 1024px) {
 
-    #contenedorFormularioRegistro {
-      display: flex;
-      flex-direction: column;
-      /* background-color: aqua; */
+        #contenedorFormularioRegistro {
+            display: flex;
+            flex-direction: column;
+        }
 
+        #formulario {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        #botonFuera {
+            margin-top: 1rem;
+            width: 90%;
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            padding-right: 20px;
+            padding-left: 12%;
+        }
+
+        .form-group:nth-child(1),
+        .form-group:nth-child(2) {
+            grid-row: 1;
+        }
+
+        .form-group:nth-child(3) {
+            grid-row: 2;
+        }
+
+        .form-group:nth-child(4),
+        .form-group:nth-child(5) {
+            grid-row: 3;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .error-container {
+            width: max-content;
+        }
+
+        .error {
+            width: 400px;
+        }
+
+        input {
+            width: 400px;
+        }
     }
-
-    #formulario {
-      width:100%;
-      display: flex;
-      flex-direction: column;
-      /* justify-content: center; */
-      align-items: center;
-      /* padding: 40px; */
-    }
-
-    
-    #botonFuera {
-      margin-top: 1rem;
-      width: 90%;
-      /* justify-content: space-around; */
-      display: grid;
-      grid-template-rows: repeat(3, 1fr);
-      padding-right: 20px;
-      padding-left: 12%;
-    }
-
-    .form-group:nth-child(1),
-    .form-group:nth-child(2) {
-      grid-row: 1;
-    }
-
-    .form-group:nth-child(3) {
-      grid-row: 2;
-    }
-
-    .form-group:nth-child(4),
-    .form-group:nth-child(5) {
-      grid-row: 3;
-    }
-
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .error-container {
-     width: max-content;
-    }
-
-    .error {
-      width: 400px;
-    }
-
-    input {
-      width: 400px;
-    }
-  }
 }
 </style>

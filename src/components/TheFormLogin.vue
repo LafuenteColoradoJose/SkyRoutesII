@@ -28,19 +28,23 @@
       </div>
       <p class=""><strong>Para acceder a la aplicación, debes estar registrado.</strong></p>
 
-
     </form>
 
   </div>
 </template>
 
 <script setup>
+
+// Variables de referencia para los datos del formulario
 let email = ref("");
 let password = ref("");
+
+// Variables de errores para cada campo del formulario
 let emailError = ref("");
 let passwordError = ref("");
 let emailOrPasswordError = ref("");
 
+// Funciones de validación para el email y la contraseña
 function validarEmail() {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   if (!emailPattern.test(email.value)) {
@@ -50,6 +54,7 @@ function validarEmail() {
   }
 };
 
+// Función para validar la fortaleza de la contraseña
 function validarPassword() {
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/;
   if (!passwordPattern.test(password.value)) {
@@ -59,19 +64,22 @@ function validarPassword() {
   }
 }
 
+// Función para verificar si el formulario es válido
 function formularioValido() {
   return !emailError.value && !passwordError.value;
 };
 
 // EXPORTAR EL ID DEL USUARIO
-
+// Variables para el manejo del estado del usuario
 const userId = ref(useCookie('userId'))
 const isAdmin = ref(false);
 
+// Función asincrónica para validar el formulario de inicio de sesión
 async function validarFormulario() {
   if (formularioValido()) {
     console.log('Formulario válido. Envía los datos.');
 
+    // Realizar la solicitud al servidor para validar el email y la contraseña
     const data = await $fetch("users/users", {
       method: "PUT",
       headers: {
@@ -84,6 +92,7 @@ async function validarFormulario() {
     }
     );
 
+    // Verificar el resultado de la solicitud y redirigir según el caso
     if (data.api === 1 && data.isAdmin === 0) {
       //Email y Contraseña correcta --> Redirigir al usuario a 
       console.log("Email y Contraseña correcta");
@@ -92,7 +101,7 @@ async function validarFormulario() {
       userId.value = data.id
 
 
-      // Prueba
+      // Redirigir al usuario a la página correspondiente
       await navigateTo('/user', {
         open: {
           target: '_self',
@@ -104,6 +113,7 @@ async function validarFormulario() {
       })
 
     } else if (data.api === 1 && data.isAdmin === 1) {
+      // Usuario es un administrador --> Redirigir a la página de administrador
       userId.value = data.id
       await navigateTo('/user', {
         open: {
@@ -133,21 +143,18 @@ async function validarFormulario() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   margin: auto;
   margin-top: 1vh;
-  width: 100%;
   /* margen superior */
-  /* height: 70vh; */
-  /* width: 60vw; */
-  /* background-color: brown; */
+  width: 100%;
 }
 
 form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -155,8 +162,8 @@ label,
 input,
 .error {
   display: block;
-  margin-bottom: 5px;
   /* espacio entre cada elemento */
+  margin-bottom: 5px;
 }
 
 .error {
@@ -168,7 +175,7 @@ input,
 }
 
 button {
-  background-color: #5f7fa6;
+  background-color: #2b4d8c;
   /* Nuevo color de fondo */
   color: white;
   /* Color del texto blanco */
@@ -182,7 +189,7 @@ button {
 }
 
 button:hover {
-  background-color: #4a6280;
+  background-color: #233e71;
   /* Cambio de color al pasar el ratón */
 }
 

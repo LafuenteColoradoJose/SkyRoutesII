@@ -8,9 +8,9 @@
         <div class="form-group">
 
           <div class="">
-            <label for="nombre">Nombre:</label>
-            <input v-model.trim="name" type="text" id="nombre" name="name" class="input input-bordered"
-              required @input="validarNombre">
+            <label for="nombre">Nombre y Apellido:</label>
+            <input v-model.trim="name" type="text" id="nombre" name="name" class="input input-bordered" required
+              @input="validarNombre">
           </div>
           <div class="error-container">
             <div id="nombreError" class="error">{{ nombreError }}</div>
@@ -21,8 +21,8 @@
         <div class="form-group">
           <div>
             <label for="usuario">Usuario:</label>
-            <input v-model.trim="user" type="text" id="usuario" name="user" class="input input-bordered"
-              required @input="validarUsuario">
+            <input v-model.trim="user" type="text" id="usuario" name="user" class="input input-bordered" required
+              @input="validarUsuario">
           </div>
           <div class="error-container">
             <div id="usuarioError" class="error">{{ usuarioError }}</div>
@@ -33,8 +33,8 @@
           <div>
             <div>
               <label for="email" class="">Email:</label>
-              <input v-model.trim="email" type="email" id="email" name="email" class="input input-bordered"
-                required @input="validarEmail">
+              <input v-model.trim="email" type="email" id="email" name="email" class="input input-bordered" required
+                @input="validarEmail">
             </div>
 
             <div class="error-container">
@@ -44,15 +44,11 @@
           </div>
         </div>
 
-
-
-
-
         <div class="form-group">
           <div>
             <label for="password">Contraseña:</label>
-            <input v-model.trim="password" type="password" id="password" name="password"
-              class="input input-bordered" required @input="validarPassword">
+            <input v-model.trim="password" type="password" id="password" name="password" class="input input-bordered"
+              required @input="validarPassword">
           </div>
           <div class="error-container">
             <div id="passwordError" class="error">{{ passwordError }}</div>
@@ -70,7 +66,6 @@
           </div>
         </div>
 
-
       </div>
 
       <div class="text-center m-12">
@@ -83,27 +78,32 @@
 
 <script setup>
 
+// Variables de referencia para los datos del formulario
 let name = ref("");
 let user = ref("");
 let email = ref("");
 let password = ref("");
+let confirmPassword = ref("");
+
+// Variables de errores para cada campo del formulario
 let nombreError = ref("");
 let usuarioError = ref("");
 let emailError = ref("");
 let passwordError = ref("");
 let emailOcupado = ref("");
-let confirmPassword = ref("");
 let confirmPasswordError = ref("");
 
+// Función para validar el formato del nombre
 function validarNombre() {
   const nombrePattern = /^[a-zA-ZÀ-ÿ\s']{2,}\s[a-zA-ZÀ-ÿ\s']{2,}$/u;
   if (!nombrePattern.test(name.value)) {
-    nombreError.value = 'El nombre debe tener al menos 2 caracteres de longitud.';
+    nombreError.value = 'El nombre y apellido deben tener al menos 2 caracteres.';
   } else {
     nombreError.value = ''
   }
 };
 
+// Función para validar la longitud del usuario
 function validarUsuario() {
   if (user.value.length < 2) {
     usuarioError.value = 'El usuario debe tener al menos 2 caracteres de longitud.';
@@ -112,24 +112,27 @@ function validarUsuario() {
   }
 };
 
+// Función para validar el formato del correo electrónico
 function validarEmail() {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   if (!emailPattern.test(email.value)) {
-    emailError.value = 'El formato del email no es válido, debe cumplir RFC5322.';
+    emailError.value = 'El formato del email no es válido';
   } else {
     emailError.value = '';
   }
 };
 
+// Función para validar la fortaleza de la contraseña
 function validarPassword() {
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/;
   if (!passwordPattern.test(password.value)) {
-    passwordError.value = 'Contraseña no cumple los requisitos.';
+    passwordError.value = 'La contraseña debe tener al menos 8 caracteres,  contener al menos una mayúscula y un caracter especial.';
   } else {
     passwordError.value = '';
   }
 };
 
+// Función que verifica si el formulario es válido
 function formularioValido() {
   return (
     !nombreError.value &&
@@ -140,6 +143,7 @@ function formularioValido() {
   );
 };
 
+// Función para validar que las contraseñas coincidan
 function validarConfirmPassword() {
   if (confirmPassword.value !== password.value) {
     confirmPasswordError.value = 'Las contraseñas no coinciden.';
@@ -148,10 +152,12 @@ function validarConfirmPassword() {
   }
 };
 
+// Función asincrónica para validar el formulario antes de enviarlo
 async function validarFormulario() {
   if (formularioValido()) {
     console.log('Formulario válido. Envía los datos.');
 
+    // Enviar datos del formulario al servidor
     const data = await $fetch("users/users", {
       method: "POST",
       headers: {
@@ -165,16 +171,9 @@ async function validarFormulario() {
       }),
     });
 
-    console.log(data);
-
     if (data.api === 1) {
       // Redirigir al usuario a TheFormLogin.vue
       console.log("Usuario registrado con éxito. Redirigiendo al login...");
-      // const router = useRouter();
-      // $router.push('/TheFormLogin');
-      // window.location.href = 'TheFormLogin.html';
-
-      // Prueba
       await navigateTo('/', {
         open: {
           target: '_self',
@@ -204,14 +203,10 @@ async function validarFormulario() {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: brown; */
-
-  /* height: auto; */
   /* Bloqueo */
   width: 100%;
-  /* margin: auto; */
-  margin-top: 1vh;
   /* margen superior */
+  margin-top: 1vh;
 }
 
 
@@ -221,13 +216,13 @@ label {
 }
 
 input {
-  display: block;
   /* margin-bottom: 5px; */
+  display: block;
 }
 
 .error-container {
-  height: 25px;
   /* Ajusta la altura del contenedor de error */
+  height: 25px;
 }
 
 .error {
@@ -235,23 +230,22 @@ input {
 }
 
 button {
-  background-color: #5f7fa6;
   /* Nuevo color de fondo */
-  color: white;
+  background-color: #2b4d8c;
   /* Color del texto blanco */
-  border: none;
+  color: white;
   /* Sin borde */
-  border-radius: 4px;
+  border: none;
   /* Esquinas redondeadas */
+  border-radius: 4px;
   cursor: pointer;
-
-  padding: 6px 12px;
   /* Espaciado interno */
+  padding: 6px 12px;
 }
 
 button:hover {
-  background-color: #4a6280;
   /* Cambio de color al pasar el ratón */
+  background-color: #233e71;
 }
 
 .form-group {
@@ -265,23 +259,18 @@ button:hover {
     #contenedorFormularioRegistro {
       display: flex;
       flex-direction: column;
-      /* background-color: aqua; */
-
     }
 
     #formulario {
-      width:100%;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      /* justify-content: center; */
       align-items: center;
-      /* padding: 40px; */
     }
 
     #botonFuera {
       margin-top: 1rem;
       width: 90%;
-      /* justify-content: space-around; */
       display: grid;
       grid-template-rows: repeat(3, 1fr);
       padding-right: 20px;
@@ -302,7 +291,6 @@ button:hover {
       grid-row: 3;
     }
 
-
     .form-group {
       display: flex;
       flex-direction: column;
@@ -310,7 +298,7 @@ button:hover {
     }
 
     .error-container {
-     width: max-content;
+      width: max-content;
     }
 
     .error {
@@ -320,9 +308,6 @@ button:hover {
     input {
       width: 400px;
     }
-
-
-
 
   }
 
