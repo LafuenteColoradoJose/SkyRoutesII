@@ -8,10 +8,10 @@
     </aside>
 
     <article class="flex flex-row">
-      <div>
+      <div v-if="userId">
         <NuxtLink to="/contact" class="link link-hover mr-14">Contacta</NuxtLink>
       </div>
-      <div>
+      <div v-if="userId">
         <NuxtLink to="/about" class="link link-hover">Nosotros</NuxtLink>
       </div>
 
@@ -38,6 +38,7 @@
 </template>
 
 <script setup>
+const userId = ref(useCookie('userId'))
 
 
 

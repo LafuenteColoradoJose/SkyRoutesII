@@ -2,7 +2,7 @@
     <div id="TheFormMap" class="flex flex-col lg:flex-row lg:mx-6 lg:justify-between lg:gap-4 items-center gap-2">
 
 
-         <!-- ​‌‌‌⁡⁣⁢⁣‍𝗙𝗢𝗥𝗠𝗨𝗟𝗔𝗥𝗜𝗢⁡​​⁡ -->
+        <!-- ​‌‌‌⁡⁣⁢⁣‍𝗙𝗢𝗥𝗠𝗨𝗟𝗔𝗥𝗜𝗢⁡​​⁡ -->
 
         <section id="formulario" class="flex h-full">
             <form class=" flex-col text-center space-y-2 h-full" @submit.prevent="solicitarDatos">
@@ -28,7 +28,7 @@
 
                 <!-- ⁡⁢⁣⁡⁣⁢⁣𝗙𝗢𝗥𝗠𝗨𝗟𝗔𝗥𝗜𝗢 𝗔𝗜𝗥𝗖𝗥𝗔𝗙𝗧⁡⁡ -->
                 <article id="formAircraft"
-                    class=" flex flex-row space-x-3 space-y-3 justify-center content-between items-center">
+                    class=" flex flex-row space-x-2 space-y-3 justify-center content-between items-center">
 
                     <div id="aircrafts" class="flex space-x-3 space-y-3 justify-center content-between items-stretch">
                         <span class="mb-3 pt-2">Seleccione Aeronave</span>
@@ -173,7 +173,7 @@
                     </article>
 
                     <article class="m-2">
-                        <button  v-if="fpWaypoints > 0" class="btn" type="submit" @click="saveFP">Guardar</button>
+                        <button v-if="fpWaypoints > 0" class="btn" type="submit" @click="saveFP">Guardar</button>
                     </article>
 
                 </section>
@@ -627,7 +627,7 @@ const saveFP = async () => {
         }),
     });
 
-    
+
 
     // console.log('DATA desde guardarFP:   ', data)
     if (data.res.rowsAffected > 0) {
@@ -901,6 +901,7 @@ setInterval(calculateBearingAndCheckDestination, 30000)
         width: 60vw;
     }
 
+   
     /* #rumbo {
         width: 20vw;
         margin-top: 5vh;
