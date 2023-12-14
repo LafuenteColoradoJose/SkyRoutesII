@@ -194,7 +194,7 @@ const logout = () => {
     document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     if (process.client) {
             window.location.reload()
-            console.log('window.location.reload()')
+            // console.log('window.location.reload()')
         }
    return navigateTo('/')
 
@@ -211,7 +211,7 @@ const logout = () => {
 <style scope>
 #navBar {
     background-color: #5f7fa6;
-    background-image: url('/imgs/World Map.svg');
+    background-image: url('/imgs/WorldMap.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: auto;

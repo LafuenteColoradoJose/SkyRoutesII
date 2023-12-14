@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col gap-3 justify-center">
-        <h1 class="text-5xl text-center">Bienvenido a SkyRoutes</h1>
+        <h1 class="text-3xl text-center md:text-5xl">Bienvenido a SkyRoutes</h1>
 
         <section class=" mx-10 flex flex-col gap-2 items-center">
 
@@ -57,25 +57,3 @@
     </div>
 </template>
 
-<style scoped>
-
-/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙄𝙊𝙎 𝙋𝙀𝙌𝙐𝙀Ñ𝙊𝙎⁡ */
-@media (max-width: 767px) {
-
-    h1 {
-        font-size: 2.5rem;
-    }
-
-}
-
-/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙈𝙀𝘿𝙄𝘼𝙉𝙊𝙎⁡ */
-@media (min-width: 768px) and (max-width: 1023px) {
-   
-    h1 {
-        font-size: 4rem;
-    }
-
-}
-
-
-</style>
