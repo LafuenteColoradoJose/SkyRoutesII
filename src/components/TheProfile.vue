@@ -108,7 +108,7 @@ let actualPasswordError = ref("");
 let passwordError = ref("");
 let confirmPasswordError = ref("");
 
-(async ()=> {
+onMounted( async ()=> {
     try {
         const response = await $fetch("profiles/profiles", {
             method: "PUT",
@@ -129,7 +129,7 @@ let confirmPasswordError = ref("");
     } catch (error) {
         console.error("Error al obtener los datos del perfil:", error);
     }
-})();
+});
 
 
 async function actualizarPerfil() {

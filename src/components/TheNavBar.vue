@@ -125,7 +125,7 @@
                                     <NuxtLink to="/profile" class="text-xl">Perfil</NuxtLink>
                                 </li>
                                 <li class="text-xl font-semibold" @click="logout">
-                                    <NuxtLink to="/" class="text-xl">Logout</NuxtLink>
+                                    <NuxtLink class="text-xl">Logout</NuxtLink>
                                 </li>
                             </ul>
                         </div>
@@ -170,12 +170,12 @@ if (userId2.value == '93') {
 
 const logout = () => {
     document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-   
+
     return reloadNuxtApp({
         path: '/',
         ttl: 10000,
-    
     })
+
 }
 
 
