@@ -1,13 +1,13 @@
 
 export default defineNuxtRouteMiddleware((to, from) => {
 
-    const userId = ref(useCookie('userId'))
+    const userIdAuth = ref(useCookie('userId'))
 
-    if (!userId.value) {
+    if (!userIdAuth.value) {
         return navigateTo('/')
     }
 
-    // console.log('userId', userId)
+
 
 })
 

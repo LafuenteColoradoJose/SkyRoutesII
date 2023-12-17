@@ -170,11 +170,12 @@ if (userId2.value == '93') {
 
 const logout = () => {
     document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-    if (window !== undefined) {
-        window.location.reload()
-        console.log('XXXXXXXXXXXXXX LOGOUT XXXXXXXXXXXXX')
-    }
-    return navigateTo('/')
+   
+    return reloadNuxtApp({
+        path: '/',
+        ttl: 10000,
+    
+    })
 }
 
 

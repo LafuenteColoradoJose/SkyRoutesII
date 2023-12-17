@@ -90,9 +90,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
 
-// Variables para el manejo del estado del formulario y del usuario
 const userId = ref(useCookie('userId')).value;
 let nombre = ref("");
 let usuario = ref("");
@@ -102,7 +100,6 @@ let nuevaContrasena = ref("");
 let repetirContrasena = ref("");
 let contrasenaBase = ref("");
 
-// Variables de errores para cada campo del formulario
 let nombreError = ref("");
 let usuarioError = ref("");
 let emailError = ref("");
@@ -111,8 +108,7 @@ let actualPasswordError = ref("");
 let passwordError = ref("");
 let confirmPasswordError = ref("");
 
-// Hook para cargar los datos del perfil al montar el componente
-onMounted(async () => {
+(async ()=> {
     try {
         const response = await $fetch("profiles/profiles", {
             method: "PUT",
@@ -124,7 +120,6 @@ onMounted(async () => {
             }),
         });
 
-        // Suponiendo que data es un objeto con una propiedad 'db'
         const userProfile = response.db[0];
         nombre.value = userProfile.name;
         usuario.value = userProfile.user;
@@ -134,14 +129,13 @@ onMounted(async () => {
     } catch (error) {
         console.error("Error al obtener los datos del perfil:", error);
     }
-});
+})();
 
-// Función para actualizar el perfil del usuario
+
 async function actualizarPerfil() {
-    // Verifica si la contrasenaActual coincide con la contrasenaBase
     if (contrasenaActual.value !== contrasenaBase.value) {
         actualPasswordError.value = 'La contraseña actual no es correcta.';
-        return; // Detiene la actualización del perfil si las contraseñas no coinciden
+        return;
     }
     actualPasswordError.value = '';
 
@@ -160,20 +154,15 @@ async function actualizarPerfil() {
         }),
     });
 
-    await navigateTo('/user', {
-        open: {
-            target: '_self',
-            windowFeatures: {
-                width: 500,
-                height: 500
-            }
-        }
+    reloadNuxtApp({
+        path: '/profile',
+        ttl: 10000,
     })
+
+
 };
 
-// Resto de funciones para validar campos del formulario
 
-// Función para validar el formato del nombre
 function validarNombre() {
     const nombrePattern = /^[a-zA-ZÀ-ÿ\s']{2,}\s[a-zA-ZÀ-ÿ\s']{2,}$/u;
     if (!nombrePattern.test(nombre.value)) {
@@ -183,7 +172,6 @@ function validarNombre() {
     }
 };
 
-// Función para validar la longitud del usuario
 function validarUsuario() {
     if (usuario.value.length < 2) {
         usuarioError.value = 'El usuario debe tener al menos 2 caracteres de longitud.';
@@ -192,7 +180,6 @@ function validarUsuario() {
     }
 };
 
-// Función para validar el formato del correo electrónico
 function validarEmail() {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(email.value)) {
@@ -202,7 +189,6 @@ function validarEmail() {
     }
 };
 
-// Función para validar la fortaleza de la contraseña
 function validarPassword() {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/;
     if (!passwordPattern.test(nuevaContrasena.value)) {
@@ -212,7 +198,6 @@ function validarPassword() {
     }
 };
 
-// Función para validar que las contraseñas coincidan
 function validarConfirmPassword() {
     if (repetirContrasena.value !== nuevaContrasena.value) {
         confirmPasswordError.value = 'Las contraseñas no coinciden.';
@@ -229,11 +214,8 @@ function validarConfirmPassword() {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* Bloqueo */
     width: 100%;
-    /* margin: auto; */
     margin-top: 1vh;
-    /* margen superior */
 }
 
 
@@ -244,12 +226,10 @@ label {
 
 input {
     display: block;
-    /* margin-bottom: 5px; */
 }
 
 .error-container {
     height: 25px;
-    /* Ajusta la altura del contenedor de error */
 }
 
 .error {
@@ -258,22 +238,16 @@ input {
 
 button {
     background-color: #2b4d8c;
-    /* Nuevo color de fondo */
     color: white;
-    /* Color del texto blanco */
     border: none;
-    /* Sin borde */
     border-radius: 4px;
-    /* Esquinas redondeadas */
     cursor: pointer;
 
     padding: 6px 12px;
-    /* Espaciado interno */
 }
 
 button:hover {
     background-color: #233e71;
-    /* Cambio de color al pasar el ratón */
 }
 
 .form-group {
@@ -290,7 +264,6 @@ button:hover {
 
     .form-group {
         width: 48%;
-        /* Ancho para tener dos columnas con margen entre ellas */
     }
 }
 
