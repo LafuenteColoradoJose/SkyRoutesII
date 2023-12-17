@@ -22,7 +22,7 @@
                         <li v-show="!isAdmin && !userId2">
                             <NuxtLink to="/about">Nosotros</NuxtLink>
                         </li>
-                        <li v-if="userId">
+                        <li v-if="userId2">
                             <a>Planes de vuelo</a>
                             <ul class="p-2">
                                 <li>
