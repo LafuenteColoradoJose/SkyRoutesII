@@ -13,13 +13,13 @@
                         </svg>
                     </div>
                     <ul class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li v-show="!isAdmin && !userId">
+                        <li v-show="!isAdmin && !userId2">
                             <NuxtLink to="/">Inicio</NuxtLink>
                         </li>
-                        <li v-show="!isAdmin && !userId">
+                        <li v-show="!isAdmin && !userId2">
                             <NuxtLink to="/contact">Contacta</NuxtLink>
                         </li>
-                        <li v-show="!isAdmin && !userId">
+                        <li v-show="!isAdmin && !userId2">
                             <NuxtLink to="/about">Nosotros</NuxtLink>
                         </li>
                         <li v-if="userId">
@@ -56,20 +56,19 @@
                 </article>
             </div>
 
-            <!-- 𝗡𝗔𝗩𝗕𝗔𝗥 𝗗𝗜𝗦𝗣𝗢𝗦𝗜𝗧𝗜𝗩𝗢𝗦 𝗚𝗥𝗔𝗡𝗗𝗘𝗦 -->
 
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal px-1">
-                    <li v-show="!isAdmin && !userId" class="text-xl font-semibold">
+                    <li v-show="!isAdmin && !userId2" class="text-xl font-semibold">
                         <NuxtLink to="/">Inicio</NuxtLink>
                     </li>
-                    <li v-show="!isAdmin && !userId" class="text-xl font-semibold">
+                    <li v-show="!isAdmin && !userId2" class="text-xl font-semibold">
                         <NuxtLink to="/contact">Contacta</NuxtLink>
                     </li>
-                    <li v-show="!isAdmin && !userId" class="text-xl font-semibold">
+                    <li v-show="!isAdmin && !userId2" class="text-xl font-semibold">
                         <NuxtLink to="/about">Nosotros</NuxtLink>
                     </li>
-                    <li v-if="userId">
+                    <li v-if="userId2">
                         <details class="">
                             <summary class="text-xl font-semibold">Planes de vuelo</summary>
                             <ul class="p-2">
@@ -103,15 +102,10 @@
             </div>
             <div class="navbar-end">
 
-                <!-- 𝗡𝗔𝗩𝗕𝗔𝗥 𝗥𝗜𝗚𝗛𝗧 𝗦𝗜𝗗𝗘 𝗠𝗘𝗡𝗨 -->
-                <div v-show="userId" class="navbar ml-16 md:ml-44 lg:ml-96">
-                    <!-- <div class="flex-1">
-                        <a class="btn btn-ghost text-xl">daisyUI</a>
-                    </div> -->
+                <div v-show="userId2" class="navbar ml-16 md:ml-44 lg:ml-96">
+
                     <div class="flex-none gap-2">
-                        <!-- <div class="form-control">
-                            <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
-                        </div> -->
+
                         <div class="dropdown dropdown-end">
                             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                                 <div class="w-10 rounded-full shadow-xl border-2">
@@ -126,12 +120,7 @@
                             </div>
                             <ul tabindex="0"
                                 class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                                <!-- <li>
-                                    <a class="justify-between">
-                                        Profile
-                                        <span class="badge">New</span>
-                                    </a>
-                                </li> -->
+
                                 <li class="text-xl font-semibold">
                                     <NuxtLink to="/profile" class="text-xl">Perfil</NuxtLink>
                                 </li>
@@ -144,21 +133,17 @@
                 </div>
 
 
-                <!-- THEME -->
                 <div id="icono" class="">
                     <label class="swap swap-rotate">
 
-                        <!-- this hidden checkbox controls the state -->
                         <input type="checkbox" @change="$emit('toggle-theme')" />
 
-                        <!-- sun icon -->
                         <svg class="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                             @click="handleThemeChange('moon')">
                             <path
                                 d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
                         </svg>
 
-                        <!-- moon icon -->
                         <svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                             @click="handleThemeChange('sun')">
                             <path
@@ -174,34 +159,22 @@
 </template>
 
 <script setup>
-// console.log(toogle-theme)
 
-// bg-[#5f7fa6]
-
-// acceder al Id del usuario desde el composable
-const userId = ref(useCookie('userId'))
-// console.log('ID de usuario: ', userId)
+const userId2 = ref(useCookie('userId'))
 
 const isAdmin = ref(false)
-if (userId.value == '93') {
-    // console.log('es admin', isAdmin)
+if (userId2.value == '93') {
     isAdmin.value = true
 }
 
 
 const logout = () => {
-    // navigateTo('/')
     document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-    if (process.client) {
-            window.location.reload()
-            // console.log('window.location.reload()')
-        }
-   return navigateTo('/')
-
-    // if (typeof window !== 'undefined') {
-    //     setInterval(() => {
-    //     }, 100);
+    // if (window !== undefined) {
+        window.location.reload()
+        console.log('logout de los cojones')
     // }
+    return navigateTo('/')
 }
 
 
@@ -220,4 +193,5 @@ const logout = () => {
 
 summary ul li {
     background-color: aqua;
-}</style>
+}
+</style>
