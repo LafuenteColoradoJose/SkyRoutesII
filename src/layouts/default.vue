@@ -12,7 +12,6 @@ const theme = ref('aqua')
 
 const toggleTheme = () => {
     theme.value = theme.value === 'aqua' ? 'light' : 'aqua';
-    // console.log(theme.value)
 }
 
 onMounted(() => {
@@ -25,8 +24,6 @@ onMounted(() => {
 
 <style scope>
 
-    
-
     main {
         min-height: 100vh;
         height: 100%;
@@ -34,9 +31,6 @@ onMounted(() => {
         background-repeat: no-repeat;
         background-position: center;
         background-size:contain;
-        /* background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('/airplane-front-view-silhouette-3.svg'); */
     }
-
-   
 
 </style>

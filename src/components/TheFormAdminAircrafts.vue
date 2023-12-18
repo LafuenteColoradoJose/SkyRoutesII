@@ -5,11 +5,9 @@
         <div class="m-auto">
             <button @click="OpenModalCreate" class="btn-xs border rounded-md">Crear Aeronave</button>
         </div>
-        <!-- Modal crear -->
         <dialog id="modalCreate" class="modal">
             <div class="modal-box">
                 <span class="text-center font-bold"> {{ textResponse }}</span>
-                <!-- TABLA AIRCRAFTS CREAR -->
                 <form class="flex flex-col justify-center items-center" v-on:submit.prevent="">
                     <label for="">Modelo</label>
                     <input v-model.trim="modelo" type="text" name="" id="" class="input input-bordered w-full max-w-xs"
@@ -33,21 +31,18 @@
                 </form>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
             </div>
         </dialog>
 
-        <!-- PAGINACIÓN -->
         <div class="flex justify-center mt-4 mb-4 gap-4 w-auto items-center">
             <button @click="prevPage" :disabled="currentPage === 1" class="btn">Anterior</button>
             <div class="font-extrabold">Página {{ currentPage }} de {{ totalPages }}</div>
             <button @click="nextPage" :disabled="currentPage === totalPages" class="btn">Siguiente</button>
         </div>
 
-        <!-- Mostrar aeronaves -->
         <table id="tableAircrafts" class="table text-center">
             <thead>
                 <tr>
@@ -87,7 +82,6 @@
             </tbody>
         </table>
 
-        <!-- DETAILS AERONAVES MODAL -->
         <dialog id="modalDetails" class="modal">
             <div class="modal-box">
                 <table id="tableAircrafts" class="table">
@@ -124,18 +118,15 @@
                 </table>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
             </div>
         </dialog>
 
-        <!-- MODAL AERONAVES EDITAR -->
         <dialog id="modalEdit" class="modal">
             <div class="modal-box text-center">
                 <span class="text-center font-bold"> {{ textResponse }}</span>
-                <!-- TABLA AIRCRAFTS EDITAR -->
                 <form v-on:submit.prevent="" class="lg:flex lg:flex-col lg:gap-3 lg:items-center lg:justify-between">
                     <div class="lg:flex lg:flex-wrap lg:gap-3">
                         <article class="flex flex-col justify-center items-center mb-8">
@@ -181,20 +172,17 @@
                 </form>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
             </div>
         </dialog>
 
-        <!-- MODAL ELIMINAR -->
         <dialog id="modalDelete" class="modal">
             <div class="modal-box">
                 <span class="text-center font-bold"> {{ textResponse }}</span>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
@@ -241,7 +229,6 @@ let paginatedAircrafts = computed(() => {
     let end = start + perPage;
     let slice = aircrafts.value.slice(start, end);
 
-    // Si la página no está llena, llenarla con aeropuertos vacíos
     while (slice.length < perPage) {
         slice.push({});
     }
@@ -262,8 +249,6 @@ const prevPage = () => {
         currentPage.value--;
     }
 };
-
-// CREAR AERONAVE
 
 const OpenModalCreate = () => {
     modalCreate.showModal();
@@ -303,28 +288,22 @@ const createAircraft = async () => {
         img.value = '';
         await showAllAircrafts();
     } catch (error) {
-        console.log(error);
         textResponse.value = "Error al crear la aeronave";
     }
 };
 
-// MOSTRAR AERONAVE
 const aircraftDetails = ref('');
 const showDetails = async (aircraftShow) => {
-    console.log(aircraftShow);
     for (let i = 0; i < aircrafts.value.length; i++) {
         if (aircrafts.value[i].id === aircraftShow.id) {
             aircraftDetails.value = aircrafts.value[i];
-            console.log(aircraftDetails.value);
         }
     }
     await modalDetails.showModal();
 };
 
 
-// EDITAR AERONAVE
 const editAircraft = async (aircraftEdit) => {
-    console.log(aircraftEdit);
     for (let i = 0; i < aircrafts.value.length; i++) {
         if (aircrafts.value[i].id === aircraftEdit.id) {
             modelo.value = aircrafts.value[i].modelo;
@@ -348,7 +327,6 @@ const combustibleModificar = ref("");
 const imgModificar = ref("");
 
 const updateAircraft = async () => {
-    console.log(aircraftForEditId.value)
     try {
         const response = await $fetch("../aircrafts/aircrafts", {
             method: "PATCH",
@@ -376,12 +354,10 @@ const updateAircraft = async () => {
         imgModificar.value = '';
         await showAllAircrafts();
     } catch (error) {
-        console.log(error);
         textResponse.value = "Error al modificar la aeronave";
     }
 };
 
-// ELIMINAR AERONAVE
 const deleteAircraft = async (aircraftDelete) => {
     try {
         const response = await $fetch("../aircrafts/aircrafts", {
@@ -396,7 +372,6 @@ const deleteAircraft = async (aircraftDelete) => {
         textResponse.value = "Aeronave eliminada correctamente";
         await showAllAircrafts();
     } catch (error) {
-        console.log(error);
         textResponse.value = "Error al eliminar la aeronave";
     }
     await modalDelete.showModal();
@@ -411,7 +386,5 @@ section {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    /* width: 100vw;
-    height: 100%; */
 }
 </style>

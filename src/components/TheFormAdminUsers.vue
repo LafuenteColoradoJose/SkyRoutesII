@@ -5,11 +5,9 @@
         <div class="m-auto">
             <button @click="OpenModalCreate" class="btn-xs border rounded-md">Crear Usuario</button>
         </div>
-        <!-- Modal crear -->
         <dialog id="modalCreate" class="modal">
             <div class="modal-box">
                 <span class="text-center font-bold"> {{ textResponse }}</span>
-                <!-- TABLA USERS CREAR -->
                 <form class="flex flex-col justify-center items-center" v-on:submit.prevent="">
                     <label for="">Nombre</label>
                     <input v-model.trim="name" type="text" name="" id="" class="input input-bordered w-full max-w-xs"
@@ -28,21 +26,18 @@
                 </form>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
             </div>
         </dialog>
 
-        <!-- PAGINACIÓN -->
         <div class="flex justify-center mt-4 mb-4 gap-4">
             <button @click="prevPage" :disabled="currentPage === 1" class="btn">Anterior</button>
             <div>Página {{ currentPage }} de {{ totalPages }}</div>
             <button @click="nextPage" :disabled="currentPage === totalPages" class="btn">Siguiente</button>
         </div>
 
-        <!-- Mostrar Usuarios-->
         <table id="tableUsers" class="table w-full">
             <thead>
                 <tr>
@@ -50,7 +45,6 @@
                     <th>Nombre</th>
                     <th>Usuario</th>
                     <th class="hidden lg:table-cell">Email</th>
-                    <!-- <th class="hidden lg:table-cell">Password</th> -->
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -60,7 +54,6 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.user }}</td>
                     <td class="hidden lg:table-cell">{{ user.email }}</td>
-                    <!-- <td class="hidden lg:table-cell">{{ user.password }}</td> -->
                     <td>
                         <div v-if=user.id class="flex flex-col gap-1 lg:flex-row  lg:gap-2 justify-center">
                             <button @click="showDetails(user)" class="btn-xs border rounded-md lg:hidden">Mostrar</button>
@@ -77,7 +70,6 @@
             </tbody>
         </table>
 
-        <!-- DETAILS usuarios MODAL -->
         <dialog id="modalDetails" class="modal">
             <div class="modal-box">
                 <table id="tableUsers" class="table">
@@ -98,26 +90,20 @@
                             <th>Email</th>
                             <td>{{ userDetails.email }}</td>
                         </tr>
-                        <!-- <tr>
-                            <th>Password</th>
-                            <td>{{ userDetails.password }}</td>
-                        </tr> -->
+                       
                     </tbody>
                 </table>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
             </div>
         </dialog>
 
-        <!-- MODAL USERS EDITAR -->
         <dialog id="modalEdit" class="modal">
             <div class="modal-box text-center">
                 <span class="text-center font-bold"> {{ textResponse }}</span>
-                <!-- TABLA USERS EDITAR -->
                 <form v-on:submit.prevent="" class="lg:flex lg:flex-col lg:gap-3 lg:items-center lg:justify-between">
                     <div class="lg:flex lg:flex-wrap lg:gap-3">
                         <article class="flex flex-col justify-center items-center mb-8">
@@ -138,12 +124,7 @@
                             <input v-model.trim="emailModificar" type="text" name="" id=""
                                 class="input input-bordered w-full max-w-xs">
                         </article>
-                        <!-- <article class="flex flex-col justify-center items-center mb-6">
-                            <span class="font-mono italic"> {{ password }}</span>
-                            <label for="">Nuevo Password</label>
-                            <input v-model.trim="passwordModificar" type="text" name="" id=""
-                                class="input input-bordered w-full max-w-xs">
-                        </article> -->
+                       
                     </div>
 
                     <button class="btn btn-ghost border border-gray-700 my-2 w-fit" @click="updateUser">Modificar
@@ -151,20 +132,17 @@
                 </form>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
             </div>
         </dialog>
 
-        <!-- MODAL ELIMINAR -->
         <dialog id="modalDelete" class="modal">
             <div class="modal-box">
                 <span class="text-center font-bold"> {{ textResponse }}</span>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
@@ -211,7 +189,6 @@ let paginatedUsers = computed(() => {
     let end = start + perPage;
     let slice = users.value.slice(start, end);
 
-    // Si la página no está llena, llenarla con aeropuertos vacíos
     while (slice.length < perPage) {
         slice.push({});
     }
@@ -232,8 +209,6 @@ const prevPage = () => {
         currentPage.value--;
     }
 };
-
-// CREAR USUARIO
 
 const OpenModalCreate = () => {
     modalCreate.showModal();
@@ -269,28 +244,22 @@ const createUser = async () => {
         
         await showAllUsers();
     } catch (error) {
-        console.log(error);
         textResponse.value = "Error al crear el usuario";
     }
 };
 
-// MOSTRAR USUARIO
 const userDetails = ref('');
 const showDetails = async (userShow) => {
-    console.log(userShow);
     for (let i = 0; i < users.value.length; i++) {
         if (users.value[i].id === userShow.id) {
             userDetails.value = users.value[i];
-            console.log(userDetails.value);
         }
     }
     await modalDetails.showModal();
 };
 
 
-// EDITAR AEROPUERTO
 const editUser = async (userEdit) => {
-    // console.log(userEdit);
     for (let i = 0; i < users.value.length; i++) {
         if (users.value[i].id === userEdit.id) {
             name.value = users.value[i].name;
@@ -310,7 +279,6 @@ const emailModificar = ref("");
 const passwordModificar = ref("");
 
 const updateUser = async () => {
-    console.log(userForEditId.value)
     try {
         const response = await $fetch("../users/users", {
             method: "PATCH",
@@ -334,12 +302,10 @@ const updateUser = async () => {
         passwordModificar.value = '';
         await showAllUsers();
     } catch (error) {
-        console.log(error);
         textResponse.value = "Error al modificar el usuario";
     }
 };
 
-// ELIMINAR AEROPUERTO
 const deleteUser = async (userDelete) => {
     try {
         const response = await $fetch("../users/users", {
@@ -354,7 +320,6 @@ const deleteUser = async (userDelete) => {
         textResponse.value = "Usuario eliminado correctamente";
         await showAllUsers();
     } catch (error) {
-        console.log(error);
         textResponse.value = "Error al eliminar el usuario";
     }
     await modalDelete.showModal();
@@ -369,7 +334,6 @@ section {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    /* width: 100vw;
-    height: 100%; */
+   
 }
 </style>

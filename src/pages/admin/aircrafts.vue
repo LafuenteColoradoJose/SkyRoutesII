@@ -27,9 +27,7 @@ div {
   background-position: center;
   width: 100vw;
   height: 100%;
-  
 
-  /* align-self: flex-start; */
 }
 </style>
 

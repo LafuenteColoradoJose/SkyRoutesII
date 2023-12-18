@@ -25,6 +25,5 @@ div {
     background-size: cover;
     background-position: center;
     width: 100vw;
-    /* height: 100vh; */
 }
 </style>

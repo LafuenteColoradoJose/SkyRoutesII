@@ -1,6 +1,5 @@
 <template>
     <div id="contenedor" class="flex flex-col justify-center items-center">
-        <!-- {{ error }} -->
         <h1 class="text-4xl text-center text-white">Error {{ error.statusCode }}</h1>
         <h2 class="text-2xl text-center text-white">{{ error.message }}</h2>
         <h4 class="text-xl text-center text-white">{{ error.path }}</h4>

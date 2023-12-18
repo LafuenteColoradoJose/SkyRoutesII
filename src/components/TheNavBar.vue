@@ -167,7 +167,6 @@ if (userId2.value == '93') {
     isAdmin.value = true
 }
 
-
 const logout = () => {
     document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 

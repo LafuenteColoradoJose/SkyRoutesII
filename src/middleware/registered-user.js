@@ -3,7 +3,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
     if (userIdReg.value) {
 
-        if (from.path ==='/user'&& to.path === '/') {
+        if (from.path ==='/user' && to.path === '/') {
             return reloadNuxtApp({
                 path: '/about',
             })
@@ -12,6 +12,5 @@ export default defineNuxtRouteMiddleware((to, from) => {
         return reloadNuxtApp({
             path: '/about',
         })
-
     }
 })

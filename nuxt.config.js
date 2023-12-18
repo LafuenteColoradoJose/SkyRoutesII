@@ -1,8 +1,12 @@
 3// https://nuxt.com/docs/api/configuration/nuxt-config
 import { fileURLToPath } from "url"
 export default defineNuxtConfig({
-  devtools: { 
-    enabled: true 
+  devtools: {
+    enabled: true,
+
+    timeline: {
+      enabled: true,
+    },
   },
   srcDir: 'src/',
   alias: {
@@ -53,8 +57,7 @@ export default defineNuxtConfig({
       USER_GMAIL: process.env.USER_GMAIL,
       PASS_GMAIL: process.env.PASS_GMAIL,
 
-      APIKEY_RESEND: process.env.APIKEY_RESEND,
-      PASS_SMTPMAILER: process.env.PASS_SMTPMAILER,
+      
     },
 
     devtools: {

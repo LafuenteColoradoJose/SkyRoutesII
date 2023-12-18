@@ -1,20 +1,8 @@
 <template>
     <div id="TheFormMap" class="flex flex-col lg:flex-row lg:mx-6 lg:justify-between lg:gap-4 items-center gap-2">
 
-
-        <!-- ​‌‌‌⁡⁣⁢⁣‍𝗙𝗢𝗥𝗠𝗨𝗟𝗔𝗥𝗜𝗢⁡​​⁡ -->
-
         <section id="formulario" class="flex h-full">
             <form class=" flex-col text-center space-y-2 h-full" @submit.prevent="solicitarDatos">
-                <!-- <div v-if="localizacion[0] === undefined" role="alert" class="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        class="stroke-current shrink-0 w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <span>Para utilizar el GPS deberá permitir la geolocalización en su navegador.</span>
-                </div> -->
-
                 <h2 class="text-3xl">Planes de vuelo</h2>
 
                 <article id="formPilotLisence" class="mb-1">
@@ -22,11 +10,8 @@
                     <input type="text" v-model.trim="flightLicense" @input="validarCampo"
                         :class="{ 'border-red-800': !isValidLicense, 'border-green-500': isValidLicense, 'rounded-lg': true }"
                         placeholder="Nº de Licencia">
-                    <!-- <p>{{ pilotLicense }}</p> -->
                 </article>
 
-
-                <!-- ⁡⁢⁣⁡⁣⁢⁣𝗙𝗢𝗥𝗠𝗨𝗟𝗔𝗥𝗜𝗢 𝗔𝗜𝗥𝗖𝗥𝗔𝗙𝗧⁡⁡ -->
                 <article id="formAircraft"
                     class=" flex flex-row space-x-2 space-y-3 justify-center content-between items-center">
 
@@ -69,9 +54,7 @@
 
                 </article>
 
-                <!-- ⁡⁣⁢⁣𝗙𝗢𝗥𝗠𝗨𝗟𝗔𝗥𝗜𝗢 𝗔𝗜𝗥𝗣𝗢𝗥𝗧⁡⁡⁡ -->
                 <article id="formAirport" class="flex flex-row justify-between">
-                    <!-- 𝗦𝗘𝗟𝗘𝗖𝗧 -->
                     <div id="selectAirport" class="flex flex-col justify-center content-center items-center">
 
                         <span class="mb-3 pt-2">Seleccione Aeropuerto de salida</span>
@@ -87,7 +70,6 @@
                             <option v-for="airport in airports"> {{ airport.name }}</option>
                         </select>
 
-                        <!-- 𝗙𝗘𝗖𝗛𝗔 -->
                         <div id="date" class="my-2">
                             <input type="datetime-local" name="date" id="date" v-model="departureTime" :min="minDateTime"
                                 v-show="!isSubmitted">
@@ -95,7 +77,6 @@
 
                     </div>
 
-                    <!-- 𝗗𝗔𝗧𝗢𝗦 -->
                     <div id="dateFP" class="flex flex-col mx-1">
                         <table class="border-separate border-spacing-1 border border-slate-400 rounded">
                             <tr>
@@ -131,9 +112,8 @@
                     </div>
                 </article>
 
-                <!-- ⁡⁢⁢⁣𝗠𝗘𝗧𝗔𝗥⁡⁡⁡ -->
 
-                <section id="metar" class="border border-gray-800 rounded text-center">
+                <section id="metar" class="border border-gray-800 rounded text-center mx-1">
 
 
                     <article v-if="fpMetar.length === 0">METAR</article>
@@ -147,7 +127,6 @@
                                     <p class="py-4"> {{ modalContent }} </p>
                                     <div class="modal-action">
                                         <form method="dialog">
-                                            <!-- if there is a button in form, it will close the modal -->
                                             <button class="btn">Close</button>
                                         </form>
                                     </div>
@@ -159,9 +138,6 @@
 
                 </section>
 
-
-
-                ⁡⁣⁢⁣<!-- 𝗕𝗨𝗧𝗧𝗢𝗡S -->⁡
                 <section id="buttons" class="mb-1 flex justify-around lg:mt-o">
 
                     <article class="m-2">
@@ -182,10 +158,6 @@
         </section>
 
 
-
-        <!-- ​‌‌‌⁡⁣⁢⁣‍𝗠𝗔𝗣𝗔​​⁡ -->
-
-
         <section id="contenedorMapa" class="flex justify-center content-center z-0">
             <LMap ref="map" :zoom="zoom" :center="[40.416729, -3.703790]">
 
@@ -201,10 +173,6 @@
                             stroke="#345ca8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
 
-
-                    <!-- <img id="rumboIcono" src="/icons/maps-arrow.svg" v-if="decodedPolyline.length > 1"
-                        :style="{ transform: `rotate(${bearing}deg)`, borderColor: bearing === bearingCorrect ? 'green' : 'red' }" />
-                    <img id="rumboIcono" src="/icons/maps-arrow.svg" v-else /> -->
                     <div id="texto" class="flex flex-col text-[#345ca8] font-bold text-2xl">
                         <span id="rumboTexto">{{ bearing }} º</span>
                         <span id="distanciaTexto">{{ distanceBearing }} </span>
@@ -241,8 +209,6 @@
                     </LTooltip>
                 </LCircleMarker>
 
-                <!-- <l-image-overlay url="/iconAircraft.png" :bounds="[localizacion]" :opacity="1"></l-image-overlay> -->
-
             </LMap>
         </section>
 
@@ -256,7 +222,6 @@
 
 import { ref } from 'vue'
 
-// ⁡⁢⁢⁣𝗩𝗔𝗟𝗜𝗗𝗔𝗥 𝗟𝗜𝗖𝗘𝗡𝗖𝗜𝗔⁡
 let flightLicense = ref('')
 let isValidLicense = ref(false)
 
@@ -266,22 +231,18 @@ function validarCampo() {
     isValidLicense.value = patron.test(flightLicense.value);
 }
 
-// ⁡⁢⁢⁣Sacar datos aeropuertos⁡
 let airports = ref([])
 let origin = ref('')
 let destination = ref('')
 
 const responseAirports = await $fetch('/airports/airports')
-// const airports = await response.db[0].id
 airports = await responseAirports.db.map(airport => {
     return {
         name: airport.name,
         ICAO: airport.ICAO
     }
 })
-// console.log(airports)
 
-// ⁡⁢⁢⁣𝗦𝗮𝗰𝗮𝗿 𝗱𝗮𝘁𝗼𝘀 𝗔𝗲𝗿𝗼𝗻𝗮𝘃𝗲𝘀⁡
 let responseAircrafts = ref([])
 let aircrafts = ref([])
 let aircraftRegistration = ref('Matrícula')
@@ -292,60 +253,34 @@ let aircraftImage = ref('/airplaneFormulario.svg')
 
 
 responseAircrafts = await $fetch('/aircrafts/aircrafts')
-// console.log(responseAircrafts)
-// console.log(responseAircrafts.db)
-// console.log(typeof(responseAircrafts.db))
 
 aircrafts = await responseAircrafts.db.map(aircraft => {
-    // console.log(aircraft)
-    // console.log(aircraft.modelo)
-    // console.log(aircraft.matricula)
-    // console.log(aircraft.turbulence)
-    // console.log(aircraft.velocidad)
-    // console.log(aircraft.combustible)
-    // console.log(aircraft.img)
+ 
     return aircraft
 });
 
-// console.log(typeof(aircrafts))
-// console.log(aircrafts)
-
-
-// ⁡⁢⁢⁣cambiar datos aeronaves⁡
 const selectedAircraft = ref(null)
 let idAircraft = ref('')
 
 const selectAircraft = async () => {
-    // console.log(selectedAircraft.value)
     for (let aircraft in aircrafts) {
-        // console.log(aircrafts[aircraft].id)
         if (aircrafts[aircraft].id === selectedAircraft.value) {
             aircraftRegistration = aircrafts[aircraft].matricula
             aircraftTurbulence = aircrafts[aircraft].turbulence
-            // aircraftFuel = aircrafts[aircraft].combustible
             aircraftFuel = String(aircrafts[aircraft].combustible).padStart(5, '0');
             aircraftSpeed = aircrafts[aircraft].velocidad
             aircraftSpeedCalc.value = aircrafts[aircraft].velocidad
             aircraftImage = aircrafts[aircraft].img
             idAircraft = aircrafts[aircraft].id
-            // console.log(aircraftRegistration)
-            // console.log(aircraftTurbulence)
-            // console.log(aircraftFuel)
-            // console.log(typeof (aircraftFuel))
-            // console.log(aircraftSpeed)
-            // console.log(typeof (aircraftSpeed))
-            // console.log(aircraftImage)
         }
     }
 }
 
 
-// ⁡⁢⁢⁣𝗙𝗣 𝗔𝗣𝗜 𝗜𝗡𝗧𝗘𝗥𝗡𝗔⁡
 
 let datosResponse = ref([])
 let datos = ref([])
 
-// console.log(datos)
 let fpOrigin = ref('ICAO')
 let fpDestination = ref('ICAO')
 let fpDistance = ref('NM')
@@ -354,50 +289,22 @@ let fpWaypoints = ref('Nº')
 
 let fpEncodedPolyline = ref('')
 
-
-// let fpDepartureTime = ref('')
-// let fpArrivalTime = ref('mm:ss')
-// let fpFlightTime = ref('')
-// let fpCruiseSpeed = ref('')
-// let fpFuelRemaining = ref('')
-
-// console.log(fpOrigin)
-// console.log(fpDestination)
-// console.log(fpDistance)
-// console.log(fpAltitude)
-// console.log(fpWaypoints)
-
-
-// sacar aeropuertos de DD.BB. interna
 const flightplandatabase = async () => {
     let fromICAO;
     let toICAO;
 
-    // console.log("fromICAO", fromICAO, "tipo" , typeof fromICAO )
-    // console.log("origin.value", origin.value, "tipo" , typeof origin.value)
-    // console.log("toICAO", toICAO, "tipo" , typeof toICAO)
-
-    // sacar ICAO de origen y destino
     for (let airport in airports) {
-        // console.log(airports[airport].ICAO)
-        // console.log(airports[airport].name)
-        // console.log(origin.value)
         if (airports[airport].name === origin.value) {
-            // console.log("ENCONTRADO:  ", airports[airport].name)
             fromICAO = airports[airport].ICAO
         }
 
         if (airports[airport].name === destination.value) {
-            // console.log("ENCONTRADO:  ", airports[airport].name)
             toICAO = airports[airport].ICAO
         }
     }
 
-
-    // 𝗦𝗮𝗰𝗮 𝗱𝗮𝘁𝗼𝘀 𝗱𝗲 𝗹𝗮 𝗔𝗣𝗜 interna
-
     const data = await $fetch("/fp/fp", {
-        method: "PATCH", // Hago un PATCH porque no me deja hacer un GET con body
+        method: "PATCH",
         headers: {
             "Content-Type": "application/json",
         },
@@ -407,13 +314,9 @@ const flightplandatabase = async () => {
         }),
     });
 
-    // console.log('data: ', data)
     datosResponse = data.response[0]
-    // console.log('datosResponse: ', datosResponse)
 
     datos = datosResponse
-    // console.log('DATOS: ', datos)
-
 
     fpOrigin.value = datos.fromICAO
     fpDestination.value = datos.toICAO
@@ -421,24 +324,8 @@ const flightplandatabase = async () => {
     fpAltitude.value = datos.maxAltitude.toLocaleString("es-ES") + " ft"
     fpWaypoints.value = datos.waypoints
     fpEncodedPolyline.value = datos.encodedPolyline
-    //fpDepartureTime = datos.departureTime
-    // fpArrivalTime.value = datos.arrivalTime
-    // fpFlightTime = datos.flightTime
-    // fpCruiseSpeed = datos.cruiseSpeed
-    // fpFuelRemaining = datos.fuelRemaining
-
-
-    // console.log(fpOrigin.value)
-    // console.log(fpDestination)
-    // console.log(fpDistance)
-    // console.log("TIPODE ALTITUD: ",typeof(datos.maxAltitude))
-    // console.log(fpWaypoints)
 
 }
-
-// ⁡⁢⁢⁣​‌‍‌𝗙𝗘𝗖𝗛𝗔​⁡
-
-// ⁡⁢⁢⁣CONTROLAR FECHA MÍNIMA DE SALIDA⁡
 
 let minDateTime = ref('');
 
@@ -453,9 +340,6 @@ onMounted(() => {
     minDateTime.value = `${year}-${month}-${day}T${hours}:${minutes}`;
 });
 
-
-// ⁡⁢⁢⁣SACAR DATOS DE FECHA⁡
-
 import moment from 'moment'
 
 let departureTime = ref(null)
@@ -464,47 +348,24 @@ let fpArrivalTime = ref("HH:mm")
 let aircraftSpeedCalc = ref()
 
 const flightTime = async () => {
-    // Sacar la hora de la fecha de salida
     let departureTimeCalc = moment(departureTime.value);
-
-    // Sacar datos de la distancia
     let distanciaCalc = parseFloat(fpDistance.value);
-    // console.log("distanciaCalc", distanciaCalc)
-
-    // Sacar datos de la velocidad
     let velocidadCalc = parseFloat(aircraftSpeedCalc.value);
-    // console.log("velocidadCalc", velocidadCalc)
-
-    // Verificar que distanciaCalc y velocidadCalc son números
     if (isNaN(distanciaCalc) || isNaN(velocidadCalc)) {
         console.error("distanciaCalc y/o velocidadCalc no son números");
         return;
     }
 
-    // Calcular la hora de llegada
-    let tiempoDeVuelo = distanciaCalc / velocidadCalc; // tiempo en horas
-    // console.log("Tiempo de vuelo ", tiempoDeVuelo)
+    let tiempoDeVuelo = distanciaCalc / velocidadCalc;
     let totalMinutos = Math.floor(tiempoDeVuelo * 60);
-    // console.log("Total minutos ", totalMinutos)
-
     let horaSalida = departureTimeCalc;
-    // console.log("Hora de salida ", horaSalida.format('HH:mm'));
-
-    let horaLlegada = moment(horaSalida); // Clonar horaSalida
+    let horaLlegada = moment(horaSalida);
     horaLlegada.add(totalMinutos, 'minutes');
-    // console.log("Hora de llegada ", horaLlegada.format('HH:mm'));
-
     fpDepartureTime.value = moment(departureTime.value).format('HH:mm');
-    // console.log("fpDepartureTime.value", fpDepartureTime.value)
     fpArrivalTime.value = horaLlegada.format('HH:mm');
-    // console.log("fpArrivalTime.value", fpArrivalTime.value)
 }
 
-// ⁡⁢⁢⁣desabilitar fecha⁡
-
 let isSubmitted = ref(false)
-
-// ⁡⁢⁢⁣⁡⁢⁢⁣𝗦𝗮𝗰𝗮𝗿 𝗠𝗘𝗧𝗔𝗥 𝗱𝗲 𝗔𝗣𝗜 𝗘𝘅𝘁𝗲𝗿𝗻𝗮⁡
 
 let fpMetar = ref('')
 let fpTAF = ref('')
@@ -516,23 +377,11 @@ const getMetar = async () => {
         }
     }
     )
-
-    // const { data } = await useFetch(`https://api.flightplandatabase.com/weather/${fpDestination.value}`)
-    // const { data } = await useFetch(`https://api.met.no/weatherapi/tafmetar/1.0/metar?extended=false&icao=${fpDestination.value}`)
-
-    // ⁡⁢⁣⁡⁣⁣⁢⁢PRUEBAS CON METAR POR EXECSO DE PLANES DE VUELO DIARIOS A LA API⁡⁡
-    // const { data: metar } = await useLazyFetch(`https://api.met.no/weatherapi/tafmetar/1.0/metar?extended=false&icao=LEBA`) // PRUEBAS CON METAR a Noruega
-    // console.log(dataMetar)
-    // console.log(typeof (dataMetar))
     fpTAF.value = dataMetar.response.TAF
-    // console.log(fpTAF.value)
     fpMetar.value = dataMetar.response.METAR
-    // console.log(fpMetar.value)
 }
 
-// ⁡⁢⁢⁣Mostrar ALERT METAR⁡
-
-const modalContent = ref('')    // Contenido del modal
+const modalContent = ref('')   
 
 const showTAF = async () => {
     if (fpMetar !== '') {
@@ -540,73 +389,27 @@ const showTAF = async () => {
         modalContent.value = fpTAF.value;
     }
 };
-
-
-
-// ⁡⁢⁢⁡⁢⁢⁣FUNCIÓN GENERAL PARA MANEJAR EL SUBMIT⁡⁡⁡
 const solicitarDatos = async () => {
-    //console.log(pilotLicense)
-    //console.log(validarCampo(pilotLicense))
-
-    //console.log('pulsar formulario')
-
-    //console.log(`Origen: ${origin.value}`)
-    //console.log(`Destino: ${destination.value}`)
-    //console.log(`Aeronave: ${aircraft.value}`)
 
     await flightplandatabase()
     await flightTime()
     await dibujarPolyline()
     await getMetar()
     isSubmitted.value = true
-
-    // console.log('fpEncodedPolyline.value DESDE FORMULARIO: ', fpEncodedPolyline.value)
-    // console.log('TIPO DE  ', typeof (fpEncodedPolyline.value))
 }
 
-
-// ⁡⁢⁢⁣FUNCIÓN GENERAL PARA RESETEAR EL FORMULARIO ⁡
-
-// const resetForm = () => {
-//     origin.value = ''
-//     destination.value = ''
-//     selectedAircraft.value = null
-//     aircraftRegistration.value = 'Matrícula'
-//     aircraftTurbulence.value = 'Turbulence'
-//     aircraftFuel.value = 'Fuel'
-//     aircraftSpeed.value = 'Speed'
-//     aircraftImage.value = 'img'
-//     fpOrigin.value = 'ICAO'
-//     fpDestination.value = 'ICAO'
-//     fpDistance.value = 'NM'
-//     fpAltitude.value = 'ft'
-//     fpWaypoints.value = 'Nº'
-//     fpEncodedPolyline.value = ''
-//     fpArrivalTime.value = 'mm:ss'
-//     departureTime.value = null
-//     aircraftSpeedCalc.value = null
-//     fpMetar.value = ''
-//     isSubmitted = false
-
-// };
-
-// ⁡⁢⁢⁣Resetear formulario⁡
 
 const resetForm = () => {
 
     if (typeof window !== 'undefined') {
         window.location.reload();
     }
-
-
 };
 
-// ⁡⁢⁢⁣𝗚𝗨𝗔𝗥𝗗𝗔𝗥 𝗣𝗟𝗔𝗡 𝗗𝗘 𝗩𝗨𝗘𝗟𝗢⁡
 import swal from 'sweetalert'
 
 
 const saveFP = async () => {
-    // console.log('Guardar Plan de Vuelo')
 
     const data = await $fetch("/fp/fp", {
         method: "POST",
@@ -621,15 +424,12 @@ const saveFP = async () => {
             fpWaypoints: fpWaypoints,
             idAircraft: idAircraft,
             departureTime: departureTime,
-            userID: useCookie('userId'), // Hay que sacar el userID del usuario logueado
+            userID: useCookie('userId'),
             license: flightLicense
 
         }),
     });
 
-
-
-    // console.log('DATA desde guardarFP:   ', data)
     if (data.res.rowsAffected > 0) {
         swal('Plan de vuelo guardado correctamente')
     } else {
@@ -637,8 +437,6 @@ const saveFP = async () => {
     }
 }
 
-
-// ​‌‌‌⁡⁢⁢⁣𝗟Ó𝗚𝗜𝗖𝗔 𝗠𝗔𝗣𝗔​ ⁡
 
 let zoom = ref(5)
 import polyline from '@mapbox/polyline';
@@ -664,19 +462,10 @@ let coordLlegada = ref([])
 const dibujarPolyline = () => {
     if (fpEncodedPolyline.value) {
         decodedPolyline.value = polyline.decode(fpEncodedPolyline.value);
-        // console.log(fpEncodedPolyline.value)
-        // console.log("decodedPolyline" , decodedPolyline.value);
         coordSalida.value = decodedPolyline.value[0]
         coordLlegada.value = decodedPolyline.value[decodedPolyline.value.length - 1]
     }
 }
-
-// console.log(fpEncodedPolyline.value)
-// console.log(polyline.decode("sfdvFfjvTr`cHtyzEja_BbzoAv|sEv}yC)"))
-// const pruebaPolylie = polyline.decode("sfdvFfjvTr`cHtyzEja_BbzoAv|sEv}yC)")
-
-
-// ⁡⁢⁢⁣𝗚𝗘𝗢𝗟𝗢𝗖𝗔𝗟𝗜𝗭𝗔𝗖𝗜Ó𝗡⁡
 
 let localizacion = ref([])
 onMounted(() => {
@@ -687,23 +476,17 @@ onMounted(() => {
 const getLocation = () => {
     if (typeof window !== 'undefined' && 'geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            // console.log("La latitud es :", position.coords.latitude);
-            // console.log("La longitud es :", position.coords.longitude);
-            // console.log("La precisión es :", position.coords.accuracy);
             localizacion.value = [position.coords.latitude, position.coords.longitude];
-            // console.log(localizacion.value);
+          
         });
     }
 }
-
 
 onMounted(() => {
     if (localizacion.value.length <= 0) {
         swal('Para utilizar el GPS deberá permitir la geolocalización en su navegador.')
     }
 });
-
-// ⁡⁢⁢⁣𝗥𝗨𝗠𝗕𝗢⁡
 
 let bearing = ref('Rumbo')
 let distanceBearing = ref('Distancia')
@@ -723,7 +506,6 @@ const calculateBearingAndCheckDestination = async () => {
     lon1.value = localizacion.value[1]
 
     if (currentIndex > decodedPolyline.value.length) {
-        // Ha llegado a Destino
         alert('Ha llegado a Destino')
         return
     }
@@ -738,22 +520,14 @@ const calculateBearingAndCheckDestination = async () => {
     if (distance < 0.1) {
         currentIndex++
         bearing.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat2.value, lon2.value))
-        // console.log("RUMBO", bearing.value)
     }
 
     bearing.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat2.value, lon2.value))
-    console.log("RUMBO", bearing.value)
-    // console.log("RUMBO TIPO", typeof bearing.value)
-
     distanceBearing.value = parseFloat(distance.toFixed(2)) + ' Nm'
-    // console.log("DISTANCIA", distanceBearing.value)
-
-    // RUMBO CORRECTO
 
     lat3.value = destinationBearing[2]
     lon3.value = destinationBearing[3]
 
-    // Empiezo a comparar los rumbos cuando llego al punto de salida
     if (currentIndex > 0) {
         bearingNext.value = Math.round(await calculateBearing(lat1.value, lon1.value, lat3.value, lon3.value))
         if (bearing.value === bearingNext.value) {
@@ -761,7 +535,6 @@ const calculateBearingAndCheckDestination = async () => {
         } else {
             bearingCorrect.value = false
         }
-        // console.log("RUMBO CORRECTO", bearingCorrect.value)
     }
 
 }
@@ -798,9 +571,7 @@ setInterval(calculateBearingAndCheckDestination, 30000)
     justify-content: center;
     align-items: center;
     z-index: 999;
-    /* gap: 1rem; */
 
-    /* From https://css.glass */
     background: rgba(255, 255, 255, 0);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -810,89 +581,36 @@ setInterval(calculateBearingAndCheckDestination, 30000)
 
 }
 
-/* #rumboIcono {
-    width: 100%;
-    height: auto;
-    border: solid 2px transparent;
-} */
 
-/* #texto {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
-    width: auto;
-
-
-} */
-
-/* #rumboTexto,
-#distanciaTexto {
-
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-align: center;
-    color: rgba(52, 92, 168, 1);
-
-
-} */
-
-
-/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙋𝙀𝙌𝙐𝙀Ñ𝙊𝙎⁡ */
 @media (max-width: 767px) {
 
     #formAircraft,
     #formAirport {
         flex-direction: column;
-        /* En columna en dispositivos móviles */
     }
 
     #contenedorMapa {
         height: 70vh;
         width: 90vw;
     }
-
-    /* #rumboIcono {
-        width: max-content;
-        height: auto;
-    } */
-
-
 }
 
-/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙈𝙀𝘿𝙄𝘼𝙉𝙊𝙎⁡ */
 @media (min-width: 768px) and (max-width: 1023px) {
     #TheFormMap {
         display: flex;
         flex-direction: column;
-        /* Por defecto, en columna en pantallas medianas */
     }
 
     #contenedorMapa {
         height: 70vh;
         width: 90vw;
     }
-
-    /* #rumbo {
-        width: 30vw;
-        margin-top: 2vh;
-    } */
-
-    /* #rumboIcono {
-        width: 10vw;
-        height: auto;
-    } */
-
-
 }
 
-/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙂𝙍𝘼𝙉𝘿𝙀𝙎⁡ */
 @media (min-width: 1024px) {
     #TheFormMap {
         display: flex;
         flex-direction: row;
-        /* Por defecto, en fila en pantallas grandes */
         height: 100%;
     }
 
@@ -900,18 +618,6 @@ setInterval(calculateBearingAndCheckDestination, 30000)
         height: 70vh;
         width: 60vw;
     }
-
-   
-    /* #rumbo {
-        width: 20vw;
-        margin-top: 5vh;
-    } */
-
-    /* #rumboIcono {
-        width: 4vw;
-        height: auto;
-
-    } */
 }
 
 .alert {
@@ -922,9 +628,6 @@ setInterval(calculateBearingAndCheckDestination, 30000)
     background-color: rgba(52, 92, 168, 1);
 
 }
-
-
-/* para validar la licencia */
 
 .border-red-800 {
     border: 2px solid red;

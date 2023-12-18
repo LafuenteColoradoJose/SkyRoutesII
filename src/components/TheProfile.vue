@@ -108,7 +108,7 @@ let actualPasswordError = ref("");
 let passwordError = ref("");
 let confirmPasswordError = ref("");
 
-onMounted( async ()=> {
+onMounted(async () => {
     try {
         const response = await $fetch("profiles/profiles", {
             method: "PUT",

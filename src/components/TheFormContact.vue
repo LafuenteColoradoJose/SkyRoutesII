@@ -52,24 +52,9 @@ const enviarDatos = async () => {
             email: email.value,
             bio: bio.value
         })
-        // body:
-        // {
-        //     nombre: nombre.value,
-        //     apellidos: apellidos.value,
-        //     email: email.value,
-        //     bio: bio.value
-        // }
+       
 
     });
-
-    // nombre = nombre.value
-    // email = email.value
-    // bio = bio.value
-
-    // console.log(nombre, email, bio)
-    // console.log(nombre.value, email.value, bio.value)
-
-    console.log(response)
 
     if (response.res === 'ok') {
         nombre.value = ''
@@ -81,8 +66,5 @@ const enviarDatos = async () => {
         swal('Error al enviar el mensaje')
     }
 }
-
-
-
 
 </script>

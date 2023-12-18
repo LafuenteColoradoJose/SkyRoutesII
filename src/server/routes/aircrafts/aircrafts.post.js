@@ -3,8 +3,6 @@ import { connect } from "@planetscale/database"
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
 
-    // console.log('BODY:  ', body)
-
     const modelo = body.modelo;
     const matricula = body.matricula;
     const velocidad = body.velocidad;
@@ -18,7 +16,6 @@ export default defineEventHandler(async (event) => {
         password: useRuntimeConfig().public.DATABASE_PASSWORD,
     }
 
-    // const res = body
     const conn = connect(config)
 
     const res = await conn.execute(
@@ -30,7 +27,6 @@ export default defineEventHandler(async (event) => {
 
 
     return {
-        // api: 1,
         res,
     };
 });

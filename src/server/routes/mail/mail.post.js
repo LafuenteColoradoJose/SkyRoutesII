@@ -13,7 +13,6 @@ export default defineEventHandler(async (event) => {
         bio,
     } = body;
 
-    // Configurar el transporte de correo
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         host: "smtp.gmail.com",
@@ -25,18 +24,6 @@ export default defineEventHandler(async (event) => {
         },
     });
 
-
-    // const transporter = nodemailer.createTransport({
-    //     port: 465,
-    //     host: "smtp.mailgun.org",
-    //     auth: {
-    //         user:  "brad@sandboxadfe43ae354b4c598a4f1053b9c7d259.mailgun.org",
-    //         // pass: useRuntimeConfig().public.PASS_GMAIL,
-    //     },
-    //     secure: true,
-    // });
-
-    // Configurar el contenido del correo
     const mailOptions = {
         from: email,
         to: useRuntimeConfig().public.ACCOUNT_GMAIL,
@@ -44,7 +31,6 @@ export default defineEventHandler(async (event) => {
         text: `Nombre: ${nombre}\nApellidos: ${apellidos}\nEmail: ${email}\nBio: ${bio}`,
     };
 
-    // Enviar el correo
     let response = "";
 
     try {

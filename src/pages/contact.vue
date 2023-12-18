@@ -10,7 +10,7 @@
   #contenedor {
     display: flex;
     flex-direction: row;
-    justify-content: center; /* Por defecto, en fila en pantallas grandes */
+    justify-content: center;
     
   }
 

@@ -3,7 +3,6 @@ import { connect } from "@planetscale/database"
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
 
-    // console.log('BODY:  ', body)
 
     const id = body.id;
     const modelo = body.modelo;

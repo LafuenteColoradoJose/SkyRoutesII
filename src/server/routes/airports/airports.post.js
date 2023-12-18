@@ -3,8 +3,6 @@ import { connect } from "@planetscale/database"
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
 
-    // console.log('BODY:  ', body)
-
     const ICAO = body.ICAO;
     const name = body.name;
     const LAT = body.LAT;

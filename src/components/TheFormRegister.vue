@@ -78,14 +78,12 @@
 
 <script setup>
 
-// Variables de referencia para los datos del formulario
 let name = ref("");
 let user = ref("");
 let email = ref("");
 let password = ref("");
 let confirmPassword = ref("");
 
-// Variables de errores para cada campo del formulario
 let nombreError = ref("");
 let usuarioError = ref("");
 let emailError = ref("");
@@ -93,7 +91,6 @@ let passwordError = ref("");
 let emailOcupado = ref("");
 let confirmPasswordError = ref("");
 
-// Función para validar el formato del nombre
 function validarNombre() {
   const nombrePattern = /^[a-zA-ZÀ-ÿ\s']{2,}\s[a-zA-ZÀ-ÿ\s']{2,}$/u;
   if (!nombrePattern.test(name.value)) {
@@ -103,7 +100,6 @@ function validarNombre() {
   }
 };
 
-// Función para validar la longitud del usuario
 function validarUsuario() {
   if (user.value.length < 2) {
     usuarioError.value = 'El usuario debe tener al menos 2 caracteres de longitud.';
@@ -112,7 +108,6 @@ function validarUsuario() {
   }
 };
 
-// Función para validar el formato del correo electrónico
 function validarEmail() {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   if (!emailPattern.test(email.value)) {
@@ -122,17 +117,15 @@ function validarEmail() {
   }
 };
 
-// Función para validar la fortaleza de la contraseña
 function validarPassword() {
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/;
   if (!passwordPattern.test(password.value)) {
-    passwordError.value = 'La contraseña debe tener al menos 8 caracteres,  contener al menos una mayúscula y un caracter especial.';
+    passwordError.value = 'La contraseña debe tener al menos 10 caracteres,  contener al menos una mayúscula y un caracter especial.';
   } else {
     passwordError.value = '';
   }
 };
 
-// Función que verifica si el formulario es válido
 function formularioValido() {
   return (
     !nombreError.value &&
@@ -143,7 +136,6 @@ function formularioValido() {
   );
 };
 
-// Función para validar que las contraseñas coincidan
 function validarConfirmPassword() {
   if (confirmPassword.value !== password.value) {
     confirmPasswordError.value = 'Las contraseñas no coinciden.';
@@ -152,12 +144,9 @@ function validarConfirmPassword() {
   }
 };
 
-// Función asincrónica para validar el formulario antes de enviarlo
 async function validarFormulario() {
   if (formularioValido()) {
-    console.log('Formulario válido. Envía los datos.');
 
-    // Enviar datos del formulario al servidor
     const data = await $fetch("users/users", {
       method: "POST",
       headers: {
@@ -172,8 +161,6 @@ async function validarFormulario() {
     });
 
     if (data.api === 1) {
-      // Redirigir al usuario a TheFormLogin.vue
-      console.log("Usuario registrado con éxito. Redirigiendo al login...");
       await navigateTo('/', {
         open: {
           target: '_self',
@@ -185,7 +172,6 @@ async function validarFormulario() {
       })
 
     } else if (data.api === 0) {
-      // Mostrar un mensaje de correo ocupado
       console.log("Correo ocupado. Mostrar mensaje al usuario...");
       emailOcupado.value = 'Correo ocupado.';
     }

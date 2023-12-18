@@ -17,8 +17,6 @@ definePageMeta({
 
 </script>
 
-
-
 <style scoped>
 div {
     background-image: url('/imgs/cockpit.svg');

@@ -5,11 +5,9 @@
         <div class="m-auto">
             <button @click="OpenModalCreate" class="btn-xs border rounded-md">Crear Aeropuerto</button>
         </div>
-        <!-- Modal crear -->
         <dialog id="modalCreate" class="modal">
             <div class="modal-box">
                 <span class="text-center font-bold"> {{ textResponse }}</span>
-                <!-- TABLA AIRPORTS CREAR -->
                 <form class="flex flex-col justify-center items-center" v-on:submit.prevent="">
                     <label for="">ICAO</label>
                     <input v-model.trim="ICAO" type="text" name="" id="" class="input input-bordered w-full max-w-xs"
@@ -28,21 +26,18 @@
                 </form>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
             </div>
         </dialog>
 
-        <!-- PAGINACIÓN -->
         <div class="flex justify-center mt-4 mb-4 gap-4">
             <button @click="prevPage" :disabled="currentPage === 1" class="btn">Anterior</button>
             <div class="font-extrabold">Página {{ currentPage }} de {{ totalPages }}</div>
             <button @click="nextPage" :disabled="currentPage === totalPages" class="btn">Siguiente</button>
         </div>
 
-        <!-- Mostrar aeropuertos -->
         <table id="tableAirports" class="table  text-center">
             <thead>
                 <tr>
@@ -77,7 +72,6 @@
             </tbody>
         </table>
 
-        <!-- DETAILS AEROPUERTOS MODAL -->
         <dialog id="modalDetails" class="modal">
             <div class="modal-box">
                 <table id="tableAirports" class="table">
@@ -106,18 +100,15 @@
                 </table>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
             </div>
         </dialog>
 
-        <!-- MODAL AEROPUERTOS EDITAR -->
         <dialog id="modalEdit" class="modal">
             <div class="modal-box text-center">
                 <span class="text-center font-bold"> {{ textResponse }}</span>
-                <!-- TABLA AIRPORTS EDITAR -->
                 <form v-on:submit.prevent="" class="lg:flex lg:flex-col lg:gap-3 lg:items-center lg:justify-between">
                     <div class="lg:flex lg:flex-wrap lg:gap-3">
                         <article class="flex flex-col justify-center items-center mb-8">
@@ -151,20 +142,17 @@
                 </form>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
             </div>
         </dialog>
 
-        <!-- MODAL ELIMINAR -->
         <dialog id="modalDelete" class="modal">
             <div class="modal-box">
                 <span class="text-center font-bold"> {{ textResponse }}</span>
                 <div class="modal-action">
                     <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn">Close</button>
                     </form>
                 </div>
@@ -211,7 +199,6 @@ let paginatedAirports = computed(() => {
     let end = start + perPage;
     let slice = airports.value.slice(start, end);
 
-    // Si la página no está llena, llenarla con aeropuertos vacíos
     while (slice.length < perPage) {
         slice.push({});
     }
@@ -232,8 +219,6 @@ const prevPage = () => {
         currentPage.value--;
     }
 };
-
-// CREAR AEROPUERTO
 
 const OpenModalCreate = () => {
     modalCreate.showModal();
@@ -269,28 +254,22 @@ const createAirport = async () => {
 
         await showAllAirports();
     } catch (error) {
-        console.log(error);
         textResponse.value = "Error al crear el aeropuerto";
     }
 };
 
-// MOSTRAR AERONAVE
 const airportDetails = ref('');
 const showDetails = async (airportShow) => {
-    console.log(airportShow);
     for (let i = 0; i < airports.value.length; i++) {
         if (airports.value[i].id === airportShow.id) {
             airportDetails.value = airports.value[i];
-            console.log(airportDetails.value);
         }
     }
     await modalDetails.showModal();
 };
 
 
-// EDITAR AEROPUERTO
 const editAirport = async (airportEdit) => {
-    // console.log(airportEdit);
     for (let i = 0; i < airports.value.length; i++) {
         if (airports.value[i].id === airportEdit.id) {
             ICAO.value = airports.value[i].ICAO;
@@ -310,7 +289,6 @@ const LATModificar = ref("");
 const LONModificar = ref("");
 
 const updateAirport = async () => {
-    console.log(airportForEditId.value)
     try {
         const response = await $fetch("../airports/airports", {
             method: "PATCH",
@@ -334,12 +312,10 @@ const updateAirport = async () => {
         LONModificar.value = '';
         await showAllAirports();
     } catch (error) {
-        console.log(error);
         textResponse.value = "Error al modificar el aeropuerto";
     }
 };
 
-// ELIMINAR AEROPUERTO
 const deleteAirport = async (airportDelete) => {
     try {
         const response = await $fetch("../airports/airports", {
@@ -354,7 +330,6 @@ const deleteAirport = async (airportDelete) => {
         textResponse.value = "Aeropuerto eliminado correctamente";
         await showAllAirports();
     } catch (error) {
-        console.log(error);
         textResponse.value = "Error al eliminar el aeropuerto";
     }
     await modalDelete.showModal();
@@ -369,7 +344,6 @@ section {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    /* width: 100vw;
-    height: 100%; */
+   
 }
 </style>

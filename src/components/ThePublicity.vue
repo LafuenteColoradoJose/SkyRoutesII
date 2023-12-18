@@ -12,10 +12,6 @@
                 <p class="mb-2">Con SkyRoutes, generar planes de vuelo precisos y eficientes nunca ha
                     sido tan fácil. Nuestra aplicación inteligente utiliza tecnología de
                     vanguardia para ofrecerte una herramienta completa y confiable.</p>
-    
-                <!-- <p>SkyRoutes es completamente gratuito, lo que te permite disfrutar de todas sus ventajas sin ningún costo, por
-                    lo que te permite maximizar tus recursos mientras disfrutas de un servicio de alta calidad.</p> -->
-    
             </div>
 
             <div id="img" class="w-fit">
@@ -35,21 +31,16 @@
 </template>
 
 <style scoped>
-/* ⁡⁢⁣⁢⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙋𝙀𝙌𝙐𝙀Ñ𝙊𝙎⁡⁡ */
 
 @media (max-width: 767px) {}
 
-/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙈𝙀𝘿𝙄𝘼𝙉𝙊𝙎⁡⁡ */
 @media (min-width: 768px) and (max-width: 1023px) {}
 
-/* ⁡⁢⁣⁢𝘿𝙄𝙎𝙋𝙊𝙎𝙄𝙏𝙄𝙑𝙊𝙎 𝙂𝙍𝘼𝙉𝘿𝙀𝙎⁡ */
 @media (min-width: 1024px) {
 
 #publicity {
     width: 400px;
 }
-
- 
 
 }
 </style>

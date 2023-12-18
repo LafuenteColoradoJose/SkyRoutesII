@@ -1,7 +1,6 @@
 <template>
     <section class="flex flex-col justify-center">
 
-
         <h1 class="text-4xl text-center m-7">Flight Plans</h1>
 
         <div class="flex flex-col justify-around w-full px-5">
@@ -13,11 +12,8 @@
 
                 </nav>
 
-                <!-- <button type="submit">Mostrar</button> -->
-
                 <div class="overflow-x-auto">
     <table class="table w-full">
-        <!-- head -->
         <thead>
             <tr>
                 <th>Select</th>
@@ -57,19 +53,14 @@
 
 let dataFP = ref([])
 const userId = ref(useCookie('userId'))
-// console.log('userid es: ', userId.value)
 const enviarDatos = async () => {
-
     const response = await $fetch(`/fp/fp?userId=${userId.value}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
     })
-
-    // console.log(response.db)
     dataFP.value = response.db
-
 };
 
 onMounted(() => {
@@ -83,7 +74,6 @@ function formatDate(dateString) {
 
 let selectedRows = ref([])
 const deleteSelected = async () => {
-    console.log(selectedRows.value)
     const response = await $fetch('/fp/fp', {
         method: 'DELETE',
         headers: {
@@ -93,7 +83,6 @@ const deleteSelected = async () => {
             selectedRows: selectedRows.value
         })
     })
-    console.log('RESPONDE ES: ', response)
 
     let rowsAffected = response.res.reduce((total, current) => total + current.rowsAffected, 0);
 
@@ -107,8 +96,6 @@ const deleteSelected = async () => {
     } else {
         swal('Error al eliminar el plan de vuelo')
     }
-
-
 }
 
 </script>
