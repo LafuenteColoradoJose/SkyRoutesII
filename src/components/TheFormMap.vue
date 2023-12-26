@@ -483,10 +483,25 @@ const getLocation = () => {
 }
 
 onMounted(() => {
-    if (localizacion.value.length <= 0) {
-        swal('Para utilizar el GPS deberá permitir la geolocalización en su navegador.')
-    }
-});
+      if (!navigator.geolocation) {
+        swal('Su navegador no admite la geolocalización.');
+      } else {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            // Actualizar la variable localizacion con los datos de la ubicación si es necesario
+            localizacion.value = `${position.coords.latitude}, ${position.coords.longitude}`;
+          },
+          (error) => {
+            // Manejar el error de permisos o de geolocalización no disponible
+            if (error.code === 1) {
+              swal('Para utilizar el GPS, debe permitir la geolocalización en su navegador.');
+            } else if (error.code === 2) {
+              swal('No se pudo obtener la ubicación: geolocalización no disponible.');
+            }
+          }
+        );
+      }
+    });
 
 let bearing = ref('Rumbo')
 let distanceBearing = ref('Distancia')
