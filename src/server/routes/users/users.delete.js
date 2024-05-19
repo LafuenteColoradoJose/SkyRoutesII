@@ -1,23 +1,24 @@
-import { connect } from "@planetscale/database"
+import mysql from 'mysql2/promise'
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
 
     const id = body.id;
 
-    const config = {
+    const connection = await mysql.createConnection({
         host: useRuntimeConfig().public.DATABASE_HOST,
-        username: useRuntimeConfig().public.DATABASE_USERNAME,
+        user: useRuntimeConfig().public.DATABASE_USERNAME,
         password: useRuntimeConfig().public.DATABASE_PASSWORD,
-    }
-    
-    const conn = connect(config)
+        database: useRuntimeConfig().public.DATABASE_NAME
+    })
 
-    const res = await conn.execute(
+    const [rows] = await connection.execute(
         `DELETE FROM users WHERE id = ${id};`
     );
 
+    await connection.end();
+
     return {
-        res,
+        rows,
     };
 });

@@ -1,4 +1,4 @@
-import { connect } from "@planetscale/database"
+import mysql from 'mysql2/promise'
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
@@ -7,15 +7,13 @@ export default defineEventHandler(async (event) => {
     const name = body.name;
     const user = body.user;
     const email = body.email;
-    
 
-    const config = {
+    const connection = await mysql.createConnection({
         host: useRuntimeConfig().public.DATABASE_HOST,
-        username: useRuntimeConfig().public.DATABASE_USERNAME,
+        user: useRuntimeConfig().public.DATABASE_USERNAME,
         password: useRuntimeConfig().public.DATABASE_PASSWORD,
-    }
-
-    const conn = connect(config)
+        database: useRuntimeConfig().public.DATABASE_NAME
+    })
 
     let updateQuery = `UPDATE users SET`;
 
@@ -30,9 +28,11 @@ export default defineEventHandler(async (event) => {
     }
     updateQuery += ` WHERE id = '${id}';`;
 
-    const res = await conn.execute(updateQuery, {
+    const res = await connection.execute(updateQuery, {
         method: "PATCH"
     });
+
+    await connection.end();
 
     return {
         res,

@@ -25,7 +25,7 @@
       </div>
       <div class="flex flex-row gap-2">
         <span class="text-xs"> José Lafuente</span>
-        <a href="https://github.com/JoseLafuenteColorado">
+        <a href="https://github.com/LafuenteColoradoJose">
           <img src="/icons/github.svg" alt="Logotipo SkyRoutes" class="w-5">
         </a>
       </div>

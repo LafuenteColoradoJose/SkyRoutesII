@@ -287,7 +287,7 @@ let fpDistance = ref('NM')
 let fpAltitude = ref('ft')
 let fpWaypoints = ref('Nº')
 
-let fpEncodedPolyline = ref('')
+let fpEncodedPolyline = ref('sfdvFfjvTr`cHg`sN?_ibE?_ibEcwjBasrI')
 
 const flightplandatabase = async () => {
     let fromICAO;
@@ -315,6 +315,7 @@ const flightplandatabase = async () => {
     });
 
     datosResponse = data.response[0]
+    console.log(datosResponse)
 
     datos = datosResponse
 
@@ -324,7 +325,8 @@ const flightplandatabase = async () => {
     fpAltitude.value = datos.maxAltitude.toLocaleString("es-ES") + " ft"
     fpWaypoints.value = datos.waypoints
     fpEncodedPolyline.value = datos.encodedPolyline
-
+    console.log(datos.encodedPolyline)
+    console.log(fpEncodedPolyline.value)
 }
 
 let minDateTime = ref('');
@@ -393,7 +395,7 @@ const solicitarDatos = async () => {
 
     await flightplandatabase()
     await flightTime()
-    await dibujarPolyline()
+    dibujarPolyline()
     await getMetar()
     isSubmitted.value = true
 }
@@ -430,7 +432,7 @@ const saveFP = async () => {
         }),
     });
 
-    if (data.res.rowsAffected > 0) {
+    if (data.res[0].affectedRows > 0) {
         swal('Plan de vuelo guardado correctamente')
     } else {
         swal('Error al guardar el plan de vuelo')
@@ -464,6 +466,7 @@ const dibujarPolyline = () => {
         decodedPolyline.value = polyline.decode(fpEncodedPolyline.value);
         coordSalida.value = decodedPolyline.value[0]
         coordLlegada.value = decodedPolyline.value[decodedPolyline.value.length - 1]
+        console.log(decodedPolyline.value)
     }
 }
 
@@ -554,7 +557,9 @@ const calculateBearingAndCheckDestination = async () => {
 
 }
 
-setInterval(calculateBearingAndCheckDestination, 30000)
+onBeforeMount(() => {
+    setInterval(calculateBearingAndCheckDestination, 30000)
+})
 
 </script>
 

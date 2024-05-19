@@ -1,4 +1,4 @@
-import { connect } from "@planetscale/database"
+import mysql from 'mysql2/promise'
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
@@ -8,21 +8,23 @@ export default defineEventHandler(async (event) => {
     const LAT = body.LAT;
     const LON = body.LON;
 
-    const config = {
+    const connection = await mysql.createConnection({
         host: useRuntimeConfig().public.DATABASE_HOST,
-        username: useRuntimeConfig().public.DATABASE_USERNAME,
+        user: useRuntimeConfig().public.DATABASE_USERNAME,
         password: useRuntimeConfig().public.DATABASE_PASSWORD,
-    }
-
+        database: useRuntimeConfig().public.DATABASE_NAME
+    })
     // const res = body
-    const conn = connect(config)
+    
 
-    const res = await conn.execute(
+    const res = await connection.execute(
         `INSERT INTO airports (ICAO, name, LAT, LON) 
          VALUES ('${ICAO}', '${name}', '${LAT}', '${LON}');`, {
         method: "POST"
     }
     );
+
+    await connection.end();
 
     return {
         api: 1,

@@ -1,4 +1,4 @@
-import { connect } from "@planetscale/database"
+import mysql from 'mysql2/promise'
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
@@ -13,26 +13,32 @@ export default defineEventHandler(async (event) => {
     const license = body.license._value;
     const userID = body.userID._value;
 
-  
-
-    console.log('DESDE SERVIDOR')
-
-    const config = {
+    const connection = await mysql.createConnection({
         host: useRuntimeConfig().public.DATABASE_HOST,
-        username: useRuntimeConfig().public.DATABASE_USERNAME,
+        user: useRuntimeConfig().public.DATABASE_USERNAME,
         password: useRuntimeConfig().public.DATABASE_PASSWORD,
+        database: useRuntimeConfig().public.DATABASE_NAME
+    })
+
+    try {
+
+        const res = await connection.execute(
+            `INSERT INTO flightplans (fpOrigin, fpDestination, distance, maxAltitude, waypoints, idAircraft, date, userID, license) 
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`, 
+            [fpOrigin, fpDestination, distance, maxAltitude, waypoints, idAircraft, date, userID, license]
+        );
+        await connection.end();
+
+        return {
+            res,
+        };
+    } catch (error) {
+        await connection.end();
+        return {
+            error,
+        };
+        
     }
 
-    const conn = connect(config)
 
-    const res = await conn.execute(
-        `INSERT INTO flightplans (fpOrigin, fpDestination, distance, maxAltitude, waypoints, idAircraft, date, userID, license) 
-         VALUES ('${fpOrigin}', '${fpDestination}', '${distance}', '${maxAltitude}', '${waypoints}', '${idAircraft}', '${date}', '${userID}', '${license}');`, {
-        method: "POST"
-    }
-    );
-
-    return {
-        res,
-    };
 });

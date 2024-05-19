@@ -1,4 +1,4 @@
-import { connect } from "@planetscale/database"
+import mysql from 'mysql2/promise'
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
@@ -12,13 +12,13 @@ export default defineEventHandler(async (event) => {
     const combustible = body.combustible;
     const img = body.img;
 
-    const config = {
+    const connection = await mysql.createConnection({
         host: useRuntimeConfig().public.DATABASE_HOST,
-        username: useRuntimeConfig().public.DATABASE_USERNAME,
+        user: useRuntimeConfig().public.DATABASE_USERNAME,
         password: useRuntimeConfig().public.DATABASE_PASSWORD,
-    }
+        database: useRuntimeConfig().public.DATABASE_NAME
+    })
 
-    const conn = connect(config)
 
     let updateQuery = `UPDATE aircrafts SET`;
 
@@ -45,9 +45,11 @@ export default defineEventHandler(async (event) => {
 
     updateQuery += ` WHERE id = '${id}';`;
 
-    const res = await conn.execute(updateQuery, {
+    const res = await connection.execute(updateQuery, {
         method: "PATCH"
     });
+
+    await connection.end();
 
     return {
         res,

@@ -52,6 +52,7 @@ export default defineNuxtConfig({
       DATABASE_HOST: process.env.DATABASE_HOST,
       DATABASE_USERNAME: process.env.DATABASE_USERNAME,
       DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
+      DATABASE_NAME: process.env.DATABASE_NAME,
 
       ACCOUNT_GMAIL: process.env.ACCOUNT_GMAIL,
       USER_GMAIL: process.env.USER_GMAIL,
