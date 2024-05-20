@@ -38,5 +38,3 @@
 <script setup>
 const userId = ref(useCookie('userId'))
 </script>
-
-<style scoped></style>
