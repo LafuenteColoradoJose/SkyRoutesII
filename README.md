@@ -46,7 +46,7 @@
 
 
    
-## Autores
+## Authors
   :large_blue_diamond: [José Antonio Rivera Vargas](https://github.com/JoseAntonioRiveraVargas)
 
  :large_blue_diamond: [José Lafuente Colorado](https://github.com/JoseLafuenteColorado)

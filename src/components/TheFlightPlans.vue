@@ -84,7 +84,9 @@ const deleteSelected = async () => {
         })
     })
 
-    let rowsAffected = response.res.reduce((total, current) => total + current.rowsAffected, 0);
+
+    let rowsAffected = response.res.reduce((total, current) => total + current, 0);
+    console.log(rowsAffected)
 
     if (rowsAffected > 0) {
         swal('Plan de vuelo eliminado correctamente')

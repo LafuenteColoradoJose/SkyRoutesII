@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise'
+import { getDbConnection } from "~/server/db/db";
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
@@ -8,12 +8,7 @@ export default defineEventHandler(async (event) => {
     const user = body.user;
     const email = body.email;
 
-    const connection = await mysql.createConnection({
-        host: useRuntimeConfig().public.DATABASE_HOST,
-        user: useRuntimeConfig().public.DATABASE_USERNAME,
-        password: useRuntimeConfig().public.DATABASE_PASSWORD,
-        database: useRuntimeConfig().public.DATABASE_NAME
-    })
+    const connection = await getDbConnection();
 
     let updateQuery = `UPDATE users SET`;
 

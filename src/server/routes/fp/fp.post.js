@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise'
+import { getDbConnection } from "~/server/db/db";
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
@@ -13,12 +13,7 @@ export default defineEventHandler(async (event) => {
     const license = body.license._value;
     const userID = body.userID._value;
 
-    const connection = await mysql.createConnection({
-        host: useRuntimeConfig().public.DATABASE_HOST,
-        user: useRuntimeConfig().public.DATABASE_USERNAME,
-        password: useRuntimeConfig().public.DATABASE_PASSWORD,
-        database: useRuntimeConfig().public.DATABASE_NAME
-    })
+    const connection = await getDbConnection();
 
     try {
 
@@ -28,10 +23,10 @@ export default defineEventHandler(async (event) => {
             [fpOrigin, fpDestination, distance, maxAltitude, waypoints, idAircraft, date, userID, license]
         );
         await connection.end();
-
         return {
             res,
         };
+        
     } catch (error) {
         await connection.end();
         return {

@@ -7,7 +7,7 @@
 
                 <article id="formPilotLisence" class="mb-1">
                     <label for="Nº"></label>
-                    <input type="text" v-model.trim="flightLicense" @input="validarCampo"
+                    <input type="text" id="Nº" v-model.trim="flightLicense" @input="validarCampo"
                         :class="{ 'border-red-800': !isValidLicense, 'border-green-500': isValidLicense, 'rounded-lg': true }"
                         placeholder="Nº de Licencia">
                 </article>
@@ -315,7 +315,7 @@ const flightplandatabase = async () => {
     });
 
     datosResponse = data.response[0]
-    console.log(datosResponse)
+    // console.log(datosResponse)
 
     datos = datosResponse
 
@@ -325,8 +325,8 @@ const flightplandatabase = async () => {
     fpAltitude.value = datos.maxAltitude.toLocaleString("es-ES") + " ft"
     fpWaypoints.value = datos.waypoints
     fpEncodedPolyline.value = datos.encodedPolyline
-    console.log(datos.encodedPolyline)
-    console.log(fpEncodedPolyline.value)
+    // console.log(datos.encodedPolyline)
+    // console.log(fpEncodedPolyline.value)
 }
 
 let minDateTime = ref('');
@@ -466,7 +466,7 @@ const dibujarPolyline = () => {
         decodedPolyline.value = polyline.decode(fpEncodedPolyline.value);
         coordSalida.value = decodedPolyline.value[0]
         coordLlegada.value = decodedPolyline.value[decodedPolyline.value.length - 1]
-        console.log(decodedPolyline.value)
+        // console.log(decodedPolyline.value)
     }
 }
 

@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise'
+import { getDbConnection } from "~/server/db/db";
 
 export default defineEventHandler(async (event) => {
     
@@ -7,17 +7,12 @@ export default defineEventHandler(async (event) => {
     const email = body.email._value;
     const password = body.password._value;
 
-    const connection = await mysql.createConnection({
-        host: useRuntimeConfig().public.DATABASE_HOST,
-        user: useRuntimeConfig().public.DATABASE_USERNAME,
-        password: useRuntimeConfig().public.DATABASE_PASSWORD,
-        database: useRuntimeConfig().public.DATABASE_NAME
-    })
+    const connection = await getDbConnection();
 
-    const [rows] = await connection.execute(`SELECT * FROM users WHERE email='${email}' AND password='${password}';`);
-    await connection.end();
+    const [rows] = await connection.execute(`SELECT * FROM users WHERE email= ? AND password= ?`, [email, password]);
     
     if (rows.length > 0) {
+        await connection.end();
         return {
             api: 1,
             id: rows[0].id,
@@ -25,7 +20,8 @@ export default defineEventHandler(async (event) => {
         };
         
     }
-
+    
+    await connection.end();
     return {
         api: 0,
         // existingUser: existingUser.rows,

@@ -1,4 +1,5 @@
 import mysql from 'mysql2/promise'
+import { getDbConnection } from '~/server/db/db';
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
@@ -10,15 +11,9 @@ export default defineEventHandler(async (event) => {
     const license = "1";
     const admin = 0;
 
-    const connection = await mysql.createConnection({
-        host: useRuntimeConfig().public.DATABASE_HOST,
-        user: useRuntimeConfig().public.DATABASE_USERNAME,
-        password: useRuntimeConfig().public.DATABASE_PASSWORD,
-        database: useRuntimeConfig().public.DATABASE_NAME
-    })
+    const connection = await getDbConnection();
 
-
-    const [rows] = await connection.execute(`SELECT * FROM users WHERE email='${email}'`);
+    const [rows] = await connection.execute("SELECT * FROM users WHERE email=?", [email]);
 
     if (rows.length > 0) {
         return {
@@ -28,10 +23,8 @@ export default defineEventHandler(async (event) => {
     }
 
     const res = await connection.execute(
-        `INSERT INTO users (name, user, email, password, license, admin) 
-         VALUES ('${name}', '${user}', '${email}', '${password}', '${license}', ${admin})`, {
-        method: "POST"
-    }
+        "INSERT INTO users (name, user, email, password, license, admin) VALUES (?, ?, ?, ?, ?, ?)", 
+        [name, user, email, password, license, admin]
     );
 
     await connection.end();

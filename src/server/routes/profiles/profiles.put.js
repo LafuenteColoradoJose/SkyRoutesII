@@ -1,15 +1,10 @@
-import mysql from 'mysql2/promise';
+import { getDbConnection } from "~/server/db/db";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const userId = body.userId;
 
-  const connection = await mysql.createConnection({
-    host: useRuntimeConfig().public.DATABASE_HOST,
-    user: useRuntimeConfig().public.DATABASE_USERNAME,
-    password: useRuntimeConfig().public.DATABASE_PASSWORD,
-    database: useRuntimeConfig().public.DATABASE_NAME
-})
+  const connection = await getDbConnection();
 
   const [ rows ] = await connection.execute(`SELECT * FROM users WHERE id ='${userId}'`);
   await connection.end();

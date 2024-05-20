@@ -19,13 +19,13 @@
 
       <div class="flex flex-row gap-2">
         <span class="text-xs"> José A. Rivera</span>
-        <a href="https://github.com/JoseAntonioRiveraVargas">
+        <a href="https://github.com/JoseAntonioRiveraVargas" target="_blank">
           <img src="/icons/github.svg" alt="Logotipo SkyRoutes" class="w-5">
         </a>
       </div>
       <div class="flex flex-row gap-2">
         <span class="text-xs"> José Lafuente</span>
-        <a href="https://github.com/LafuenteColoradoJose">
+        <a href="https://github.com/LafuenteColoradoJose" target="_blank">
           <img src="/icons/github.svg" alt="Logotipo SkyRoutes" class="w-5">
         </a>
       </div>
