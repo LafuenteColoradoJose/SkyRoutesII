@@ -1,6 +1,6 @@
 <template>
-  <footer class="footer items-center p-4 bg-[#5f7fa6]">
-    <aside class="items-center grid-flow-col">
+  <footer class="footer items-center p-4 bg-[#5f7fa6] ">
+    <aside class="items-center grid-flow-col ml-20">
       <img src="/SkyRoutes_Logo.svg" alt="Logotipo SkyRoutes" class="w-20 mr-3">
       <p>Copyright © 2023 - All right reserved</p>
     </aside>

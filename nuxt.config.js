@@ -8,17 +8,22 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+
   srcDir: 'src/',
+
   alias: {
     '@': fileURLToPath(new URL('./src/', import.meta.url)),
   },
+
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt3-leaflet',
     // 'cookie-universal-nuxt',
 
   ],
+
   css: ['@/assets/css/main.css'],
+
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'page', mode: 'out-in' },
@@ -112,7 +117,5 @@ export default defineNuxtConfig({
     ],
   },
 
-
-  
-
+  compatibilityDate: "2024-11-20",
 })

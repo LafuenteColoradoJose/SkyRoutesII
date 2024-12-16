@@ -52,7 +52,7 @@
                 </div>
 
                 <article>
-                    <img src="/SkyRoutes_Logo_White.svg" alt="SkyRoutes Logo" class="w-12 pt-2">
+                    <img src="/SkyRoutes_Logo_White.svg" alt="SkyRoutes Logo" class="w-12 pt-2 ml-20">
                 </article>
             </div>
 
