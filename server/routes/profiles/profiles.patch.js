@@ -1,41 +1,63 @@
+// Reading file to debug
 import { getDbConnection } from "~/server/db/db";
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
+  try {
+    const body = await readBody(event);
 
-  const userId = body.userId;
-  const name = body.name._value;
-  const user = body.user._value;
-  const email = body.email._value;
-  const password = body.password._value;
-  let passwordnew = body.passwordnew._value;
 
-  const connection = await getDbConnection();
+    const userId = parseInt(body.userId);
+    const name = body.name;
+    const user = body.user;
+    const email = body.email;
+    const password = body.password;
+    const passwordnew = body.passwordnew;
+    const img = body.img;
 
-  const res = await conn.execute(`SELECT * FROM users WHERE id ='${userId}' AND password='${password}';`);
+    const connection = await getDbConnection();
 
-  if (res.rows.length > 0) {
-    if (passwordnew === "") {
-      await conn.execute(`UPDATE users
-      SET name = '${name}', user = '${user}', email = '${email}', password = '${password}'
-      WHERE id = ${userId}`
+    try {
+      const [rows] = await connection.execute(
+        "SELECT * FROM users WHERE id = ? AND password = ?",
+        [userId, password]
       );
-    } else {
-      await conn.execute(`UPDATE users
-      SET name = '${name}', user = '${user}', email = '${email}', password = '${passwordnew}'
-      WHERE id = ${userId}`
-      );
+
+      if (rows.length > 0) {
+        let updateQuery = 'UPDATE "users" SET "name" = ?, "user" = ?, "email" = ?';
+        let params = [name, user, email];
+
+        if (passwordnew && passwordnew.trim() !== "") {
+          updateQuery += ', "password" = ?';
+          params.push(passwordnew);
+        }
+
+        if (img) {
+          updateQuery += ', "img" = ?';
+          params.push(img);
+        }
+
+        updateQuery += ' WHERE "id" = ?';
+        params.push(userId);
+
+        await connection.execute(updateQuery, params);
+        await connection.end();
+
+        return { db: "Usuario Modificado" };
+      } else {
+        await connection.end();
+        return { db: "Contraseña Erronea" };
+      }
+    } catch (dbError) {
+      await connection.end();
+      console.error("DB Error in profiles.patch:", dbError);
+      throw createError({
+        statusCode: 500,
+        statusMessage: "Database Error: " + dbError.message
+      });
     }
 
-    await connection.end();
-
-    return {
-      db: "Usuario Modificado",
-    };
-
-  } else {
-    return {
-      db: "Contraseña Erronea",
-    };
+  } catch (e) {
+    console.error("General Error in profiles.patch:", e);
+    throw e;
   }
 });

@@ -98,13 +98,17 @@
                     </button>
 
                     <div v-if="userId2" class="relative group">
-                        <button class="flex items-center space-x-2 focus:outline-none">
+                        <button class="flex items-center space-x-3 focus:outline-none py-1">
+                            <div class="text-right hidden lg:block">
+                                <p class="text-sm font-bold text-[var(--color-text-body)]">{{ userName || 'Usuario' }}
+                                </p>
+                                <p class="text-xs text-[var(--color-text-muted)]">Piloto</p>
+                            </div>
                             <div
-                                class="w-10 h-10 rounded-full bg-sky-secondary text-white flex items-center justify-center border-2 border-white/20 shadow-md">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
+                                class="w-10 h-10 rounded-full bg-sky-secondary text-white flex items-center justify-center border-2 border-white/20 shadow-md overflow-hidden">
+                                <img v-if="userImg" :src="userImg" alt="User" class="w-full h-full object-cover">
+                                <span v-else class="text-xs font-bold">{{ userName ? userName.charAt(0).toUpperCase() :
+                                    'U' }}</span>
                             </div>
                         </button>
                         <div
@@ -194,7 +198,7 @@
                             </div>
                         </div>
                         <div class="ml-3">
-                            <div class="text-base font-medium leading-none text-white">Usuario</div>
+                            <div class="text-base font-medium leading-none text-white">{{ userName || 'Usuario' }}</div>
                         </div>
                     </div>
                     <div class="mt-3 px-2 space-y-1">
@@ -216,11 +220,36 @@ import { ref } from 'vue'
 
 const userId2 = ref(useCookie('userId'))
 const isMobileMenuOpen = ref(false)
+const userName = ref('')
+const userImg = ref('')
 
 const isAdmin = ref(false)
 if (userId2.value == '93') {
     isAdmin.value = true
 }
+
+const fetchUserProfile = async () => {
+    if (!userId2.value) return;
+    try {
+        const response = await $fetch("profiles/profiles", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId: userId2.value }),
+        });
+        if (response && response.db && response.db[0]) {
+            // The user requested 'juanito' (the username), not the person's name 'JuanAntonio'.
+            // The DB has 'user' field for username.
+            userName.value = response.db[0].user;
+            userImg.value = response.db[0].img;
+        }
+    } catch (e) {
+        console.error("Error fetching navbar profile:", e);
+    }
+}
+
+onMounted(() => {
+    fetchUserProfile();
+});
 
 const logout = () => {
     document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'

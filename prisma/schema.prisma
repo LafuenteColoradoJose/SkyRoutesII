@@ -17,6 +17,7 @@ model User {
   email       String       @unique
   password    String
   license     String?
+  img         String?
   admin       Boolean      @default(false)
   flightPlans FlightPlan[]
 
@@ -47,7 +48,7 @@ model Airport {
 }
 
 model FlightPlan {
-  id            Int      @id @default(autoincrement())
+  id            Int     @id @default(autoincrement())
   fpOrigin      String
   fpDestination String
   distance      Float
@@ -55,12 +56,12 @@ model FlightPlan {
   waypoints     String
   date          String // Storing as string based on usage in raw query, can be DateTime if preferred
   license       String?
-  
-  aircraft      Aircraft? @relation(fields: [idAircraft], references: [id])
-  idAircraft    Int?
-  
-  user          User?     @relation(fields: [userID], references: [id])
-  userID        Int?
+
+  aircraft   Aircraft? @relation(fields: [idAircraft], references: [id])
+  idAircraft Int?
+
+  user   User? @relation(fields: [userID], references: [id])
+  userID Int?
 
   @@map("flightplans")
 }
