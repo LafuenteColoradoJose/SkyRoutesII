@@ -35,21 +35,15 @@
 
    2. MySql: Configure the environment variables in the .env file.
    3. Email Account: Configure the environment variables in the .env file.
-   [For more information :es:.](https://github.com/iesgrancapitan-proyectos/202324daw-diciembre-skyroutes-JoseLafuente-JoseAntonioRivera/wiki/Despliegue)
 
 ## How to Use
-[Wiki :es:](https://github.com/iesgrancapitan-proyectos/202324daw-diciembre-skyroutes-JoseLafuente-JoseAntonioRivera/wiki)
-
-[Project Documentation :es:](https://github.com/iesgrancapitan-proyectos/202324daw-diciembre-skyroutes-JoseLafuente-JoseAntonioRivera/wiki/6.-Documentaci%C3%B3n-del-proyecto)
-
+[Documentation](wiki)
 
 ## Test the Proyect
 [SkyRoutes II](https://skyroutes2.vercel.app/)
 
    
 ## Authors
-  :large_blue_diamond: [José Antonio Rivera Vargas](https://github.com/JoseAntonioRiveraVargas)
-
  :large_blue_diamond: [José Lafuente Colorado](https://github.com/JoseLafuenteColorado)
 
 

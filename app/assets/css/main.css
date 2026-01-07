@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sky-primary: var(--color-sky-primary);
+  --color-sky-secondary: var(--color-sky-secondary);
+  --color-sky-accent: #f59e0b;
+  --color-sky-dark: var(--color-sky-dark);
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --animate-fade-in: fade-in 0.5s ease-in-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+:root.light-mode {
+  /* Modern Palette - Light */
+  --color-sky-primary: #0284c7;
+  /* Sky 600 - Readable on white */
+  --color-sky-secondary: #64748b;
+  /* Slate 500 */
+  --color-sky-dark: #f8fafc;
+  /* Slate 50 */
+
+  --color-nav-bg: rgb(255 255 255 / 0.9);
+  --color-nav-border: rgb(0 0 0 / 0.05);
+
+  /* Text Colors Light */
+  --color-text-heading-from: #0f172a;
+  /* Slate 900 */
+  --color-text-heading-to: #334155;
+  /* Slate 700 */
+  --color-text-body: #334155;
+  /* Slate 700 */
+  --color-text-muted: #64748b;
+  /* Slate 500 */
+
+  /* Components Colors Light */
+  --color-card-bg: rgb(255 255 255 / 0.7);
+  --color-input-bg: rgb(241 245 249 / 0.8);
+  --color-border-subtle: rgb(0 0 0 / 0.1);
+}
+
+/* Custom Utilities for Glassmorphism */
+@utility glass {
+  background-color: var(--color-card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border-subtle);
+}
+
+@utility glass-dark {
+  background-color: var(--color-card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border-subtle);
+}
+
+:root {
+  color-scheme: light dark;
+
+  /* Modern Palette - Dark (Default) */
+  --color-sky-primary: #0ea5e9;
+  /* Sky 500 - Vibrant on dark */
+  --color-sky-secondary: #94a3b8;
+  /* Slate 400 */
+  --color-sky-dark: #0f172a;
+  /* Slate 900 */
+
+  --color-nav-bg: rgb(15 23 42 / 0.85);
+  /* Slate 900 Glass */
+  --color-nav-border: rgb(255 255 255 / 0.1);
+
+  /* Text Colors Dark (Default) */
+  --color-text-heading-from: #f8fafc;
+  /* Slate 50 */
+  --color-text-heading-to: #cbd5e1;
+  /* Slate 300 */
+  --color-text-body: #e2e8f0;
+  /* Slate 200 */
+  --color-text-muted: #94a3b8;
+  /* Slate 400 */
+
+  /* Components Colors Dark */
+  --color-card-bg: rgb(30 41 59 / 0.6);
+  /* Slate 800 Glass */
+  --color-input-bg: rgb(15 23 42 / 0.6);
+  --color-border-subtle: rgb(255 255 255 / 0.1);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-sky-dark);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+:root.light-mode body {
+  color: #0f172a;
+}
+
+#__nuxt {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s ease-in-out;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+  transform: translateY(10px);
+}

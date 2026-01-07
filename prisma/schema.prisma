@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  name        String
+  user        String       @unique
+  email       String       @unique
+  password    String
+  license     String?
+  admin       Boolean      @default(false)
+  flightPlans FlightPlan[]
+
+  @@map("users")
+}
+
+model Aircraft {
+  id          Int          @id @default(autoincrement())
+  modelo      String
+  matricula   String       @unique
+  velocidad   Int
+  turbulence  String
+  combustible Float
+  img         String?
+  flightPlans FlightPlan[]
+
+  @@map("aircrafts")
+}
+
+model Airport {
+  id   Int    @id @default(autoincrement())
+  ICAO String @unique
+  name String
+  LAT  String
+  LON  String
+
+  @@map("airports")
+}
+
+model FlightPlan {
+  id            Int      @id @default(autoincrement())
+  fpOrigin      String
+  fpDestination String
+  distance      Float
+  maxAltitude   Float
+  waypoints     String
+  date          String // Storing as string based on usage in raw query, can be DateTime if preferred
+  license       String?
+  
+  aircraft      Aircraft? @relation(fields: [idAircraft], references: [id])
+  idAircraft    Int?
+  
+  user          User?     @relation(fields: [userID], references: [id])
+  userID        Int?
+
+  @@map("flightplans")
+}
