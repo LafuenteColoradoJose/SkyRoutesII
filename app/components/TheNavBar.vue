@@ -260,5 +260,4 @@ const logout = () => {
 
 defineEmits(['toggle-theme'])
 </script>
-
-<style scoped></style>
+

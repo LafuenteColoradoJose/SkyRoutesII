@@ -26,7 +26,7 @@ export default defineNuxtConfig({
 
   modules: [], // Removed @nuxtjs/tailwindcss, nuxt3-leaflet
 
-  css: ['./app/assets/css/main.css'],
+  css: ['@/assets/css/main.css'],
 
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
